@@ -11,10 +11,6 @@ const nextConfig: NextConfig = {
     remotePatterns: [{ protocol: "https", hostname: "images.unsplash.com", pathname: "/photo-*" }],
   },
   partialPrefetching: true,
-  // The public landing page is not designed yet; send visitors to the learner dashboard mock.
-  async redirects() {
-    return [{ source: "/", destination: "/dashboard", permanent: false }];
-  },
   turbopack: {
     rules: {
       "*.css": {

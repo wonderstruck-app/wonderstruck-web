@@ -24,6 +24,7 @@ export function SessionCanvas({
   activity,
   activityTitle,
   suggestions = [],
+  embedded = false,
 }: {
   initialMessages: Message[];
   /** Shown as Mira's first turn when there is no conversation yet. */
@@ -32,6 +33,8 @@ export function SessionCanvas({
   activity?: ReactNode;
   activityTitle?: string;
   suggestions?: string[];
+  /** Inline preview (e.g. the landing page): no page-height layout, sticky dock or edge fade. */
+  embedded?: boolean;
 }) {
   const [messages] = useState<Message[]>(
     initialMessages.length
@@ -57,8 +60,8 @@ export function SessionCanvas({
   }, []);
 
   useEffect(() => {
-    if (extra.length) endRef.current?.scrollIntoView({ block: "end", behavior: "smooth" });
-  }, [extra]);
+    if (extra.length) endRef.current?.scrollIntoView({ block: embedded ? "nearest" : "end", behavior: "smooth" });
+  }, [extra, embedded]);
 
   function send(text: string) {
     const t = text.trim();
@@ -77,9 +80,18 @@ export function SessionCanvas({
   const status = listening ? "Listening · preview" : voice === "muted" ? "Muted" : "Tap to talk";
 
   return (
-    <section aria-label="Session with Mira" className="relative flex min-h-[34rem] min-w-0 flex-col lg:h-full lg:min-h-0">
-      <div className="relative min-h-0 flex-1 [mask-image:linear-gradient(to_bottom,transparent,black_3rem,black_calc(100%-2rem),transparent)] lg:overflow-y-auto [scrollbar-width:none]">
-        <ol aria-label="Conversation" className="mx-auto flex max-w-[44rem] flex-col gap-7 px-1 py-10">
+    <section
+      aria-label="Session with Mira"
+      className={cn("relative flex min-w-0 flex-col", !embedded && "min-h-[34rem] lg:h-full lg:min-h-0")}
+    >
+      <div
+        className={cn(
+          "relative min-h-0 flex-1",
+          !embedded &&
+            "[mask-image:linear-gradient(to_bottom,transparent,black_3rem,black_calc(100%-2rem),transparent)] lg:overflow-y-auto [scrollbar-width:none]",
+        )}
+      >
+        <ol aria-label="Conversation" className={cn("mx-auto flex max-w-[44rem] flex-col gap-7 px-1", !embedded && "py-10")}>
           {messages.map((m) => (
             <Line key={m.id} m={m} present={m.id === lastMira} listening={listening} />
           ))}
@@ -108,7 +120,14 @@ export function SessionCanvas({
         <div ref={endRef} />
       </div>
 
-      <div className="sticky bottom-[calc(4.75rem+env(safe-area-inset-bottom))] z-10 flex shrink-0 flex-col items-center gap-4 bg-gradient-to-t from-background from-65% to-transparent pt-12 pb-3 lg:bottom-0 lg:bg-none lg:pb-2">
+      <div
+        className={cn(
+          "flex shrink-0 flex-col items-center gap-4",
+          embedded
+            ? "pt-9"
+            : "sticky bottom-[calc(4.75rem+env(safe-area-inset-bottom))] z-10 bg-gradient-to-t from-background from-65% to-transparent pt-12 pb-3 lg:bottom-0 lg:bg-none lg:pb-2",
+        )}
+      >
         {suggestions.length > 0 && !typing && (
           <div className="flex w-full min-w-0 [justify-content:safe_center] gap-1 overflow-x-auto px-1 [scrollbar-width:none]">
             {suggestions.map((s) => (
@@ -152,7 +171,7 @@ export function SessionCanvas({
               <textarea
                 id="composer"
                 rows={1}
-                autoFocus
+                autoFocus={!embedded}
                 value={draft}
                 onChange={(e) => setDraft(e.target.value)}
                 onKeyDown={(e) => {

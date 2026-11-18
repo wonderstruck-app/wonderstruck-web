@@ -9,7 +9,7 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "key bg-key text-key-foreground [--key-edge:var(--key-edge-color)] hover:bg-key-hover disabled:bg-(--key-disabled) disabled:text-(--key-disabled-foreground) disabled:[--key-edge:var(--key-disabled-edge)]",
+          "key border-(--key-edge) bg-key text-key-foreground [--key-edge:var(--key-edge-color)] dark:border-transparent hover:bg-key-hover disabled:bg-(--key-disabled) disabled:text-(--key-disabled-foreground) disabled:[--key-edge:var(--key-disabled-edge)]",
         outline:
           "key border-ink/10 bg-(--secondary-key-face) text-foreground backdrop-blur-xl [--key-edge:var(--secondary-key-edge)] hover:bg-(--secondary-key-hover) aria-expanded:bg-(--secondary-key-hover) dark:border-ink/12",
         secondary:

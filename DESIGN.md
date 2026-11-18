@@ -136,6 +136,8 @@ Keep motion brief and purposeful. Hover, press, selection, and view changes shou
 - **Recall:** one question at a time with progress, ending in a calm "All caught up". The memory list lets learners remove what Mira remembers.
 - **Graph:** map and list views of the same data, a legend, and a detail panel. Dashed cream links mean "related in meaning, not a prerequisite"; labels carry a dark halo so edges never cut through text.
 - **Settings:** plain grouped form; switches with persistent labels and hints.
+- **Landing (`/`):** a persuasion page outside the app shell (wordmark, theme toggle and Sign in on top). The `hero-sky` hero keeps "Less doomscrolling. More wondering." with Mira standing alone on the hero's bottom edge (nothing drawn over her) and named in the lead copy. Then a plain-language positioning line ("Not another feed. Not another course.") and one alternating row per core feature, each a simple promise beside a picture of the product doing it: Discover (two real `LearningCard`s), Talk it through with Mira (the real `SessionCanvas` in its `embedded` mode), Learn it by doing it (the real, playable `ActivityView`), Remember it for good (recap with the real `RecallCard` on top) and Watch your knowledge connect (the real `GraphSnapshot`). Previews reuse app components rather than copies, so the landing always matches the product. It closes with three "smarter, not hooked" principles and a sky CTA band. Copy stays short and everyday; previews read demo content from `lib/data` (`components/wonderstruck/landing.tsx`).
+- **Login (`/login`):** a centred column with Mira, one heading, Continue with Google (Better Auth `signIn.social`), errors in an alert line and a short privacy note. App pages are not gated yet.
 
 ### Data layer
 

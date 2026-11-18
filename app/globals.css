@@ -83,12 +83,12 @@
   --secondary: oklch(0.93 0.006 265);
   --secondary-foreground: oklch(0.21 0.015 265);
   --secondary-edge: oklch(0.82 0.008 265);
-  --secondary-key-edge: oklch(0.86 0.014 75);
+  --secondary-key-edge: oklch(0.79 0.016 75);
   --secondary-key-face: oklch(1 0 0 / 0.92);
   --secondary-key-hover: oklch(1 0 0);
   --key-hi: oklch(1 0 0 / 0.16);
   --key-ambient: 0 10px 18px -10px oklch(0.35 0.04 60 / 0.35);
-  --icon-edge-base: oklch(0.88 0.012 75);
+  --icon-edge-base: oklch(0.8 0.014 75);
   --key-disabled: oklch(0.78 0.016 75);
   --key-disabled-foreground: oklch(0.2 0.015 265);
   --key-disabled-edge: oklch(0.66 0.018 75);
