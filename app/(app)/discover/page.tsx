@@ -53,7 +53,7 @@ export default async function DiscoverPage() {
                   <li key={block.id}>
                     <Link
                       href={`/learn/${block.id}`}
-                      className="squircle-md group flex items-center gap-3 p-1.5 transition-colors hover:bg-white/[0.04]"
+                      className="squircle-md group flex items-center gap-3 p-1.5 transition-colors hover:bg-ink/[0.04]"
                     >
                       <span className="squircle-sm relative size-12 shrink-0 overflow-hidden">
                         <Image src={block.image.src} alt="" fill sizes="48px" className="object-cover" />
@@ -67,7 +67,7 @@ export default async function DiscoverPage() {
               </ul>
               <Link
                 href="/saved"
-                className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline"
+                className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-primary-ink hover:underline"
               >
                 See all {saved.length}
                 <ArrowRight aria-hidden className="size-4" />

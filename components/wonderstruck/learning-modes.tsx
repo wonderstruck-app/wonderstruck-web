@@ -11,26 +11,23 @@ const icons = {
   recall: RotateCcw,
 };
 
+// White glyphs on every key, so faces are mid-tone in both themes.
 const tints = {
   blue: {
     tile: "bg-tint-blue/10 hover:bg-tint-blue/15",
-    icon: "bg-tint-blue text-[oklch(0.2_0.05_240)]",
-    edge: "[--key-edge:oklch(0.5_0.1_240)]",
+    face: "[--face:var(--tint-blue)] dark:[--face:oklch(0.6_0.13_245)]",
   },
   cream: {
-    tile: "bg-primary/8 hover:bg-primary/12",
-    icon: "bg-primary text-primary-foreground",
-    edge: "[--key-edge:var(--primary-edge)]",
+    tile: "bg-primary/16 hover:bg-primary/24 dark:bg-primary/8 dark:hover:bg-primary/12",
+    face: "[--face:var(--primary-ink)] dark:[--face:oklch(0.68_0.09_80)]",
   },
   green: {
     tile: "bg-tint-green/10 hover:bg-tint-green/15",
-    icon: "bg-tint-green text-[oklch(0.2_0.05_155)]",
-    edge: "[--key-edge:oklch(0.52_0.11_155)]",
+    face: "[--face:var(--tint-green)] dark:[--face:oklch(0.6_0.13_155)]",
   },
   honey: {
     tile: "bg-tint-honey/10 hover:bg-tint-honey/15",
-    icon: "bg-tint-honey text-[oklch(0.24_0.04_70)]",
-    edge: "[--key-edge:oklch(0.56_0.07_65)]",
+    face: "[--face:oklch(0.67_0.13_62)] dark:[--face:oklch(0.66_0.12_62)]",
   },
 } as const;
 
@@ -62,8 +59,8 @@ export function LearningModes({ modes }: { modes: LearningMode[] }) {
                   <span
                     className={cn(
                       "key squircle-sm grid size-11 shrink-0 place-items-center",
-                      t.icon,
-                      t.edge,
+                      "bg-(--face) text-white [--key-edge:color-mix(in_oklch,var(--face)_72%,black)]",
+                      t.face,
                     )}
                   >
                     <Icon aria-hidden className="size-5 stroke-[2.25]" />

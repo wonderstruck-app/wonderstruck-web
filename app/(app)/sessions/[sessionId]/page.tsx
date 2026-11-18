@@ -95,7 +95,7 @@ async function Session({ params }: Props) {
       </Link>
 
       <header className="mt-3 flex flex-col gap-5 sm:flex-row sm:items-center">
-        <div className="squircle-lg relative aspect-[16/10] w-full shrink-0 overflow-hidden shadow-[0_20px_40px_-20px_oklch(0_0_0/0.8)] sm:w-48">
+        <div className="squircle-lg relative aspect-[16/10] w-full shrink-0 overflow-hidden shadow-[0_20px_40px_-20px_color-mix(in_oklch,var(--shadow-color)_calc(0.8*var(--shade)*100%),transparent)] sm:w-48">
           <Image
             src={s.image.src}
             alt={s.image.alt}
@@ -244,7 +244,7 @@ function Concepts({ session: s }: { session: LearningSession }) {
       </ul>
       <Link
         href="/graph"
-        className="mt-3 inline-block text-sm font-semibold text-primary hover:underline"
+        className="mt-3 inline-block text-sm font-semibold text-primary-ink hover:underline"
       >
         See them in your graph
       </Link>
@@ -297,10 +297,10 @@ function Transcript({ session: s }: { session: LearningSession }) {
         <span className="text-sm font-medium text-muted-foreground">
           {s.messageCount} messages
         </span>
-        <span className="ml-auto text-sm font-semibold text-primary group-open:hidden">
+        <span className="ml-auto text-sm font-semibold text-primary-ink group-open:hidden">
           Show
         </span>
-        <span className="ml-auto hidden text-sm font-semibold text-primary group-open:inline">
+        <span className="ml-auto hidden text-sm font-semibold text-primary-ink group-open:inline">
           Hide
         </span>
       </summary>

@@ -23,7 +23,7 @@ export function MemoryList({ items: initial }: { items: MemoryItem[] }) {
     );
 
   return (
-    <ul className="flex flex-col divide-y divide-white/6 border-t border-white/6">
+    <ul className="flex flex-col divide-y divide-ink/6 border-t border-ink/6">
       {items.map((m) => (
         <li key={m.id} className="flex items-start gap-3 py-3 last:pb-0">
           <div className="min-w-0 flex-1">

@@ -34,7 +34,7 @@ export function GraphExplorer({ graph }: { graph: LearningGraph }) {
 
       <div className="mt-5 grid grid-cols-[minmax(0,1fr)] gap-5 xl:grid-cols-[minmax(0,1fr)_22rem]">
         <TabsContent value="map" className="min-w-0">
-          <div className="squircle-lg overflow-hidden border border-tint-blue/20 bg-[radial-gradient(90%_80%_at_50%_40%,oklch(0.24_0.05_260),oklch(0.17_0.015_265))] p-4 sm:p-8">
+          <div className="dark squircle-lg overflow-hidden border border-tint-blue/20 text-foreground bg-[radial-gradient(90%_80%_at_50%_40%,oklch(0.24_0.05_260),oklch(0.17_0.015_265))] p-4 sm:p-8">
             <GraphCanvas
               graph={graph}
               labels
@@ -65,7 +65,7 @@ function Legend() {
       </li>
       <li className="flex items-center gap-2">
         <svg width="28" height="6" aria-hidden>
-          <line x1="2" y1="3" x2="26" y2="3" strokeWidth="2.5" strokeLinecap="round" className="stroke-white/40" />
+          <line x1="2" y1="3" x2="26" y2="3" strokeWidth="2.5" strokeLinecap="round" className="stroke-ink/40" />
         </svg>
         Same session
       </li>
@@ -166,7 +166,7 @@ function Detail({
               >
                 <span className="flex items-center justify-between gap-2">
                   <span className="font-semibold">{label(other)}</span>
-                  <span className={cn("shrink-0 text-xs font-semibold", l.kind === "semantic" ? "text-primary" : "text-muted-foreground")}>
+                  <span className={cn("shrink-0 text-xs font-semibold", l.kind === "semantic" ? "text-primary-ink" : "text-muted-foreground")}>
                     {l.kind === "semantic"
                       ? `Related · ${Math.round((l.similarity ?? 0) * 100)}%`
                       : "Same session"}
@@ -188,7 +188,7 @@ function Detail({
       <ul className="mt-1.5 flex flex-col gap-1">
         {sessions.map((s) => (
           <li key={s.id}>
-            <Link href={`/sessions/${s.id}`} className="text-sm font-semibold text-primary hover:underline">
+            <Link href={`/sessions/${s.id}`} className="text-sm font-semibold text-primary-ink hover:underline">
               {s.title}
             </Link>
           </li>

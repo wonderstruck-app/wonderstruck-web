@@ -38,7 +38,7 @@ export default async function DashboardPage() {
   ].slice(0, 3);
 
   return (
-    <div className="mx-auto w-full max-w-[104rem] px-4 pt-6 pb-14 sm:px-6 lg:px-8 lg:pt-6">
+    <div className="w-full px-4 pt-6 pb-14 sm:px-6 lg:px-8 lg:pt-6">
       <Rise order={0}>
         <TopBar recallDue={recall.length} conceptCount={graph.concepts.length} />
       </Rise>

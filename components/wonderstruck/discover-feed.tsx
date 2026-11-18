@@ -20,7 +20,7 @@ export function DiscoverFeed({
   return (
     <>
       <TopicFilter topics={topics} value={topic} onChange={setTopic} />
-      <ul className="mt-6 grid gap-5 md:grid-cols-2 2xl:grid-cols-3" aria-label="Learning blocks">
+      <ul className="mt-6 grid gap-5 md:grid-cols-2" aria-label="Learning blocks">
         {shown.map((b, i) => (
           <Rise as="li" order={Math.min(i, 6)} key={b.id}>
             <LearningCard

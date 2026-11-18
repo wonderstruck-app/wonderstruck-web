@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default function ExploreSessionPage({ params }: Props) {
   return (
-    <div className="mx-auto flex w-full max-w-[104rem] flex-col px-4 pt-4 pb-6 sm:px-6 lg:h-dvh lg:px-8 lg:pt-6">
+    <div className="flex w-full flex-col px-4 pt-4 pb-6 sm:px-6 lg:h-dvh lg:px-8 lg:pt-6">
       <Suspense fallback={<CanvasSkeleton />}>
         <Session params={params} />
       </Suspense>
@@ -100,7 +100,7 @@ async function Session({ params }: Props) {
                     href={s.url}
                     target="_blank"
                     rel="noreferrer"
-                    className="squircle-md group -mx-2 flex items-start gap-3 p-2 outline-none transition-colors hover:bg-white/[0.04] focus-visible:ring-2 focus-visible:ring-ring"
+                    className="squircle-md group -mx-2 flex items-start gap-3 p-2 outline-none transition-colors hover:bg-ink/[0.04] focus-visible:ring-2 focus-visible:ring-ring"
                   >
                     <span className="min-w-0 flex-1">
                       <span className="block text-sm leading-snug font-semibold">{s.title}</span>
@@ -144,7 +144,7 @@ async function Session({ params }: Props) {
                 <li key={b.id}>
                   <Link
                     href={`/learn/${b.id}`}
-                    className="squircle-md group -mx-1.5 flex items-center gap-3 p-1.5 outline-none transition-colors hover:bg-white/[0.04] focus-visible:ring-2 focus-visible:ring-ring"
+                    className="squircle-md group -mx-1.5 flex items-center gap-3 p-1.5 outline-none transition-colors hover:bg-ink/[0.04] focus-visible:ring-2 focus-visible:ring-ring"
                   >
                     <span className="squircle-sm relative size-11 shrink-0 overflow-hidden">
                       <Image src={b.image.src} alt="" fill sizes="44px" className="object-cover" />

@@ -2,7 +2,7 @@ import type { CSSProperties, ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
 const tones = {
-  cream: "var(--primary)",
+  cream: "var(--primary-ink)",
   blue: "var(--tint-blue)",
   green: "var(--tint-green)",
   honey: "var(--tint-honey)",

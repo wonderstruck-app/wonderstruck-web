@@ -9,16 +9,16 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "key bg-key text-key-foreground [--key-edge:var(--key-edge-color)] hover:bg-white",
+          "key bg-key text-key-foreground [--key-edge:var(--key-edge-color)] hover:bg-key-hover disabled:bg-(--key-disabled) disabled:text-(--key-disabled-foreground) disabled:[--key-edge:var(--key-disabled-edge)]",
         outline:
-          "key border-white/12 bg-white/[0.07] text-foreground backdrop-blur-xl [--key-edge:oklch(0.42_0.008_265)] hover:bg-white/[0.12] aria-expanded:bg-white/[0.12]",
+          "key border-ink/10 bg-(--secondary-key-face) text-foreground backdrop-blur-xl [--key-edge:var(--secondary-key-edge)] hover:bg-(--secondary-key-hover) aria-expanded:bg-(--secondary-key-hover) dark:border-ink/12",
         secondary:
-          "key border-white/12 bg-white/[0.07] text-foreground backdrop-blur-xl [--key-edge:oklch(0.42_0.008_265)] hover:bg-white/[0.12] aria-expanded:bg-white/[0.12]",
+          "key border-ink/10 bg-(--secondary-key-face) text-foreground backdrop-blur-xl [--key-edge:var(--secondary-key-edge)] hover:bg-(--secondary-key-hover) aria-expanded:bg-(--secondary-key-hover) dark:border-ink/12",
         ghost:
           "transition-colors hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground active:bg-accent",
         destructive:
           "bg-destructive/10 text-destructive hover:bg-destructive/20 focus-visible:border-destructive/40 focus-visible:ring-destructive/20 dark:bg-destructive/20 dark:hover:bg-destructive/30 dark:focus-visible:ring-destructive/40",
-        link: "text-primary underline-offset-4 hover:underline",
+        link: "text-primary-ink underline-offset-4 hover:underline",
       },
       size: {
         default:

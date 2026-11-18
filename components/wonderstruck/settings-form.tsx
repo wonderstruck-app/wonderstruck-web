@@ -1,6 +1,7 @@
 "use client";
 
-import { useId, useState, type ReactNode } from "react";
+import { useId, useState, useSyncExternalStore, type ReactNode } from "react";
+import { useTheme } from "next-themes";
 import { Download, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
@@ -25,7 +26,7 @@ export function SettingsForm({
     <div className="flex flex-col gap-6">
       <Section title="Profile">
         <div className="flex items-center gap-4">
-          <span className="grid size-14 shrink-0 place-items-center rounded-full bg-primary/15 text-lg font-bold text-primary">
+          <span className="grid size-14 shrink-0 place-items-center rounded-full bg-primary/15 text-lg font-bold text-primary-ink">
             {learner.initials}
           </span>
           <div className="min-w-0">
@@ -34,6 +35,8 @@ export function SettingsForm({
           </div>
         </div>
       </Section>
+
+      <Appearance />
 
       <Section
         id="interests"
@@ -56,7 +59,7 @@ export function SettingsForm({
               className={cn(
                 "squircle-sm h-10 border px-4 text-sm font-semibold transition-colors outline-none focus-visible:ring-2 focus-visible:ring-ring",
                 i.selected
-                  ? "border-primary/50 bg-primary/12 text-primary"
+                  ? "border-primary/50 bg-primary/12 text-primary-ink"
                   : "border-border text-muted-foreground hover:border-input hover:text-foreground",
               )}
             >
@@ -165,6 +168,48 @@ export function SettingsForm({
         </div>
       </Section>
     </div>
+  );
+}
+
+const themes = [
+  ["system", "Match device"],
+  ["light", "Light"],
+  ["dark", "Dark"],
+] as const;
+
+const noop = () => () => {};
+
+function Appearance() {
+  const { theme, setTheme } = useTheme();
+  // The stored theme is only known on the client.
+  const mounted = useSyncExternalStore(noop, () => true, () => false);
+  return (
+    <Section title="Appearance">
+      <fieldset>
+        <legend className="sr-only">Theme</legend>
+        <div className="squircle-sm inline-flex gap-1 border border-border bg-background/40 p-1">
+          {themes.map(([value, label]) => (
+            <label
+              key={value}
+              className={cn(
+                "squircle-sm flex h-9 cursor-pointer items-center px-4 text-sm font-semibold transition-colors has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-ring",
+                mounted && theme === value ? "bg-secondary text-foreground" : "text-muted-foreground hover:text-foreground",
+              )}
+            >
+              <input
+                type="radio"
+                name="theme"
+                value={value}
+                checked={mounted && theme === value}
+                onChange={() => setTheme(value)}
+                className="sr-only"
+              />
+              {label}
+            </label>
+          ))}
+        </div>
+      </fieldset>
+    </Section>
   );
 }
 

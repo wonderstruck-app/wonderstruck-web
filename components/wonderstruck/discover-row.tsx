@@ -17,7 +17,7 @@ export function DiscoverRow({ blocks }: { blocks: LearningBlock[] }) {
           <li key={b.id} className="w-[15.5rem] shrink-0 snap-start sm:w-auto">
             <Link
               href={`/learn/${b.id}`}
-              className="glass squircle-md group flex h-full flex-col overflow-hidden outline-none transition-[background-color,border-color] hover:border-white/16 hover:bg-white/[0.07] focus-visible:ring-2 focus-visible:ring-ring"
+              className="glass squircle-md group flex h-full flex-col overflow-hidden outline-none transition-[background-color,border-color] hover:border-ink/16 hover:bg-ink/[0.07] focus-visible:ring-2 focus-visible:ring-ring"
             >
               <div className="squircle-sm relative m-1.5 mb-0 aspect-[16/10] overflow-hidden">
                 <Image

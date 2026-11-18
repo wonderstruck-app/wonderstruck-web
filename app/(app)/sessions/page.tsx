@@ -46,7 +46,7 @@ export default async function SessionsPage() {
                 ].map(([k, v]) => (
                   <div
                     key={k}
-                    className="squircle-md border border-white/6 bg-background/50 px-3 py-2.5"
+                    className="squircle-md border border-ink/6 bg-background/50 px-3 py-2.5"
                   >
                     <dt className="text-[0.6875rem] font-semibold text-muted-foreground">
                       {k}
@@ -61,7 +61,7 @@ export default async function SessionsPage() {
                 {topics.map((t) => (
                   <li
                     key={t}
-                    className="squircle-sm border border-white/10 bg-white/[0.04] px-3 py-1.5 text-sm font-medium text-foreground/85"
+                    className="squircle-sm border border-ink/10 bg-ink/[0.04] px-3 py-1.5 text-sm font-medium text-foreground/85"
                   >
                     {t}
                   </li>

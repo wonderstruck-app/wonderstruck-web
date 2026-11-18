@@ -15,13 +15,14 @@ export function Hero({ learner }: { learner: Learner }) {
   return (
     <section
       aria-labelledby="hero-title"
-      className="hero-sky @container squircle-lg relative isolate overflow-hidden border border-white/10 shadow-[inset_0_1px_0_0_oklch(1_0_0/0.08)]"
+      className="hero-sky @container squircle-lg relative isolate overflow-hidden border border-ink/10 shadow-[inset_0_1px_0_0_oklch(1_0_0/0.08)]"
     >
       <div className="flex min-h-[19rem] items-end">
         <div className="relative z-10 flex w-full flex-col items-center px-6 pt-6 pb-7 text-center sm:p-10 @2xl:max-w-[30rem] @2xl:items-start @2xl:text-left">
           <MiraMascot
             width={124}
-            className="pointer-events-none mb-3 drop-shadow-[0_14px_24px_oklch(0_0_0/0.45)] @2xl:hidden"
+            loading="eager"
+            className="pointer-events-none mb-3 drop-shadow-[0_14px_24px_color-mix(in_oklch,var(--shadow-color)_calc(0.45*var(--shade)*100%),transparent)] @2xl:hidden"
           />
           <h1
             id="hero-title"
@@ -33,7 +34,7 @@ export function Hero({ learner }: { learner: Learner }) {
               </span>
             ))}
             <br />
-            <span className="text-primary">{learner.name}.</span>
+            <span className="text-primary-ink">{learner.name}.</span>
           </h1>
           <p className="mt-4 max-w-[30ch] text-[1.0625rem] leading-relaxed text-foreground/80">
             Something caught your eye today? Ask Mira and wander through it
@@ -58,7 +59,8 @@ export function Hero({ learner }: { learner: Learner }) {
 
         <MiraMascot
           width={220}
-          className="pointer-events-none absolute right-[6%] bottom-0 hidden translate-y-[6%] drop-shadow-[0_18px_30px_oklch(0_0_0/0.45)] @2xl:block @4xl:right-[9%]"
+          loading="eager"
+          className="pointer-events-none absolute right-[6%] bottom-0 hidden translate-y-[6%] drop-shadow-[0_18px_30px_color-mix(in_oklch,var(--shadow-color)_calc(0.45*var(--shade)*100%),transparent)] @2xl:block @4xl:right-[9%]"
         />
       </div>
     </section>

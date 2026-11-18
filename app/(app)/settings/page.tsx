@@ -45,7 +45,7 @@ export default async function SettingsPage() {
                   ["Concepts", graph.concepts.length],
                   ["Memories", memory.length],
                 ].map(([k, v]) => (
-                  <div key={k} className="squircle-md border border-white/6 bg-background/50 px-3 py-2.5">
+                  <div key={k} className="squircle-md border border-ink/6 bg-background/50 px-3 py-2.5">
                     <dt className="text-[0.6875rem] font-semibold text-muted-foreground">{k}</dt>
                     <dd className="mt-0.5 text-[1.375rem] font-bold tabular-nums">{v}</dd>
                   </div>

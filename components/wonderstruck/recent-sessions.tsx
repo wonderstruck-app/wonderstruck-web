@@ -22,7 +22,7 @@ export function RecentSessions({ sessions }: { sessions: SessionSummary[] }) {
             key={s.id}
             className="squircle-sm flex items-center gap-3 p-2 transition-colors hover:bg-accent/60"
           >
-            <span className="relative size-10 shrink-0 overflow-hidden rounded-full ring-1 ring-white/10">
+            <span className="relative size-10 shrink-0 overflow-hidden rounded-full ring-1 ring-ink/10">
               <Image
                 src={s.image.src}
                 alt=""

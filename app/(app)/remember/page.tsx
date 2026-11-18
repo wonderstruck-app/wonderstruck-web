@@ -32,7 +32,7 @@ export default async function RememberPage() {
               title="Recent reviews"
               hint={`${recalled} of ${history.length} recalled`}
             >
-              <ul className="flex flex-col divide-y divide-white/6">
+              <ul className="flex flex-col divide-y divide-ink/6">
                 {history.map((r) => (
                   <li key={r.id} className="flex items-center gap-3 py-2.5 first:pt-0 last:pb-0">
                     {r.outcome === "recalled" ? (

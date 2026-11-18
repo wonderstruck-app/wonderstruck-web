@@ -14,7 +14,7 @@ export function GraphSnapshot({ graph }: { graph: LearningGraph }) {
   return (
     <section
       aria-labelledby="graph-title"
-      className="squircle-lg relative isolate overflow-hidden border border-tint-blue/20 bg-[linear-gradient(160deg,oklch(0.26_0.06_260),oklch(0.2_0.03_270))] p-5 sm:p-6"
+      className="dark squircle-lg relative isolate overflow-hidden border border-tint-blue/20 text-foreground bg-[linear-gradient(160deg,oklch(0.26_0.06_260),oklch(0.2_0.03_270))] p-5 sm:p-6"
     >
       <h2 id="graph-title" className="sr-only">
         Your learning graph

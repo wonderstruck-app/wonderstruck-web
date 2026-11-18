@@ -12,8 +12,8 @@ The dashboard follows a friendly learning-app layout (labeled sidebar, illustrat
 
 **Two distinct identities:**
 
-- **Wonderstruck logo:** full-body Mira (`public/brand/mira-owl.png`), paired with the Wonderstruck wordmark only. No tagline. The favicon (`app/icon.png`) stays Mira's face on a transparent canvas, because the full body is unreadable at favicon size.
-- **Mira:** a soft white owl with a rounded head and body, large warm brown eyes, subtle beige feather markings, and a small dark beak and feet. The full-body owl (`public/brand/mira-owl.png`) is the main mascot for greeting and companion moments; the face (`mira-head.png`) is the compact avatar. Logo, avatar, and mascot are one character. Preserve its curious, welcoming expression.
+- **Wonderstruck logo:** a text-only wordmark, "**Wonder**struck", with "Wonder" in Mira cream (`--primary`) and "struck" in the foreground colour. No owl and no tagline beside it. The favicon (`app/icon.png`) stays Mira's face on a transparent canvas, because the full body is unreadable at favicon size.
+- **Mira:** a soft white owl with a rounded head and body, large warm brown eyes, subtle beige feather markings, and a small dark beak and feet. The full-body owl (`public/brand/mira-owl.png`) is the main mascot for greeting and companion moments; the face (`mira-head.png`) is only the favicon. There is no round owl avatar: show the owl at most once per view, and attribute Mira's messages with a cream "Mira" label and a thin cream rule instead. Logo and mascot are one character. Preserve its curious, welcoming expression.
 
 ## Colors
 
@@ -25,7 +25,7 @@ Keep semantic feedback distinct from branding. Success, warning, and error state
 
 During implementation, define semantic CSS variables for background, foreground, card, popover, primary, secondary, muted, accent, destructive, border, input, and focus ring. Map shadcn and Tailwind to those same tokens. Do not duplicate palette definitions in components.
 
-The background is a slightly blue-tinted near-black. The initial direction is dark-first. A complete light theme is not implied by this brief; any later theme must preserve hierarchy and owl visibility rather than merely invert colors.
+The background is a slightly blue-tinted near-black. The initial direction is dark-first. Dark is the default. A light theme (warm paper background, slate text, a light golden-cream `--primary` fill with dark text, near-black primary key) lives in `:root`, with the dark tokens in `.dark`, switched by `next-themes` (class attribute, system supported). The theme toggle sits in the sidebar profile row and the mobile header, and Settings has an Appearance control (Match device, Light, Dark). Hairlines and hover washes use the `--ink` token (`ink/…`: white on dark, slate on light), never `white/…`, except over imagery. Shadows use `--shadow-color` (black on dark, warm brown on light) scaled by `--shade`. In light, secondary keys are white faces on a warm edge with a soft ambient shadow (`--key-ambient`), the primary key sits on a charcoal edge rather than black, glass gains a soft warm drop shadow (`--glass-shadow`), and disabled primary keys turn a pale warm grey. Cream text, links, active nav and progress fills use `--primary-ink` (`text-primary-ink`), a deeper gold that stays legible on paper; `--primary` stays reserved for fills. Mode tiles use white glyphs on every key in both themes; each key has a mid-tone `--face` per theme and an edge mixed from it. Active nav icons inherit the label colour. The learning graph panels stay dark in both themes (`dark` class on the panel).
 
 ## Typography
 
@@ -81,7 +81,7 @@ Establish a small shared corner scale rather than choosing a different radius fo
 
 Keep focus rings outside clipping regions. Separate image clipping from interactive containers when needed. Circles remain appropriate for avatars; pills are appropriate for compact chips, not every surface.
 
-Buttons are squircles too (`squircle-sm`), never pills. Mira's soft silhouette complements this geometry. Use the full mascot in greeting and companion moments, and the head avatar in compact companion cards. Both are treatments of the same character, not separate mascots. Use transparent-background artwork.
+Buttons are squircles too (`squircle-sm`), never pills. Mira's soft silhouette complements this geometry. Use the full mascot in greeting and companion moments, never as a repeated profile avatar. Use transparent-background artwork.
 
 ## Components
 
@@ -104,7 +104,7 @@ Preserve underlying accessibility, keyboard behavior, refs, and supported compos
 
 | Component | Responsibility |
 | --- | --- |
-| Brand mark and Mira avatar | Owl-face logo with wordmark (no tagline); full-body owl as mascot; decorative images avoid redundant announcements |
+| Brand mark and Mira | Text-only wordmark ("Wonder" in cream, no tagline); full-body owl as mascot, no round avatar; decorative images avoid redundant announcements |
 | Surface | Shared squircle panel geometry and restrained tonal/border treatment |
 | Learning card | Image, curiosity-led title, topic, sources entry point, and clear actions |
 | Topic chip | Compact, visibly selectable topic control with accessible state |
@@ -126,12 +126,12 @@ Keep motion brief and purposeful. Hover, press, selection, and view changes shou
 
 ### Page patterns
 
-- **Frame:** every page, including the dashboard, uses one width (`PageFrame`: max 104rem, same padding) so titles start at the same place; there is no narrow variant. Pages use `PageHeader` (title, one-sentence purpose, optional actions). Grid and flex children use `min-w-0` so nothing overflows on phones.
+- **Frame:** every page, including the dashboard, uses one width (the whole app shell is capped at 1536px, `max-w-[96rem]`, and centred; `PageFrame` adds the same padding) so titles start at the same place; there is no narrow variant. Pages use `PageHeader` (title, one-sentence purpose, optional actions). Grid and flex children use `min-w-0` so nothing overflows on phones.
 - **Rail:** on xl+ screens `WithRail` adds a sticky right rail (22–24rem) of `RailCard`s so wide screens have no dead space. Keep it to two or three items that relate to *this* page (Discover: Ask Mira, saved; Sessions: week summary, recall due; Session detail: its recall, explore next; Explore: resume, sparks; Settings: privacy and data). Never duplicate what the main column already shows. Below xl the rail stacks after the content.
 - **Discover:** glass learning cards with full-bleed 16:10 images and glass topic/minute chips, staggered `Rise` entrances, topic chips, and a finite feed (never infinite scroll); Ask Mira lives in the rail, not repeated below the feed.
 - **Learn (`/learn/[blockId]`):** a reading page. Full-bleed image header with the question overlaid and glass topic/minute chips, a larger lead paragraph, a 65ch body, a "Try it" bridge into the session's activity, and sources as link tiles. On desktop a simple sticky Mira box sits on the right: the full owl, one line of copy, **Talk with Mira (voice) as the primary action** and Type instead as the secondary. Below `lg` that box becomes a floating "Talk with Mira" pill at the bottom right, above the bottom nav.
-- **Session canvas (`/explore/[blockId]`):** the live session. The middle is one canvas surface (faint dot grid) where the conversation and the activities Mira sets up share a single scrolling flow, with a voice-first composer pinned at the bottom: by default only a large centred mic key ("Tap to talk") with a small keyboard key beside it; the keyboard key swaps in a single rounded field with the send key inside it and a mic key to switch back (Escape on an empty field also returns). Suggestion chips sit centred above. The right column holds Sources, "In this session" concepts with evidence badges, and Explore next. Desktop fits the viewport with the canvas scrolling internally; mobile flows with the composer sticky above the bottom nav and the rail below. Resume and activity links open here; `/sessions/[id]` stays the recap.
-- **Mira panel:** shows a "Preview" badge and an honest "not connected" reply until live voice exists. Voice states are labelled, not just animated.
+- **Session canvas (`/explore/[blockId]` and `/explore`):** the live session. `/explore` (Ask Mira anything) uses the same frame and `SessionCanvas`, opening with Mira's greeting and starter questions as chips; its right column holds Pick up where you left off and Or start from a spark. The middle is transparent, not a chat window: the conversation reads as open, left-aligned captions (Mira's larger, yours muted), with the full-body Mira standing small (about 44px) in a narrow left gutter, aligned to the top of her latest reply only (soft cream halo that breathes while listening). Activities Mira sets up sit inline in the same scrolling flow. A voice-first control is pinned at the bottom: one large squircle 3D primary speak key in the centre, its status ("Tap to talk", "Listening · preview", "Muted") beside it on the right, and small glass keys for keyboard (and mute while live) on the left; the keyboard key swaps in a single rounded field with the send key inside it and a mic key to switch back (Escape on an empty field also returns). Suggestion chips sit centred above. The right column holds Sources, "In this session" concepts with evidence badges, and Explore next. Desktop fits the viewport with the canvas scrolling internally; mobile flows with the composer sticky above the bottom nav and the rail below. Resume and activity links open here; `/sessions/[id]` stays the recap.
+- **Mira preview:** every Mira surface shows a "Preview" badge and an honest "not connected" reply until live voice exists. Voice states are labelled, not just animated.
 - **Sessions:** "This week" summary first, then grouped lists; detail pages separate discussed, practiced, and demonstrated, with the transcript collapsed.
 - **Recall:** one question at a time with progress, ending in a calm "All caught up". The memory list lets learners remove what Mira remembers.
 - **Graph:** map and list views of the same data, a legend, and a detail panel. Dashed cream links mean "related in meaning, not a prerequisite"; labels carry a dark halo so edges never cut through text.

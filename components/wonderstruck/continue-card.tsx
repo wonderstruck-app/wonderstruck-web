@@ -41,7 +41,7 @@ export function ContinueCard({ session: s }: { session: SessionSummary }) {
               className="h-2 flex-1 overflow-hidden rounded-full bg-secondary"
             >
               <div
-                className="h-full rounded-full bg-primary"
+                className="h-full rounded-full bg-primary-ink"
                 style={{ width: `${pct}%` }}
               />
             </div>

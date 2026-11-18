@@ -14,7 +14,7 @@ const meta: Record<ConceptState, { label: string; className: string; hint: strin
   },
   demonstrated: {
     label: "Demonstrated",
-    className: "border-primary/35 bg-primary/12 text-primary",
+    className: "border-primary/35 bg-primary/12 text-primary-ink",
     hint: "Explained or recalled correctly",
   },
   next: {

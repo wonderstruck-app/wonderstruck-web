@@ -32,7 +32,7 @@ export function TopicFilter<T extends string>({
             className={cn(
               "squircle-sm h-10 shrink-0 border px-4 text-sm font-semibold whitespace-nowrap transition-colors outline-none focus-visible:ring-2 focus-visible:ring-ring",
               active
-                ? "border-primary/50 bg-primary/12 text-primary"
+                ? "border-primary/50 bg-primary/12 text-primary-ink"
                 : "border-border bg-card text-muted-foreground hover:border-input hover:text-foreground",
             )}
           >

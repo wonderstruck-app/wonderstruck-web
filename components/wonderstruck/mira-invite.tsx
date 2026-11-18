@@ -30,7 +30,7 @@ export function MiraInvite({
       />
       <MiraMascot
         width={116}
-        className="relative mx-auto drop-shadow-[0_14px_22px_oklch(0_0_0/0.45)]"
+        className="relative mx-auto drop-shadow-[0_14px_22px_color-mix(in_oklch,var(--shadow-color)_calc(0.45*var(--shade)*100%),transparent)]"
       />
       <h2 id="mira-invite" className="relative mt-4 text-[1.3125rem] font-bold text-balance">
         {resuming ? "Pick up with Mira" : "Talk it through with Mira"}
@@ -67,7 +67,7 @@ export function MiraFab({ href }: { href: string }) {
     <Button
       asChild
       size="lg"
-      className="fixed right-4 bottom-[calc(5.25rem+env(safe-area-inset-bottom))] z-30 h-14 rounded-full pr-6 pl-5 shadow-[0_12px_30px_oklch(0_0_0/0.5)] lg:hidden"
+      className="fixed right-4 bottom-[calc(5.25rem+env(safe-area-inset-bottom))] z-30 h-14 rounded-full pr-6 pl-5 shadow-[0_12px_30px_color-mix(in_oklch,var(--shadow-color)_calc(0.5*var(--shade)*100%),transparent)] lg:hidden"
     >
       <Link href={href}>
         <Mic aria-hidden className="size-5" />

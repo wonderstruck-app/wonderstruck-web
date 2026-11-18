@@ -25,14 +25,14 @@ export function SidebarNavLink({
       href={item.href}
       aria-current={active ? "page" : undefined}
       className={cn(
-        "squircle-sm group flex h-12 items-center gap-3 px-3.5 text-[0.9375rem] font-medium text-muted-foreground transition-colors outline-none hover:bg-white/5 hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring",
+        "squircle-sm group flex h-12 items-center gap-3 px-3.5 text-[0.9375rem] font-medium text-muted-foreground transition-colors outline-none hover:bg-ink/5 hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring",
         active &&
-          "bg-sidebar-accent font-semibold text-sidebar-accent-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
+          "bg-sidebar-accent font-semibold text-primary-ink hover:bg-sidebar-accent hover:text-primary-ink",
       )}
     >
       <Icon
         aria-hidden
-        className={cn("size-5 stroke-[1.85]", active && "text-primary")}
+        className="size-5 stroke-[1.85]"
       />
       <span className="flex-1">{item.label}</span>
       {badge && (
@@ -56,12 +56,12 @@ export function BottomNavLink({ href }: { href: string }) {
       aria-current={active ? "page" : undefined}
       className={cn(
         "squircle-sm flex min-h-14 flex-1 flex-col items-center justify-center gap-1 text-[0.6875rem] font-medium text-muted-foreground outline-none focus-visible:ring-2 focus-visible:ring-ring",
-        active && "text-primary",
+        active && "text-primary-ink",
       )}
     >
       <Icon
         aria-hidden
-        className={cn("size-5 stroke-[1.85]", active && "text-primary")}
+        className="size-5 stroke-[1.85]"
       />
       {item.label}
     </Link>
