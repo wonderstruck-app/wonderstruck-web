@@ -33,6 +33,7 @@ export default async function SessionsPage() {
               order={1}
               featured
               icon={<CalendarDays />}
+              essential={false}
               title="Your week in wonder"
               hint={`${topics.length} topics explored`}
               className="scroll-mt-8"

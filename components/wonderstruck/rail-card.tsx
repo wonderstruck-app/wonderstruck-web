@@ -11,6 +11,9 @@ export function RailCard({
   hint,
   order = 0,
   featured = false,
+  essential = true,
+  centered = false,
+  art,
   children,
   className,
 }: {
@@ -20,6 +23,12 @@ export function RailCard({
   hint?: ReactNode;
   order?: number;
   featured?: boolean;
+  /** Non-essential cards are dropped on phones to keep the stacked rail short. */
+  essential?: boolean;
+  /** On phones: art on top, centred header and body, no icon key. */
+  centered?: boolean;
+  /** Shown above the header on phones when `centered`. */
+  art?: ReactNode;
   children?: ReactNode;
   className?: string;
 }) {
@@ -27,10 +36,17 @@ export function RailCard({
     <Rise
       as="section"
       order={order}
-      className={cn("surface squircle-lg p-5", featured && "glow-soft", className)}
+      className={cn(
+        "surface squircle-lg p-5",
+        featured && "glow-soft",
+        !essential && "max-md:hidden",
+        centered && "max-md:px-6 max-md:pt-6 max-md:text-center",
+        className,
+      )}
     >
-      <div className="flex items-center gap-3">
-        <IconKey tone={tone} size="sm">
+      {centered && art && <div className="mb-3 flex justify-center md:hidden">{art}</div>}
+      <div className={cn("flex items-center gap-3", centered && "max-md:justify-center")}>
+        <IconKey tone={tone} size="sm" className={cn(centered && "max-md:hidden")}>
           {icon}
         </IconKey>
         <div className="min-w-0">

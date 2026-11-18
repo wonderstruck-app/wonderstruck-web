@@ -26,13 +26,15 @@ export default async function DiscoverPage() {
               icon={<Sparkles />}
               title="Curious about something else?"
               hint="Mira can start from any question"
+              centered
+              art={<MiraMascot width={88} />}
             >
               <div className="flex items-end gap-3">
-                <p className="flex-1 text-sm leading-relaxed text-foreground/80">
+                <p className="flex-1 text-sm leading-relaxed text-foreground/80 max-md:mx-auto max-md:max-w-[32ch] max-md:text-[0.9375rem]">
                   Ask out loud or type. Mira will turn it into a short
                   exploration with something to try.
                 </p>
-                <MiraMascot width={64} className="-mb-1 shrink-0" />
+                <MiraMascot width={64} className="-mb-1 shrink-0 max-md:hidden" />
               </div>
               <Button asChild className="mt-4 w-full">
                 <Link href="/explore">
@@ -44,6 +46,7 @@ export default async function DiscoverPage() {
 
             <RailCard
               order={2}
+              essential={false}
               icon={<Bookmark />}
               title="Saved for later"
               hint={`${saved.length} waiting`}

@@ -68,7 +68,7 @@ export default async function DashboardPage() {
           <Rise order={2} className="md:row-span-2 xl:row-span-1">
             <RecallCard queue={recall} />
           </Rise>
-          <Rise order={3}>
+          <Rise order={3} className="max-md:hidden">
             <RecentSessions sessions={recent} />
           </Rise>
           <Rise order={4}>

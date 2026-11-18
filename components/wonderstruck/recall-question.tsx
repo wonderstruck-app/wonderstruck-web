@@ -44,7 +44,7 @@ export function RecallQuestion({
                 key={o.id}
                 className={cn(
                   "squircle-sm flex min-h-11 cursor-pointer items-center gap-3 border border-border px-4 py-2 text-[0.9375rem] transition-colors has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-ring",
-                  !checked && "hover:border-input hover:bg-accent/60",
+                  !checked && !isSel && "hover:border-input hover:bg-accent/60",
                   !checked && isSel && "border-primary/70 bg-primary/10",
                   checked && isAnswer && "border-success/60 bg-success/10",
                   checked &&

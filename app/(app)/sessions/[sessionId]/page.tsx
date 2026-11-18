@@ -68,7 +68,7 @@ async function Session({ params }: Props) {
             </RailCard>
           )}
 
-          <RailCard order={2} icon={<Compass />} tone="blue" title="Explore next" hint="Close to what you just learned">
+          <RailCard order={2} essential={false} icon={<Compass />} tone="blue" title="Explore next" hint="Close to what you just learned">
             <ul className="flex flex-col gap-3">
               {next.map((b) => (
                 <li key={b.id}>

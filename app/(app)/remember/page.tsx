@@ -29,6 +29,7 @@ export default async function RememberPage() {
               order={1}
               icon={<History />}
               tone="honey"
+              essential={false}
               title="Recent reviews"
               hint={`${recalled} of ${history.length} recalled`}
             >

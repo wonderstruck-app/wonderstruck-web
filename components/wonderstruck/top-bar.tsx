@@ -18,7 +18,7 @@ export function TopBar({
         <label htmlFor="site-search" className="sr-only">
           Search topics, sessions, and concepts
         </label>
-        <div className="squircle-md flex h-12 items-center gap-3 border border-border bg-card px-4 transition-colors focus-within:border-primary/60">
+        <div className="glow-under squircle-md flex h-12 items-center gap-3 border border-primary/70 bg-card px-4 dark:border-primary/25 transition-[border-color,box-shadow] duration-200 focus-within:border-primary/60">
           <Search
             aria-hidden
             className="size-[1.15rem] shrink-0 text-muted-foreground"

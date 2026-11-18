@@ -29,6 +29,7 @@ export default async function SettingsPage() {
               order={1}
               featured
               icon={<ShieldCheck />}
+              essential={false}
               title="Your learning stays yours"
               hint="Nothing is shared or sold"
             >

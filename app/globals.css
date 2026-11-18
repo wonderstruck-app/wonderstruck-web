@@ -473,6 +473,27 @@
     0 20px 60px -24px oklch(0.9 0.05 82 / 0.22);
 }
 
+/* Soft cream glow under the bottom edge only (search field, Continue exploring) that brightens on focus; the field itself keeps its colours. */
+@utility glow-under {
+  --search-glow: var(--primary-edge);
+  box-shadow: 0 10px 12px -10px color-mix(in oklch, var(--search-glow) 45%, transparent);
+  &:focus-within {
+    box-shadow: 0 12px 14px -10px color-mix(in oklch, var(--search-glow) 65%, transparent);
+  }
+  .dark & {
+    box-shadow:
+      0 0 0 1px oklch(0.9 0.05 82 / 0.06),
+      0 12px 48px -14px oklch(0.9 0.05 82 / 0.28),
+      inset 0 1px 0 0 oklch(1 0 0 / 0.06);
+  }
+  .dark &:focus-within {
+    box-shadow:
+      0 0 0 1px oklch(0.9 0.05 82 / 0.08),
+      0 12px 48px -12px oklch(0.9 0.05 82 / 0.36),
+      inset 0 1px 0 0 oklch(1 0 0 / 0.06);
+  }
+}
+
 /* Small 3D icon tile: tinted face with a darker bottom edge, like a resting key. */
 @utility icon-key {
   box-shadow:

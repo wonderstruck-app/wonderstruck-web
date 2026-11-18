@@ -16,7 +16,7 @@ const NOT_CONNECTED =
 /**
  * Live session: no chat window. The conversation reads as open captions, with
  * Mira standing beside her latest reply. One large speak key leads, with its
- * status beside it; typing and mute are small keys on the other side.
+ * "Tap to talk" on its left when idle; while live, mute takes that spot and the status sits beneath. Keyboard key on the right.
  */
 export function SessionCanvas({
   initialMessages,
@@ -82,7 +82,7 @@ export function SessionCanvas({
   return (
     <section
       aria-label="Session with Mira"
-      className={cn("relative flex min-w-0 flex-col", !embedded && "min-h-[34rem] lg:h-full lg:min-h-0")}
+      className={cn("relative flex min-w-0 flex-col", !embedded && "min-h-[max(28rem,calc(100dvh-13.5rem))] lg:h-full lg:min-h-0")}
     >
       <div
         className={cn(
@@ -122,10 +122,10 @@ export function SessionCanvas({
 
       <div
         className={cn(
-          "flex shrink-0 flex-col items-center gap-4",
+          "flex shrink-0 flex-col items-center gap-6",
           embedded
             ? "pt-9"
-            : "sticky bottom-[calc(4.75rem+env(safe-area-inset-bottom))] z-10 bg-gradient-to-t from-background from-65% to-transparent pt-12 pb-3 lg:bottom-0 lg:bg-none lg:pb-2",
+            : "sticky bottom-[calc(4.75rem+env(safe-area-inset-bottom))] z-10 bg-gradient-to-t from-background from-65% to-transparent pt-12 pb-6 lg:bottom-0 lg:bg-none lg:pb-2",
         )}
       >
         {suggestions.length > 0 && !typing && (
@@ -164,7 +164,7 @@ export function SessionCanvas({
             >
               <Mic />
             </Button>
-            <div className="flex min-w-0 flex-1 items-end gap-2 rounded-[1.5rem] border border-ink/10 bg-ink/[0.04] p-1.5 pl-4 backdrop-blur-xl transition-colors focus-within:border-primary/45">
+            <div className="squircle-md box-border flex min-h-12 min-w-0 flex-1 items-center border border-ink/10 bg-ink/[0.04] px-4 backdrop-blur-xl transition-colors focus-within:border-primary/45">
               <label htmlFor="composer" className="sr-only">
                 Type to Mira
               </label>
@@ -182,33 +182,52 @@ export function SessionCanvas({
                   if (e.key === "Escape" && !draft) setTyping(false);
                 }}
                 placeholder="Type to Mira…"
-                className="field-sizing-content max-h-40 min-h-9 min-w-0 flex-1 resize-none bg-transparent py-1.5 text-base leading-snug outline-none placeholder:text-muted-foreground"
+                className="field-sizing-content max-h-40 min-w-0 flex-1 resize-none bg-transparent py-[11px] text-base leading-6 outline-none placeholder:text-muted-foreground"
               />
-              <Button type="submit" size="icon" aria-label="Send" disabled={!draft.trim()} className="size-9 shrink-0">
-                <ArrowUp />
-              </Button>
             </div>
+            <Button type="submit" size="icon-lg" aria-label="Send" disabled={!draft.trim()} className="shrink-0">
+              <ArrowUp />
+            </Button>
           </form>
         ) : (
-          <div className="grid w-full grid-cols-[1fr_auto_1fr] items-center gap-5">
-            <div className="flex items-center gap-2.5 justify-self-end">
-              {voice !== "idle" && (
-                <Button
-                  type="button"
-                  size="icon-lg"
-                  variant="secondary"
-                  aria-pressed={voice === "muted"}
-                  aria-label={voice === "muted" ? "Unmute microphone" : "Mute microphone"}
-                  onClick={() => setVoice(voice === "muted" ? "listening" : "muted")}
-                >
-                  <MicOff />
-                </Button>
-              )}
+          <div className="flex w-full flex-col items-center gap-6">
+            <div className="grid w-full grid-cols-[1fr_auto_1fr] items-center gap-6">
+              <div className="justify-self-end">
+                {voice === "idle" ? (
+                  <p aria-live="polite" className="text-sm text-muted-foreground">
+                    {status}
+                  </p>
+                ) : (
+                  <Button
+                    type="button"
+                    size="icon-lg"
+                    variant="secondary"
+                    aria-pressed={voice === "muted"}
+                    aria-label={voice === "muted" ? "Unmute microphone" : "Mute microphone"}
+                    onClick={() => setVoice(voice === "muted" ? "listening" : "muted")}
+                  >
+                    <MicOff />
+                  </Button>
+                )}
+              </div>
+              <Button
+                type="button"
+                aria-pressed={listening}
+                aria-label={listening ? "Stop talking" : "Talk with Mira"}
+                onClick={() => setVoice(listening ? "idle" : "listening")}
+                className={cn(
+                  "squircle-md size-20 shrink-0 p-0 [--key-depth:6px] [&_svg:not([class*='size-'])]:size-8",
+                  listening && "bg-primary text-primary-foreground [--key-edge:var(--primary-edge)] hover:bg-primary",
+                )}
+              >
+                {listening ? <Square className="fill-current" /> : <Mic />}
+              </Button>
               <Button
                 type="button"
                 size="icon-lg"
                 variant="secondary"
                 aria-label="Type instead"
+                className="justify-self-start"
                 onClick={() => {
                   setVoice("idle");
                   setTyping(true);
@@ -217,22 +236,12 @@ export function SessionCanvas({
                 <Keyboard />
               </Button>
             </div>
-            <Button
-              type="button"
-              aria-pressed={listening}
-              aria-label={listening ? "Stop talking" : "Talk with Mira"}
-              onClick={() => setVoice(listening ? "idle" : "listening")}
-              className={cn(
-                "squircle-md size-20 shrink-0 p-0 [--key-depth:6px] [&_svg:not([class*='size-'])]:size-8",
-                listening && "bg-primary text-primary-foreground [--key-edge:var(--primary-edge)] hover:bg-primary",
-              )}
-            >
-              {listening ? <Square className="fill-current" /> : <Mic />}
-            </Button>
-            <p aria-live="polite" className="flex items-center gap-2.5 justify-self-start text-sm text-muted-foreground">
-              {listening && <Waveform />}
-              <span className={cn(listening && "text-foreground/85")}>{status}</span>
-            </p>
+            {voice !== "idle" && (
+              <p aria-live="polite" className="flex h-5 items-center gap-2.5 text-sm text-muted-foreground">
+                {listening && <Waveform />}
+                <span className={cn(listening && "text-foreground/85")}>{status}</span>
+              </p>
+            )}
           </div>
         )}
       </div>
