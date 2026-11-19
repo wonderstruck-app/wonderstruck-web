@@ -10,7 +10,7 @@ export default async function GraphPage() {
   const semantic = graph.links.filter((l) => l.kind === "semantic").length;
 
   return (
-    <PageFrame>
+    <PageFrame accent="accent-teal">
       <PageHeader
         title="Your learning graph"
         description={`${graph.concepts.length} concepts from ${graph.sessions.length} sessions. Mira links ideas that are close in meaning, even when you met them in different places. ${semantic} such links so far.`}

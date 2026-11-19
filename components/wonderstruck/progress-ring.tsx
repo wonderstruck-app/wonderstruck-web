@@ -22,7 +22,7 @@ export function ProgressRing({
           strokeLinecap="round"
           strokeDasharray={c}
           strokeDashoffset={c * (1 - (total ? done / total : 0))}
-          className="stroke-tint-honey transition-[stroke-dashoffset] duration-700 ease-out motion-reduce:transition-none"
+          className="stroke-tint-violet transition-[stroke-dashoffset] duration-700 ease-out motion-reduce:transition-none"
         />
       </svg>
       <span className="text-sm font-bold tabular-nums">

@@ -12,6 +12,7 @@ export function RecallQuestion({
   onChecked,
   after,
   secondary,
+  size = "md",
   className,
 }: {
   item: RecallItem;
@@ -20,6 +21,8 @@ export function RecallQuestion({
   after: ReactNode;
   /** Optional quiet action beside the primary button. */
   secondary?: ReactNode;
+  /** `lg` is the focused Recall page: bigger question and roomier options. */
+  size?: "md" | "lg";
   className?: string;
 }) {
   const [selected, setSelected] = useState<string | null>(null);
@@ -29,21 +32,28 @@ export function RecallQuestion({
   return (
     <div className={cn("flex flex-col", className)}>
       <fieldset disabled={checked}>
-        <legend className="text-[0.9375rem] leading-snug font-semibold">
+        <legend
+          className={cn(
+            "leading-snug font-semibold text-balance",
+            size === "lg" ? "text-[1.25rem] font-bold sm:text-[1.5rem]" : "text-[0.9375rem]",
+          )}
+        >
           <span className="mb-1.5 block text-xs font-semibold text-muted-foreground">
             From “{item.sessionTitle}”
           </span>
           {item.question}
         </legend>
-        <div className="mt-3.5 grid gap-2">
-          {item.options.map((o) => {
+        <div className={cn("grid gap-2", size === "lg" ? "mt-6 gap-2.5" : "mt-3.5")}>
+          {item.options.map((o, i) => {
             const isSel = selected === o.id;
             const isAnswer = o.id === item.correctId;
             return (
               <label
                 key={o.id}
                 className={cn(
-                  "squircle-sm flex min-h-11 cursor-pointer items-center gap-3 border border-border px-4 py-2 text-[0.9375rem] transition-colors has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-ring",
+                  "squircle-sm flex cursor-pointer items-center gap-3 border border-border text-[0.9375rem] transition-colors",
+                  size === "lg" ? "min-h-14 px-3 py-2.5 sm:text-base" : "min-h-11 px-4 py-2",
+                  "has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-ring",
                   !checked && !isSel && "hover:border-input hover:bg-accent/60",
                   !checked && isSel && "border-primary/70 bg-primary/10",
                   checked && isAnswer && "border-success/60 bg-success/10",
@@ -62,23 +72,37 @@ export function RecallQuestion({
                   onChange={() => setSelected(o.id)}
                   className="sr-only"
                 />
-                <span
-                  aria-hidden
-                  className={cn(
-                    "grid size-5 shrink-0 place-items-center rounded-full border border-input",
-                    isSel && !checked && "border-primary bg-primary",
-                  )}
-                >
-                  {isSel && !checked && (
-                    <span className="size-2 rounded-full bg-primary-foreground" />
-                  )}
-                  {checked && isAnswer && (
-                    <Check className="size-3.5 text-success" />
-                  )}
-                  {checked && isSel && !isAnswer && (
-                    <X className="size-3.5 text-destructive" />
-                  )}
-                </span>
+                {size === "lg" ? (
+                  <span
+                    aria-hidden
+                    className={cn(
+                      "squircle-sm grid size-8 shrink-0 place-items-center bg-ink/[0.06] text-sm font-bold text-muted-foreground transition-colors",
+                      isSel && !checked && "bg-primary text-primary-foreground",
+                      checked && isAnswer && "bg-success text-background",
+                      checked && isSel && !isAnswer && "bg-destructive text-background",
+                    )}
+                  >
+                    {checked && isAnswer ? (
+                      <Check className="size-4" />
+                    ) : checked && isSel ? (
+                      <X className="size-4" />
+                    ) : (
+                      String.fromCharCode(65 + i)
+                    )}
+                  </span>
+                ) : (
+                  <span
+                    aria-hidden
+                    className={cn(
+                      "grid size-5 shrink-0 place-items-center rounded-full border border-input",
+                      isSel && !checked && "border-primary bg-primary",
+                    )}
+                  >
+                    {isSel && !checked && <span className="size-2 rounded-full bg-primary-foreground" />}
+                    {checked && isAnswer && <Check className="size-3.5 text-success" />}
+                    {checked && isSel && !isAnswer && <X className="size-3.5 text-destructive" />}
+                  </span>
+                )}
                 {o.label}
               </label>
             );
@@ -114,6 +138,7 @@ export function RecallQuestion({
           after
         ) : (
           <Button
+            size={size === "lg" ? "lg" : "default"}
             className="flex-1"
             disabled={!selected}
             onClick={() => {

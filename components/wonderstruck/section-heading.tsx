@@ -6,11 +6,14 @@ export function SectionHeading({
   title,
   href,
   linkLabel = "See all",
+  accent,
 }: {
   id: string;
   title: string;
   href?: string;
   linkLabel?: string;
+  /** accent-* class so the link takes the destination's colour. */
+  accent?: string;
 }) {
   return (
     <div className="mb-3.5 flex items-center justify-between gap-3">
@@ -20,7 +23,7 @@ export function SectionHeading({
       {href && (
         <Link
           href={href}
-          className="inline-flex h-10 items-center gap-1.5 rounded-full px-1 text-sm font-semibold text-primary-ink outline-none hover:underline focus-visible:ring-2 focus-visible:ring-ring"
+          className={`${accent ?? ""} inline-flex h-10 items-center gap-1.5 rounded-full px-1 text-sm font-semibold text-primary-ink outline-none hover:underline focus-visible:ring-2 focus-visible:ring-ring`}
         >
           {linkLabel}
           <ArrowRight aria-hidden className="size-4" />

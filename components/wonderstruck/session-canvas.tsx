@@ -122,10 +122,10 @@ export function SessionCanvas({
 
       <div
         className={cn(
-          "flex shrink-0 flex-col items-center gap-6",
+          "flex shrink-0 flex-col items-center",
           embedded
-            ? "pt-9"
-            : "sticky bottom-[calc(4.75rem+env(safe-area-inset-bottom))] z-10 bg-gradient-to-t from-background from-65% to-transparent pt-12 pb-6 lg:bottom-0 lg:bg-none lg:pb-2",
+            ? "gap-6 pt-9"
+            : "sticky bottom-[calc(3.75rem+env(safe-area-inset-bottom))] z-10 -mx-4 gap-4 border-t border-border bg-white px-4 py-4 sm:-mx-6 sm:px-6 dark:bg-[oklch(0.115_0.006_265)] lg:bottom-0 lg:mx-0 lg:gap-6 lg:border-t-0 lg:bg-transparent lg:px-0 lg:pt-12 lg:pb-2 lg:dark:bg-transparent",
         )}
       >
         {suggestions.length > 0 && !typing && (
@@ -190,7 +190,7 @@ export function SessionCanvas({
             </Button>
           </form>
         ) : (
-          <div className="flex w-full flex-col items-center gap-6">
+          <div className="flex w-full flex-col items-center gap-4 lg:gap-6">
             <div className="grid w-full grid-cols-[1fr_auto_1fr] items-center gap-6">
               <div className="justify-self-end">
                 {voice === "idle" ? (
@@ -216,7 +216,7 @@ export function SessionCanvas({
                 aria-label={listening ? "Stop talking" : "Talk with Mira"}
                 onClick={() => setVoice(listening ? "idle" : "listening")}
                 className={cn(
-                  "squircle-md size-20 shrink-0 p-0 [--key-depth:6px] [&_svg:not([class*='size-'])]:size-8",
+                  "squircle-md size-16 shrink-0 p-0 [--key-depth:5px] [&_svg:not([class*='size-'])]:size-6",
                   listening && "bg-primary text-primary-foreground [--key-edge:var(--primary-edge)] hover:bg-primary",
                 )}
               >

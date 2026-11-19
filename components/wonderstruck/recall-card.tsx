@@ -15,7 +15,7 @@ export function RecallCard({ queue }: { queue: RecallItem[] }) {
   return (
     <section
       aria-labelledby="recall-title"
-      className="surface squircle-lg flex flex-col p-5 sm:p-6"
+      className="accent-violet surface squircle-lg flex flex-col p-5 sm:p-6"
     >
       <div className="flex items-center gap-4">
         <ProgressRing done={done} total={queue.length} />

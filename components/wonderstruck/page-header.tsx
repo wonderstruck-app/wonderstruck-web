@@ -35,9 +35,9 @@ export function PageHeader({
 }
 
 /** Page width + padding shared by every app page, so titles always start in the same place. */
-export function PageFrame({ children }: { children: ReactNode }) {
+export function PageFrame({ children, accent }: { children: ReactNode; accent?: string }) {
   return (
-    <div className="w-full px-4 pt-6 pb-14 sm:px-6 lg:px-8 lg:pt-8">
+    <div className={`${accent ?? ""} w-full px-4 pt-6 pb-14 sm:px-6 lg:px-8 lg:pt-8`}>
       {children}
     </div>
   );

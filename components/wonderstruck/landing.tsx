@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
 import { Check } from "lucide-react";
 import type { LearningBlock, LearningGraph, Message, RecallItem } from "@/lib/data";
 import { cn } from "@/lib/utils";
@@ -8,7 +8,8 @@ import { GraphSnapshot } from "./graph-snapshot";
 import { LearningCard } from "./learning-card";
 import { RecallCard } from "./recall-card";
 import { SessionCanvas } from "./session-canvas";
-import { IconKey, type IconTone } from "./icon-key";
+import { IconKey, toneColor, type IconTone } from "./icon-key";
+import { Tinted } from "./tinted";
 
 /** Hero visual: Mira on her own, standing on the hero's bottom edge. */
 export function HeroMira() {
@@ -31,10 +32,12 @@ export function FeatureRow({
   title,
   children,
   preview,
+  accent,
   flip = false,
 }: {
   id: string;
   tone: IconTone;
+  accent?: string;
   icon: ReactNode;
   title: string;
   children: ReactNode;
@@ -44,9 +47,14 @@ export function FeatureRow({
   return (
     <article
       aria-labelledby={id}
-      className="grid items-center gap-10 lg:grid-cols-2 lg:gap-20"
+      style={{ "--t": toneColor[tone] } as CSSProperties}
+      className={cn(
+        "grid items-center gap-10 lg:gap-14 xl:gap-16",
+        flip ? "lg:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)]" : "lg:grid-cols-[minmax(0,1fr)_minmax(0,1.3fr)]",
+        accent,
+      )}
     >
-      <div className={cn("max-w-[34rem]", flip && "lg:order-2 lg:justify-self-start")}>
+      <div className={cn("max-w-[32rem]", flip && "lg:order-2 lg:justify-self-start")}>
         <IconKey tone={tone} size="lg">
           {icon}
         </IconKey>
@@ -60,7 +68,14 @@ export function FeatureRow({
           {children}
         </div>
       </div>
-      <div className={cn("min-w-0", flip && "lg:order-1")}>{preview}</div>
+      <div
+        className={cn(
+          "squircle-lg min-w-0 border border-[color-mix(in_oklch,var(--t)_22%,transparent)] bg-[radial-gradient(120%_90%_at_50%_0%,color-mix(in_oklch,var(--t)_18%,transparent),color-mix(in_oklch,var(--t)_4%,transparent)_75%)] p-3 sm:p-6",
+          flip && "lg:order-1",
+        )}
+      >
+        {preview}
+      </div>
     </article>
   );
 }
@@ -68,7 +83,7 @@ export function FeatureRow({
 /** A slice of the real Discover feed. */
 export function DiscoverPreview({ blocks }: { blocks: LearningBlock[] }) {
   return (
-    <div className="grid gap-4 sm:grid-cols-2">
+    <div className="grid gap-5 sm:grid-cols-2 sm:gap-6">
       {blocks.slice(0, 2).map((b) => (
         <LearningCard key={b.id} block={b} />
       ))}
@@ -128,8 +143,8 @@ export function RememberPreview({ queue }: { queue: RecallItem[] }) {
     "It isn't reflected sunlight. Excited atoms give off the light.",
   ];
   return (
-    <div className="flex flex-col">
-      <figure className="glass squircle-lg p-6 pb-14 sm:w-[86%] sm:p-8 sm:pb-20">
+    <div className="flex flex-col gap-5 sm:gap-6">
+      <figure className="glass squircle-lg p-6 sm:w-[86%] sm:p-8">
         <figcaption>
           <p className="text-sm font-semibold text-muted-foreground">Session recap</p>
           <p className="mt-1 text-[1.25rem] leading-snug font-bold">{queue[0]?.sessionTitle}</p>
@@ -137,13 +152,13 @@ export function RememberPreview({ queue }: { queue: RecallItem[] }) {
         <ul className="mt-5 space-y-3">
           {ideas.map((t) => (
             <li key={t} className="flex gap-3 leading-relaxed text-foreground/85">
-              <span aria-hidden className="mt-[0.6em] size-1.5 shrink-0 rounded-full bg-tint-honey [corner-shape:round]" />
+              <span aria-hidden className="mt-[0.6em] size-1.5 shrink-0 rounded-full bg-tint-violet [corner-shape:round]" />
               {t}
             </li>
           ))}
         </ul>
       </figure>
-      <div className="relative -mt-8 ml-6 self-end sm:-mt-12 sm:ml-0 sm:w-[72%]">
+      <div className="self-end sm:w-[78%]">
         <RecallCard queue={queue} />
       </div>
     </div>
@@ -155,12 +170,25 @@ export function GraphPreview({ graph }: { graph: LearningGraph }) {
   return <GraphSnapshot graph={graph} />;
 }
 
-/** Text-only principle with a hairline divider; three sit side by side. */
-export function Principle({ title, children }: { title: string; children: ReactNode }) {
+/** One principle on its own tinted tile; three sit side by side with clear gaps. */
+export function Principle({
+  tone,
+  icon,
+  title,
+  children,
+}: {
+  tone: IconTone;
+  icon: ReactNode;
+  title: string;
+  children: ReactNode;
+}) {
   return (
-    <li className="px-0 py-6 sm:px-8 sm:py-0 lg:px-12">
-      <p className="text-[1.25rem] font-bold">{title}</p>
-      <p className="mt-2 leading-relaxed text-muted-foreground">{children}</p>
-    </li>
+    <Tinted as="li" tone={tone} className="squircle-lg flex flex-col gap-5 p-6 text-left sm:p-8">
+      <IconKey tone={tone}>{icon}</IconKey>
+      <div>
+        <p className="text-[1.25rem] font-bold">{title}</p>
+        <p className="mt-2 leading-relaxed text-muted-foreground">{children}</p>
+      </div>
+    </Tinted>
   );
 }

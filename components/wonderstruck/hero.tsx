@@ -15,8 +15,9 @@ export function Hero({ learner }: { learner: Learner }) {
   return (
     <section
       aria-labelledby="hero-title"
-      className="hero-sky @container squircle-lg relative isolate overflow-hidden border border-ink/10 shadow-[inset_0_1px_0_0_oklch(1_0_0/0.08)]"
+      className="hero-sky @container squircle-lg relative isolate overflow-hidden border border-ink/10"
     >
+      <div aria-hidden className="hero-inset squircle-lg" />
       <div className="flex min-h-[19rem] items-end">
         <div className="relative z-10 flex w-full flex-col items-center px-6 pt-6 pb-7 text-center sm:p-10 @2xl:max-w-[30rem] @2xl:items-start @2xl:text-left">
           <MiraMascot

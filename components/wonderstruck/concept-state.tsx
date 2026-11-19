@@ -9,12 +9,12 @@ const meta: Record<ConceptState, { label: string; className: string; hint: strin
   },
   practiced: {
     label: "Practiced",
-    className: "border-tint-green/30 bg-tint-green/10 text-tint-green",
+    className: "border-tint-teal/30 bg-tint-teal/10 text-tint-teal",
     hint: "Tried in an activity",
   },
   demonstrated: {
     label: "Demonstrated",
-    className: "border-primary/35 bg-primary/12 text-primary-ink",
+    className: "border-tint-violet/30 bg-tint-violet/10 text-tint-violet",
     hint: "Explained or recalled correctly",
   },
   next: {

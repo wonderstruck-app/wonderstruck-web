@@ -115,7 +115,7 @@ export function AppShell({
       </aside>
 
       <div className="flex min-w-0 flex-1 flex-col">
-        <header className="sticky top-0 z-20 flex h-16 items-center justify-between border-b border-ink/8 bg-background/70 px-4 backdrop-blur-xl lg:hidden">
+        <header className="sticky top-0 z-20 flex h-16 items-center justify-between border-b border-border bg-white px-4 lg:hidden dark:border-white/8 dark:bg-[oklch(0.115_0.006_265/0.62)] dark:backdrop-blur-2xl dark:backdrop-saturate-150">
           <Link
             href="/dashboard"
             className="squircle-sm flex items-center outline-none focus-visible:ring-2 focus-visible:ring-ring"
@@ -186,7 +186,7 @@ export function AppShell({
 
         <nav
           aria-label="Primary"
-          className="fixed inset-x-0 bottom-0 z-20 border-t border-ink/8 bg-background/70 px-2 pt-1 pb-[max(0.25rem,env(safe-area-inset-bottom))] backdrop-blur-xl lg:hidden"
+          className="fixed inset-x-0 bottom-0 z-20 border-t border-border bg-white px-2 pt-1 pb-[max(0.25rem,env(safe-area-inset-bottom))] lg:hidden dark:border-white/8 dark:bg-[oklch(0.115_0.006_265/0.62)] dark:backdrop-blur-2xl dark:backdrop-saturate-150"
         >
           <Suspense>
             <ul className="flex">

@@ -14,6 +14,7 @@ export function RecentSessions({ sessions }: { sessions: SessionSummary[] }) {
         id="sessions-title"
         title="Recent sessions"
         href="/sessions"
+        accent="accent-green"
         linkLabel="All"
       />
       <ul className="-mx-2 flex flex-col gap-1">

@@ -34,7 +34,7 @@ export function GraphExplorer({ graph }: { graph: LearningGraph }) {
 
       <div className="mt-5 grid grid-cols-[minmax(0,1fr)] gap-5 xl:grid-cols-[minmax(0,1fr)_22rem]">
         <TabsContent value="map" className="min-w-0">
-          <div className="dark squircle-lg overflow-hidden border border-tint-blue/20 text-foreground bg-[radial-gradient(90%_80%_at_50%_40%,oklch(0.24_0.05_260),oklch(0.17_0.015_265))] p-4 sm:p-8">
+          <div className="dark squircle-lg overflow-hidden border border-tint-teal/20 text-foreground bg-[radial-gradient(90%_80%_at_50%_40%,oklch(0.24_0.045_220),oklch(0.17_0.015_250))] p-4 sm:p-8">
             <GraphCanvas
               graph={graph}
               labels

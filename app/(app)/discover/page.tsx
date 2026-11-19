@@ -15,7 +15,7 @@ export default async function DiscoverPage() {
   const [blocks, saved] = await Promise.all([getBlocks(), getSavedBlocks()]);
 
   return (
-    <PageFrame>
+    <PageFrame accent="accent-blue">
       <WithRail
         railLabel="Your feed"
         rail={

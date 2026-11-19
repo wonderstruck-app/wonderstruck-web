@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
+import type { ReactNode } from "react";
 import { Brain, CircleCheck, History, Lightbulb, RotateCcw, Timer, Waypoints } from "lucide-react";
-import { IconKey } from "@/components/wonderstruck/icon-key";
+import { IconKey, type IconTone } from "@/components/wonderstruck/icon-key";
+import { Tinted } from "@/components/wonderstruck/tinted";
 import { RailCard } from "@/components/wonderstruck/rail-card";
 import { Rise } from "@/components/wonderstruck/rise";
 import { MemoryList } from "@/components/wonderstruck/memory-list";
@@ -18,9 +20,10 @@ export default async function RememberPage() {
   ]);
 
   const recalled = history.filter((r) => r.outcome === "recalled").length;
+  const missed = history.length - recalled;
 
   return (
-    <PageFrame>
+    <PageFrame accent="accent-violet">
       <WithRail
         railLabel="Your memory"
         rail={
@@ -28,7 +31,7 @@ export default async function RememberPage() {
             <RailCard
               order={1}
               icon={<History />}
-              tone="honey"
+              tone="violet"
               essential={false}
               title="Recent reviews"
               hint={`${recalled} of ${history.length} recalled`}
@@ -39,7 +42,7 @@ export default async function RememberPage() {
                     {r.outcome === "recalled" ? (
                       <CircleCheck aria-hidden className="size-5 shrink-0 text-success" />
                     ) : (
-                      <RotateCcw aria-hidden className="size-5 shrink-0 text-tint-honey" />
+                      <RotateCcw aria-hidden className="size-5 shrink-0 text-tint-rose" />
                     )}
                     <div className="min-w-0 flex-1">
                       <p className="truncate text-[0.9375rem] font-medium">{r.concept}</p>
@@ -71,25 +74,51 @@ export default async function RememberPage() {
           title="Recall"
           description="A few quick questions on things you explored. Pulling an idea back from memory is what makes it stick."
         />
-        <div className="mt-7">
+        <Rise order={1} className="mt-7 grid grid-cols-3 gap-2.5 sm:gap-3">
+          <Stat tone="violet" icon={<RotateCcw />} value={queue.length} label="Due now" />
+          <Stat tone="green" icon={<CircleCheck />} value={`${recalled}/${history.length}`} label="Recalled lately" />
+          <Stat tone="rose" icon={<History />} value={missed} label="Coming back sooner" />
+        </Rise>
+        <div className="mt-4 sm:mt-5">
           <RecallSession queue={queue} />
         </div>
-        <Rise order={2} className="mt-6 grid gap-3 sm:grid-cols-3">
-          {[
-            { icon: <Timer />, tone: "honey" as const, title: "Spaced out", text: "Each idea returns just before you'd forget it." },
-            { icon: <Lightbulb />, tone: "cream" as const, title: "Effort helps", text: "A hard-won answer sticks better than an easy reread." },
-            { icon: <Waypoints />, tone: "blue" as const, title: "Feeds your graph", text: "Recalled ideas move from discussed toward demonstrated." },
-          ].map((t) => (
-            <div key={t.title} className="surface squircle-lg flex gap-3 p-4">
-              <IconKey tone={t.tone} size="sm">{t.icon}</IconKey>
-              <div>
-                <p className="font-bold">{t.title}</p>
-                <p className="mt-0.5 text-sm leading-relaxed text-muted-foreground">{t.text}</p>
-              </div>
-            </div>
-          ))}
-        </Rise>
+        <section aria-labelledby="how-title" className="mt-10">
+          <h2 id="how-title" className="text-[1.1875rem] font-bold">
+            Why it works
+          </h2>
+          <div className="mt-3.5 grid gap-3 sm:grid-cols-3">
+            {[
+              { icon: <Timer />, tone: "honey" as const, title: "Spaced out", text: "Each idea returns just before you'd forget it." },
+              { icon: <Lightbulb />, tone: "violet" as const, title: "Effort helps", text: "A hard-won answer sticks better than an easy reread." },
+              { icon: <Waypoints />, tone: "teal" as const, title: "Feeds your graph", text: "Recalled ideas move from discussed toward demonstrated." },
+            ].map((t) => (
+              <Tinted key={t.title} tone={t.tone} className="squircle-lg flex gap-3.5 p-4 sm:flex-col sm:gap-4 sm:p-5">
+                <IconKey tone={t.tone}>{t.icon}</IconKey>
+                <div>
+                  <p className="font-bold">{t.title}</p>
+                  <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{t.text}</p>
+                </div>
+              </Tinted>
+            ))}
+          </div>
+        </section>
       </WithRail>
     </PageFrame>
+  );
+}
+
+function Stat({ tone, icon, value, label }: { tone: IconTone; icon: ReactNode; value: ReactNode; label: string }) {
+  return (
+    <Tinted tone={tone} className="squircle-md flex flex-col gap-3 p-3.5 sm:flex-row sm:items-center sm:p-4">
+      <IconKey tone={tone} size="sm" className="max-sm:hidden">
+        {icon}
+      </IconKey>
+      <div className="min-w-0">
+        <p className="text-[1.375rem] leading-none font-bold tabular-nums" style={{ color: "var(--t)" }}>
+          {value}
+        </p>
+        <p className="mt-1.5 text-xs leading-snug font-medium text-muted-foreground sm:text-sm">{label}</p>
+      </div>
+    </Tinted>
   );
 }

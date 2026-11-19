@@ -61,7 +61,7 @@ function Predict({ a }: { a: Extract<Activity, { kind: "predict" }> }) {
               onClick={() => setPick(o.id)}
               className={cn(
                 "squircle-sm flex min-h-12 items-center gap-3 border border-border px-4 py-2.5 text-left text-[0.9375rem] transition-colors outline-none focus-visible:ring-2 focus-visible:ring-ring",
-                !done && "hover:border-input hover:bg-accent/60",
+                !done && !sel && "hover:border-input hover:bg-accent/60",
                 !done && sel && "border-primary/70 bg-primary/10",
                 done && ans && "border-success/60 bg-success/10",
                 done && sel && !ans && "border-destructive/60 bg-destructive/10",

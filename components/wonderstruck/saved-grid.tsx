@@ -34,7 +34,7 @@ export function SavedGrid({ saved }: { saved: SavedBlock[] }) {
       <ul className="mt-6 grid gap-5 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
         {shown.map(({ block, savedLabel }, i) => (
           <Rise as="li" order={Math.min(i, 6)} key={block.id}>
-            <LearningCard block={block} saved priority={i === 0} meta={`Saved ${savedLabel.toLowerCase()}`} />
+            <LearningCard block={block} saved priority={i === 0} meta={savedLabel} />
           </Rise>
         ))}
       </ul>

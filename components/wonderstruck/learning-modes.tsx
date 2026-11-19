@@ -25,9 +25,9 @@ const tints = {
     tile: "bg-tint-green/10 hover:bg-tint-green/15",
     face: "[--face:var(--tint-green)] dark:[--face:oklch(0.6_0.13_155)]",
   },
-  honey: {
-    tile: "bg-tint-honey/10 hover:bg-tint-honey/15",
-    face: "[--face:oklch(0.67_0.13_62)] dark:[--face:oklch(0.66_0.12_62)]",
+  violet: {
+    tile: "bg-tint-violet/10 hover:bg-tint-violet/15",
+    face: "[--face:var(--tint-violet)] dark:[--face:oklch(0.6_0.14_295)]",
   },
 } as const;
 
@@ -35,7 +35,7 @@ const modeTint = {
   discover: "blue",
   explore: "cream",
   interact: "green",
-  recall: "honey",
+  recall: "violet",
 } as const;
 
 export function LearningModes({ modes }: { modes: LearningMode[] }) {

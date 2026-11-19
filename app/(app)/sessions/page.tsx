@@ -24,7 +24,7 @@ export default async function SessionsPage() {
   const topics = [...new Set(thisWeek.flatMap((s) => s.topics))];
 
   return (
-    <PageFrame>
+    <PageFrame accent="accent-green">
       <WithRail
         railLabel="This week"
         rail={
@@ -74,14 +74,14 @@ export default async function SessionsPage() {
               <RailCard
                 order={2}
                 icon={<RotateCcw />}
-                tone="honey"
+                tone="violet"
                 title={`${recall.length} concepts ready to recall`}
                 hint="About two minutes"
               >
                 <ul className="flex flex-col gap-1.5 text-sm text-foreground/80">
                   {recall.map((r) => (
                     <li key={r.id} className="flex items-center gap-2">
-                      <span aria-hidden className="size-1.5 rounded-full bg-tint-honey" />
+                      <span aria-hidden className="size-1.5 rounded-full bg-tint-violet" />
                       {r.concept}
                     </li>
                   ))}

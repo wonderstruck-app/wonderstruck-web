@@ -10,6 +10,7 @@ export function DiscoverRow({ blocks }: { blocks: LearningBlock[] }) {
         id="discover-title"
         title="Curated for you"
         href="/discover"
+        accent="accent-blue"
         linkLabel="Open Discover"
       />
       <ul className="-mx-4 flex snap-x snap-mandatory scroll-px-4 gap-3 overflow-x-auto px-4 pb-2 [scrollbar-width:none] sm:mx-0 sm:grid sm:grid-cols-3 sm:overflow-visible sm:px-0">
@@ -17,25 +18,26 @@ export function DiscoverRow({ blocks }: { blocks: LearningBlock[] }) {
           <li key={b.id} className="w-[15.5rem] shrink-0 snap-start sm:w-auto">
             <Link
               href={`/learn/${b.id}`}
-              className="glass squircle-md group flex h-full flex-col overflow-hidden outline-none transition-[background-color,border-color] hover:border-ink/16 hover:bg-ink/[0.07] focus-visible:ring-2 focus-visible:ring-ring"
+              className="lift squircle-md group relative isolate flex aspect-[4/5] h-full flex-col justify-end overflow-hidden bg-[oklch(0.17_0.012_265)] outline-none focus-visible:ring-2 focus-visible:ring-ring sm:aspect-[5/6]"
             >
-              <div className="squircle-sm relative m-1.5 mb-0 aspect-[16/10] overflow-hidden">
-                <Image
-                  src={b.image.src}
-                  alt={b.image.alt}
-                  fill
-                  sizes="(min-width: 1280px) 320px, (min-width: 640px) 30vw, 248px"
-                  className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03] motion-reduce:transition-none"
-                />
-              </div>
-              <div className="flex flex-1 flex-col p-3.5">
-                <p className="text-xs font-semibold text-foreground/60">
+              <Image
+                src={b.image.src}
+                alt={b.image.alt}
+                fill
+                sizes="(min-width: 1280px) 320px, (min-width: 640px) 30vw, 248px"
+                className="-z-10 object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03] motion-reduce:transition-none"
+              />
+              <span
+                aria-hidden
+                className="absolute inset-0 -z-10 bg-[linear-gradient(to_top,oklch(0.12_0.01_265/0.95)_0%,oklch(0.12_0.01_265/0.75)_32%,transparent_68%)]"
+              />
+              <span aria-hidden className="squircle-md pointer-events-none absolute inset-0 ring-1 ring-white/10 ring-inset" />
+              <span className="flex flex-col p-4 text-white">
+                <span className="text-xs font-semibold text-white/65">
                   {b.topic} · {b.minutes} min
-                </p>
-                <h3 className="mt-1 text-[0.9375rem] leading-snug font-bold">
-                  {b.question}
-                </h3>
-              </div>
+                </span>
+                <span className="mt-1 text-[0.9375rem] leading-snug font-bold text-balance">{b.question}</span>
+              </span>
             </Link>
           </li>
         ))}

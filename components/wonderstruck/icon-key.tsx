@@ -1,14 +1,18 @@
 import type { CSSProperties, ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
-const tones = {
+/** CSS colour for each tone, also used to tint surfaces. */
+export const toneColor = {
   cream: "var(--primary-ink)",
   blue: "var(--tint-blue)",
   green: "var(--tint-green)",
   honey: "var(--tint-honey)",
+  violet: "var(--tint-violet)",
+  teal: "var(--tint-teal)",
+  rose: "var(--tint-rose)",
 } as const;
 
-export type IconTone = keyof typeof tones;
+export type IconTone = keyof typeof toneColor;
 
 /** Small tinted 3D tile that holds a section or mode icon. */
 export function IconKey({
@@ -25,7 +29,7 @@ export function IconKey({
   return (
     <span
       aria-hidden
-      style={{ "--chip": tones[tone] } as CSSProperties}
+      style={{ "--chip": toneColor[tone] } as CSSProperties}
       className={cn(
         "icon-key squircle-sm grid shrink-0 place-items-center",
         size === "sm" && "size-8 [&_svg]:size-4",

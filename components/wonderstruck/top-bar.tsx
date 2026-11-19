@@ -38,7 +38,7 @@ export function TopBar({
           href="/remember"
           className="squircle-sm flex h-12 items-center gap-2 px-3 text-[0.9375rem] font-semibold tabular-nums outline-none hover:bg-card focus-visible:ring-2 focus-visible:ring-ring"
         >
-          <RotateCcw aria-hidden className="size-5 text-tint-honey" />
+          <RotateCcw aria-hidden className="size-5 text-tint-violet" />
           {recallDue}
           <span className="sr-only">concepts ready to recall</span>
         </Link>
@@ -46,7 +46,7 @@ export function TopBar({
           href="/graph"
           className="squircle-sm flex h-12 items-center gap-2 px-3 text-[0.9375rem] font-semibold tabular-nums outline-none hover:bg-card focus-visible:ring-2 focus-visible:ring-ring"
         >
-          <Waypoints aria-hidden className="size-5 text-tint-blue" />
+          <Waypoints aria-hidden className="size-5 text-tint-teal" />
           {conceptCount}
           <span className="sr-only">concepts in your learning graph</span>
         </Link>

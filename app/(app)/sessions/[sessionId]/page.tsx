@@ -29,7 +29,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default function SessionPage({ params }: Props) {
   return (
-    <PageFrame>
+    <PageFrame accent="accent-green">
       <Suspense fallback={<RecapSkeleton />}>
         <Session params={params} />
       </Suspense>
@@ -53,11 +53,11 @@ async function Session({ params }: Props) {
       rail={
         <>
           {due.length > 0 && (
-            <RailCard order={1} featured icon={<RotateCcw />} tone="honey" title="Recall from this session" hint={`${due.length} ready now`}>
+            <RailCard order={1} featured icon={<RotateCcw />} tone="violet" title="Recall from this session" hint={`${due.length} ready now`}>
               <ul className="flex flex-col gap-1.5 text-sm text-foreground/80">
                 {due.map((r) => (
                   <li key={r.id} className="flex items-center gap-2">
-                    <span aria-hidden className="size-1.5 rounded-full bg-tint-honey" />
+                    <span aria-hidden className="size-1.5 rounded-full bg-tint-violet" />
                     {r.concept}
                   </li>
                 ))}

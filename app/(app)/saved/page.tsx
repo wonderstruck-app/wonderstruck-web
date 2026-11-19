@@ -8,7 +8,7 @@ export const metadata: Metadata = { title: "Saved" };
 export default async function SavedPage() {
   const saved = await getSavedBlocks();
   return (
-    <PageFrame>
+    <PageFrame accent="accent-rose">
       <PageHeader
         title="Saved"
         description="Ideas you set aside for later. No pressure, they'll wait."

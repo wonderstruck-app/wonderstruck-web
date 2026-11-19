@@ -28,7 +28,7 @@ export function SaveButton({
         setSaved(!saved);
         onToggle?.(!saved);
       }}
-      className={cn(saved && "text-primary-ink")}
+      className={cn(saved && "text-tint-rose")}
     >
       <Bookmark aria-hidden className={cn(saved && "fill-current")} />
       {!compact && (saved ? "Saved" : "Save")}

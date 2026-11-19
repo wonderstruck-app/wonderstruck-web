@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Compass, Hand, Mic, RotateCcw, Waypoints } from "lucide-react";
+import { Compass, Flag, Hand, HeartHandshake, Mic, RotateCcw, Sparkles, Waypoints } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { BrandMark } from "@/components/wonderstruck/brand";
 import {
@@ -47,6 +47,7 @@ export default async function Home() {
           aria-labelledby="landing-title"
           className="hero-sky squircle-lg relative isolate overflow-hidden border border-ink/10"
         >
+          <div aria-hidden className="hero-inset squircle-lg" />
           <div className="grid items-center gap-6 px-6 pt-12 sm:px-12 sm:pt-16 lg:grid-cols-[minmax(0,1.25fr)_minmax(0,1fr)] lg:gap-10 lg:px-16 lg:pt-10">
             <div className="text-center lg:py-16 lg:text-left">
               <h1
@@ -106,6 +107,7 @@ export default async function Home() {
             <FeatureRow
               id="f-discover"
               tone="blue"
+              accent="accent-blue"
               icon={<Compass />}
               title="Start with a question, not a syllabus"
               preview={<DiscoverPreview blocks={fan} />}
@@ -119,7 +121,7 @@ export default async function Home() {
 
             <FeatureRow
               id="f-mira"
-              tone="cream"
+              tone="honey"
               icon={<Mic />}
               title="Talk it through with Mira"
               preview={<MiraPreview />}
@@ -137,6 +139,7 @@ export default async function Home() {
               <FeatureRow
                 id="f-interact"
                 tone="green"
+                accent="accent-green"
                 icon={<Hand />}
                 title="Learn it by doing it"
                 preview={<ActivityPreview block={octopus} />}
@@ -152,7 +155,8 @@ export default async function Home() {
             {auroraFirst.length > 0 && (
               <FeatureRow
                 id="f-remember"
-                tone="honey"
+                tone="violet"
+                accent="accent-violet"
                 icon={<RotateCcw />}
                 title="Remember it for good"
                 preview={<RememberPreview queue={auroraFirst} />}
@@ -169,7 +173,8 @@ export default async function Home() {
 
             <FeatureRow
               id="f-graph"
-              tone="blue"
+              tone="teal"
+              accent="accent-teal"
               icon={<Waypoints />}
               title="Watch your knowledge connect"
               preview={<GraphPreview graph={graph} />}
@@ -191,15 +196,15 @@ export default async function Home() {
           >
             Built to leave you smarter, not hooked
           </h2>
-          <ul className="mx-auto mt-12 grid max-w-[72rem] divide-y divide-ink/10 text-center sm:grid-cols-3 sm:divide-x sm:divide-y-0">
-            <Principle title="Sessions that end">
+          <ul className="mx-auto mt-12 grid max-w-[72rem] gap-4 sm:grid-cols-3 sm:gap-6">
+            <Principle tone="green" icon={<Flag />} title="Sessions that end">
               Each one wraps up with a recap, not another autoplay.
             </Principle>
-            <Principle title="No guilt trips">
+            <Principle tone="rose" icon={<HeartHandshake />} title="No guilt trips">
               No streaks or leaderboards. Come back because you&apos;re
               curious.
             </Principle>
-            <Principle title="Mira gets to know you">
+            <Principle tone="violet" icon={<Sparkles />} title="Mira gets to know you">
               She remembers what you know and where you got stuck, so every
               session starts from you.
             </Principle>
@@ -210,6 +215,7 @@ export default async function Home() {
           aria-labelledby="cta-title"
           className="hero-sky squircle-lg relative isolate mb-16 overflow-hidden border border-ink/10 px-6 py-20 text-center sm:py-28"
         >
+          <div aria-hidden className="hero-inset squircle-lg" />
           <h2
             id="cta-title"
             className="text-[2rem] leading-[1.1] font-bold text-balance sm:text-[3rem]"
