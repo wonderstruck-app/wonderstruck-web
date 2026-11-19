@@ -75,7 +75,7 @@ async function Session({ params }: Props) {
                   <Link href={`/learn/${b.id}`} className="squircle-md group relative block aspect-[16/9] overflow-hidden">
                     <Image src={b.image.src} alt="" fill sizes="384px" className="object-cover transition-transform duration-700 group-hover:scale-105 motion-reduce:transition-none" />
                     <span className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                    <span className="absolute inset-x-3 bottom-2.5 text-sm leading-snug font-semibold text-white">
+                    <span className="absolute inset-x-3 bottom-2.5 text-sm leading-snug font-medium text-white">
                       {b.question}
                     </span>
                   </Link>
@@ -88,7 +88,7 @@ async function Session({ params }: Props) {
     >
       <Link
         href="/sessions"
-        className="inline-flex h-10 items-center gap-1.5 text-sm font-semibold text-muted-foreground hover:text-foreground"
+        className="inline-flex h-10 items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-foreground"
       >
         <ArrowLeft aria-hidden className="size-4" />
         Sessions
@@ -106,10 +106,10 @@ async function Session({ params }: Props) {
           />
         </div>
         <div className="min-w-0">
-          <p className="text-sm font-semibold text-muted-foreground">
+          <p className="text-sm font-medium text-muted-foreground">
             {s.topics.join(" · ")} · {s.whenLabel} · {s.minutes} min
           </p>
-          <h1 className="mt-1 text-[1.875rem] leading-tight font-bold sm:text-[2.125rem]">
+          <h1 className="mt-1 text-[1.875rem] leading-tight font-semibold sm:text-[2.125rem]">
             {s.title}
           </h1>
           <div className="mt-4 flex flex-wrap gap-2">
@@ -151,7 +151,7 @@ function RecapSection({ session: s }: { session: LearningSession }) {
   if (s.recapStatus === "generating")
     return (
       <section aria-busy aria-label="Writing recap" className="mt-10">
-        <p className="text-sm font-semibold text-muted-foreground">
+        <p className="text-sm font-medium text-muted-foreground">
           Mira is writing your recap…
         </p>
         <div className="mt-4 flex flex-col gap-3">
@@ -183,7 +183,7 @@ function RecapSection({ session: s }: { session: LearningSession }) {
   return (
     <section aria-labelledby="recap-title" className="mt-10">
       <div className="flex items-baseline justify-between gap-3">
-        <h2 id="recap-title" className="text-[1.375rem] font-bold">
+        <h2 id="recap-title" className="text-[1.375rem] font-semibold">
           Recap
         </h2>
         <p className="text-xs text-muted-foreground">{r.generatedLabel}</p>
@@ -192,7 +192,7 @@ function RecapSection({ session: s }: { session: LearningSession }) {
         {r.summary}
       </p>
 
-      <h3 className="mt-8 text-sm font-semibold text-muted-foreground">
+      <h3 className="mt-8 text-sm font-medium text-muted-foreground">
         Key ideas
       </h3>
       <ol className="mt-3 flex flex-col gap-3">
@@ -201,11 +201,11 @@ function RecapSection({ session: s }: { session: LearningSession }) {
             key={k.title}
             className="surface squircle-md flex gap-4 p-4"
           >
-            <span style={{ "--chip": "var(--primary)" } as CSSProperties} className="icon-key grid size-8 shrink-0 place-items-center rounded-full text-sm font-bold tabular-nums">
+            <span style={{ "--chip": "var(--primary)" } as CSSProperties} className="icon-key grid size-8 shrink-0 place-items-center rounded-full text-sm font-semibold tabular-nums">
               {i + 1}
             </span>
             <div>
-              <p className="font-bold">{k.title}</p>
+              <p className="font-semibold">{k.title}</p>
               <p className="mt-1 text-[0.9375rem] leading-relaxed text-foreground/80">
                 {k.text}
               </p>
@@ -225,7 +225,7 @@ function RecapSection({ session: s }: { session: LearningSession }) {
 function Concepts({ session: s }: { session: LearningSession }) {
   return (
     <section aria-labelledby="concepts-title" className="mt-10">
-      <h2 id="concepts-title" className="text-[1.1875rem] font-bold">
+      <h2 id="concepts-title" className="text-[1.1875rem] font-semibold">
         Concepts from this session
       </h2>
       <p className="mt-1 text-sm text-muted-foreground">
@@ -244,7 +244,7 @@ function Concepts({ session: s }: { session: LearningSession }) {
       </ul>
       <Link
         href="/graph"
-        className="mt-3 inline-block text-sm font-semibold text-primary-ink hover:underline"
+        className="mt-3 inline-block text-sm font-medium text-primary-ink hover:underline"
       >
         See them in your graph
       </Link>
@@ -261,7 +261,7 @@ const outcomeIcon = {
 function Attempts({ session: s }: { session: LearningSession }) {
   return (
     <section aria-labelledby="attempts-title" className="mt-10">
-      <h2 id="attempts-title" className="text-[1.1875rem] font-bold">
+      <h2 id="attempts-title" className="text-[1.1875rem] font-semibold">
         Activities
       </h2>
       <ul className="mt-4 flex flex-col gap-3">
@@ -272,7 +272,7 @@ function Attempts({ session: s }: { session: LearningSession }) {
           >
             {outcomeIcon[a.outcome]}
             <div>
-              <p className="font-bold">
+              <p className="font-semibold">
                 {a.title}
                 <span className="ml-2 text-sm font-medium text-muted-foreground capitalize">
                   {a.outcome}
@@ -291,23 +291,23 @@ function Transcript({ session: s }: { session: LearningSession }) {
   if (s.transcript.length === 0) return null;
   return (
     <details className="surface group squircle-lg mt-10">
-      <summary className="flex min-h-14 cursor-pointer list-none items-center gap-3 px-5 font-bold outline-none focus-visible:ring-2 focus-visible:ring-ring [&::-webkit-details-marker]:hidden">
+      <summary className="flex min-h-14 cursor-pointer list-none items-center gap-3 px-5 font-semibold outline-none focus-visible:ring-2 focus-visible:ring-ring [&::-webkit-details-marker]:hidden">
         <MessageCircle aria-hidden className="size-5 text-muted-foreground" />
         Conversation
         <span className="text-sm font-medium text-muted-foreground">
           {s.messageCount} messages
         </span>
-        <span className="ml-auto text-sm font-semibold text-primary-ink group-open:hidden">
+        <span className="ml-auto text-sm font-medium text-primary-ink group-open:hidden">
           Show
         </span>
-        <span className="ml-auto hidden text-sm font-semibold text-primary-ink group-open:inline">
+        <span className="ml-auto hidden text-sm font-medium text-primary-ink group-open:inline">
           Hide
         </span>
       </summary>
       <ol className="flex flex-col gap-4 border-t border-border px-5 py-5">
         {s.transcript.map((m) => (
           <li key={m.id}>
-            <p className="text-xs font-semibold text-muted-foreground">
+            <p className="text-xs font-medium text-muted-foreground">
               {m.role === "mira" ? "Mira" : "You"}
               {m.via === "voice" && " · voice"}
             </p>
@@ -324,7 +324,7 @@ function Transcript({ session: s }: { session: LearningSession }) {
 function ListCard({ title, items }: { title: string; items: string[] }) {
   return (
     <div className="surface squircle-md p-4">
-      <h3 className="text-sm font-semibold text-muted-foreground">{title}</h3>
+      <h3 className="text-sm font-medium text-muted-foreground">{title}</h3>
       <ul className="mt-2 flex list-disc flex-col gap-1.5 pl-5 text-[0.9375rem] leading-relaxed text-foreground/85 marker:text-muted-foreground">
         {items.map((i) => (
           <li key={i}>{i}</li>

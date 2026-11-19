@@ -95,7 +95,7 @@ export function GraphCanvas({
                 y={c.y + r + 30}
                 textAnchor="middle"
                 className={cn(
-                  "fill-foreground/85 stroke-[oklch(0.2_0.03_225)] text-[22px] font-semibold [paint-order:stroke] [stroke-linejoin:round] [stroke-width:8px]",
+                  "fill-foreground/85 stroke-[oklch(0.2_0.03_225)] text-[22px] font-medium [paint-order:stroke] [stroke-linejoin:round] [stroke-width:8px]",
                   selected && "fill-foreground",
                 )}
               >

@@ -50,7 +50,7 @@ export function RailCard({
           {icon}
         </IconKey>
         <div className="min-w-0">
-          <h2 className="leading-snug font-bold">{title}</h2>
+          <h2 className="leading-snug font-semibold">{title}</h2>
           {hint && <p className="text-xs text-muted-foreground">{hint}</p>}
         </div>
       </div>

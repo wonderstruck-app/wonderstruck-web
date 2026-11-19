@@ -32,7 +32,7 @@ export function MiraInvite({
         width={116}
         className="relative mx-auto drop-shadow-[0_14px_22px_color-mix(in_oklch,var(--shadow-color)_calc(0.45*var(--shade)*100%),transparent)]"
       />
-      <h2 id="mira-invite" className="relative mt-4 text-[1.3125rem] font-bold text-balance">
+      <h2 id="mira-invite" className="relative mt-4 text-[1.3125rem] font-semibold text-balance">
         {resuming ? "Pick up with Mira" : "Talk it through with Mira"}
       </h2>
       <p className="relative mx-auto mt-2 max-w-[30ch] text-[0.9375rem] leading-relaxed text-foreground/75">

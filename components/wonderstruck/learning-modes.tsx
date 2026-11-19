@@ -11,7 +11,7 @@ const icons = {
   recall: RotateCcw,
 };
 
-// White glyphs on every key, so faces are mid-tone in both themes.
+// White glyphs on mid-tone faces; the cream key matches the primary cream with a dark glyph.
 const tints = {
   blue: {
     tile: "bg-tint-blue/10 hover:bg-tint-blue/15",
@@ -19,7 +19,7 @@ const tints = {
   },
   cream: {
     tile: "bg-primary/16 hover:bg-primary/24 dark:bg-primary/8 dark:hover:bg-primary/12",
-    face: "[--face:var(--primary-ink)] dark:[--face:oklch(0.68_0.09_80)]",
+    face: "text-primary-foreground [--face:var(--primary)] [--key-edge:var(--primary-edge)]",
   },
   green: {
     tile: "bg-tint-green/10 hover:bg-tint-green/15",
@@ -71,7 +71,7 @@ export function LearningModes({ modes }: { modes: LearningMode[] }) {
                   />
                 </span>
                 <span className="min-w-0">
-                  <span className="block text-[0.9375rem] leading-tight font-bold">
+                  <span className="block text-[0.9375rem] leading-tight font-semibold">
                     {m.label}
                   </span>
                   <span className="mt-0.5 block text-[0.8125rem] text-muted-foreground">

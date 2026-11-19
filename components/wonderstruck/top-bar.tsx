@@ -36,7 +36,7 @@ export function TopBar({
       <div className="ml-auto hidden items-center gap-2 sm:flex xl:justify-end">
         <Link
           href="/remember"
-          className="squircle-sm flex h-12 items-center gap-2 px-3 text-[0.9375rem] font-semibold tabular-nums outline-none hover:bg-card focus-visible:ring-2 focus-visible:ring-ring"
+          className="squircle-sm flex h-12 items-center gap-2 px-3 text-[0.9375rem] font-medium tabular-nums outline-none hover:bg-card focus-visible:ring-2 focus-visible:ring-ring"
         >
           <RotateCcw aria-hidden className="size-5 text-tint-violet" />
           {recallDue}
@@ -44,7 +44,7 @@ export function TopBar({
         </Link>
         <Link
           href="/graph"
-          className="squircle-sm flex h-12 items-center gap-2 px-3 text-[0.9375rem] font-semibold tabular-nums outline-none hover:bg-card focus-visible:ring-2 focus-visible:ring-ring"
+          className="squircle-sm flex h-12 items-center gap-2 px-3 text-[0.9375rem] font-medium tabular-nums outline-none hover:bg-card focus-visible:ring-2 focus-visible:ring-ring"
         >
           <Waypoints aria-hidden className="size-5 text-tint-teal" />
           {conceptCount}

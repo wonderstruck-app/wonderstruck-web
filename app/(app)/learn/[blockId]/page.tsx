@@ -45,7 +45,7 @@ async function Learn({ params }: Props) {
         <div className="flex items-center justify-between gap-3">
           <Link
             href="/discover"
-            className="squircle-sm -ml-2 inline-flex h-10 items-center gap-1.5 px-2 text-sm font-semibold text-muted-foreground outline-none hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring"
+            className="squircle-sm -ml-2 inline-flex h-10 items-center gap-1.5 px-2 text-sm font-medium text-muted-foreground outline-none hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring"
           >
             <ArrowLeft aria-hidden className="size-4" />
             Discover
@@ -66,7 +66,7 @@ async function Learn({ params }: Props) {
             aria-hidden
             className="absolute inset-0 -z-10 bg-gradient-to-t from-[oklch(0.12_0.01_265)] via-[oklch(0.12_0.01_265/0.55)] to-transparent"
           />
-          <div className="flex flex-wrap gap-2 text-xs font-semibold text-white/90">
+          <div className="flex flex-wrap gap-2 text-xs font-medium text-white/90">
             <span className="rounded-full border border-white/15 bg-black/30 px-3 py-1 backdrop-blur-md">
               {block.topic}
             </span>
@@ -74,16 +74,16 @@ async function Learn({ params }: Props) {
               {block.minutes} min read
             </span>
           </div>
-          <h1 className="mt-3 max-w-[22ch] text-[2rem] leading-[1.08] font-bold text-balance text-white sm:text-[2.75rem] xl:text-[3.25rem]">
+          <h1 className="mt-3 max-w-[26ch] text-[1.625rem] leading-[1.15] font-semibold text-balance text-white sm:text-[2rem] xl:text-[2.375rem]">
             {block.question}
           </h1>
         </header>
 
         <div className="mx-auto mt-10 max-w-[65ch] sm:mt-12">
-          <p className="text-[1.25rem] leading-relaxed font-medium text-foreground sm:text-[1.375rem]">
+          <p className="text-[1.0625rem] leading-relaxed font-medium text-foreground sm:text-[1.125rem]">
             {block.teaser}
           </p>
-          <div className="mt-6 flex flex-col gap-5 text-[1.0625rem] leading-[1.75] text-foreground/85">
+          <div className="mt-6 flex flex-col gap-5 text-[0.9688rem] leading-[1.75] text-foreground/85 sm:text-base">
             {block.body.map((p, i) => (
               <p key={i}>{p}</p>
             ))}
@@ -98,7 +98,7 @@ async function Learn({ params }: Props) {
                 <Puzzle />
               </IconKey>
               <span className="min-w-0 flex-1">
-                <span className="block font-bold">Try it: {block.activity.title}</span>
+                <span className="block font-semibold">Try it: {block.activity.title}</span>
                 <span className="block text-sm text-foreground/70">
                   A hands-on activity inside your session with Mira
                 </span>
@@ -111,7 +111,7 @@ async function Learn({ params }: Props) {
           )}
 
           <section aria-labelledby="sources" className="mt-12">
-            <h2 id="sources" className="text-[1.0625rem] font-bold">
+            <h2 id="sources" className="text-[1.0625rem] font-semibold">
               Sources
             </h2>
             <ul className="mt-4 grid gap-3 sm:grid-cols-2">
@@ -124,7 +124,7 @@ async function Learn({ params }: Props) {
                     className="squircle-md group flex h-full items-start gap-3 border border-border bg-card/60 p-4 outline-none transition-colors hover:border-input hover:bg-card focus-visible:ring-2 focus-visible:ring-ring"
                   >
                     <span className="min-w-0 flex-1">
-                      <span className="block text-[0.9375rem] leading-snug font-semibold">
+                      <span className="block text-[0.9375rem] leading-snug font-medium">
                         {s.title}
                       </span>
                       <span className="mt-1 block text-sm text-muted-foreground">

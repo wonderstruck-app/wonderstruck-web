@@ -27,7 +27,7 @@ export function MemoryList({ items: initial }: { items: MemoryItem[] }) {
       {items.map((m) => (
         <li key={m.id} className="flex items-start gap-3 py-3 last:pb-0">
           <div className="min-w-0 flex-1">
-            <p className="text-xs font-semibold text-muted-foreground">
+            <p className="text-xs font-medium text-muted-foreground">
               {kindLabel[m.kind]}
             </p>
             <p className="mt-0.5 text-[0.9375rem] leading-snug">{m.text}</p>

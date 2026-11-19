@@ -47,7 +47,7 @@ export function RecallSession({ queue }: { queue: RecallItem[] }) {
     return (
       <div className={cn("surface squircle-lg flex flex-col items-center px-6 py-12 text-center", wash)}>
         <MiraMascot width={104} />
-        <h2 className="mt-5 text-[1.5rem] font-bold">All caught up</h2>
+        <h2 className="mt-5 text-[1.5rem] font-semibold">All caught up</h2>
         <p className="mt-2 max-w-[44ch] text-[0.9375rem] leading-relaxed text-muted-foreground">
           {queue.length === 0
             ? "Nothing is due right now. New reviews appear a day or so after your sessions."
@@ -67,8 +67,8 @@ export function RecallSession({ queue }: { queue: RecallItem[] }) {
         <IconKey tone="violet" size="sm">
           <Brain />
         </IconKey>
-        <p className="min-w-0 flex-1 truncate text-sm font-semibold text-primary-ink">{item.concept}</p>
-        <p className="shrink-0 text-sm font-semibold text-muted-foreground tabular-nums">
+        <p className="min-w-0 flex-1 truncate text-sm font-medium text-primary-ink">{item.concept}</p>
+        <p className="shrink-0 text-sm font-medium text-muted-foreground tabular-nums">
           {index + 1} / {queue.length}
         </p>
       </div>

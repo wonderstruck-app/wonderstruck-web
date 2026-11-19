@@ -39,7 +39,7 @@ export function RecapStatus({ status }: { status: Status }) {
       </span>
       <button
         type="button"
-        className="relative z-10 inline-flex items-center gap-1 font-semibold text-primary-ink outline-none hover:underline focus-visible:underline"
+        className="relative z-10 inline-flex items-center gap-1 font-medium text-primary-ink outline-none hover:underline focus-visible:underline"
       >
         <RotateCw aria-hidden className="size-3.5" />
         Retry

@@ -28,7 +28,7 @@ export function SidebarNavLink({
         item.accent,
         "squircle-sm group flex h-12 items-center gap-3 px-3.5 text-[0.9375rem] font-medium text-muted-foreground transition-colors outline-none hover:bg-ink/5 hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring",
         active &&
-          "bg-primary/12 font-semibold text-primary-ink hover:bg-primary/12 hover:text-primary-ink",
+          "bg-primary/12 font-medium text-primary-ink hover:bg-primary/12 hover:text-primary-ink",
       )}
     >
       <Icon
@@ -37,7 +37,7 @@ export function SidebarNavLink({
       />
       <span className="flex-1">{item.label}</span>
       {badge && (
-        <span className="inline-grid h-6 min-w-6 place-items-center rounded-full bg-tint-violet/20 px-1.5 text-xs leading-none font-bold text-tint-violet tabular-nums ring-1 ring-tint-violet/25">
+        <span className="inline-grid h-6 min-w-6 place-items-center rounded-full bg-tint-violet/20 px-1.5 text-xs leading-none font-semibold text-tint-violet tabular-nums ring-1 ring-tint-violet/25">
           {badge}
         </span>
       )}

@@ -9,14 +9,14 @@ import { cn } from "@/lib/utils";
 export function ActivityView({ activity }: { activity: Activity }) {
   return (
     <div>
-      <p className="text-xs font-semibold text-tint-green">
+      <p className="text-xs font-medium text-tint-green">
         {activity.kind === "predict"
           ? "Predict"
           : activity.kind === "order"
             ? "Put in order"
             : "Simulate"}
       </p>
-      <h3 className="mt-1 text-[1.1875rem] font-bold">{activity.title}</h3>
+      <h3 className="mt-1 text-[1.1875rem] font-semibold">{activity.title}</h3>
       <p className="mt-1.5 text-[0.9375rem] leading-relaxed text-foreground/80">
         {activity.prompt}
       </p>
@@ -33,7 +33,7 @@ function Reveal({ ok, children }: { ok?: boolean; children: React.ReactNode }) {
   return (
     <div aria-live="polite" className="rise-in mt-4 squircle-md border border-border bg-background/40 p-4">
       {ok !== undefined && (
-        <p className={cn("font-semibold", ok ? "text-success" : "text-destructive")}>
+        <p className={cn("font-medium", ok ? "text-success" : "text-destructive")}>
           {ok ? "Good prediction." : "Not this time. Here's why:"}
         </p>
       )}
@@ -122,7 +122,7 @@ function Order({ a }: { a: Extract<Activity, { kind: "order" }> }) {
                 done && (right ? "border-success/50 bg-success/8" : "border-destructive/50 bg-destructive/8"),
               )}
             >
-              <span className="w-5 text-sm font-bold text-muted-foreground tabular-nums">{i + 1}</span>
+              <span className="w-5 text-sm font-semibold text-muted-foreground tabular-nums">{i + 1}</span>
               <span className="flex-1 text-[0.9375rem]">{x.label}</span>
               {!done && (
                 <span className="flex gap-1">
@@ -164,9 +164,9 @@ function Simulate({ a }: { a: Extract<Activity, { kind: "simulate" }> }) {
   return (
     <div className="grid gap-5 sm:grid-cols-[minmax(0,1fr)_14rem] sm:items-center">
       <div>
-        <label htmlFor="sim" className="flex items-baseline justify-between text-sm font-semibold">
+        <label htmlFor="sim" className="flex items-baseline justify-between text-sm font-medium">
           {param.label}
-          <span className="text-[1.25rem] font-bold tabular-nums">
+          <span className="text-[1.25rem] font-semibold tabular-nums">
             {v} {param.unit}
           </span>
         </label>
@@ -188,7 +188,7 @@ function Simulate({ a }: { a: Extract<Activity, { kind: "simulate" }> }) {
       <div aria-live="polite" className="squircle-md overflow-hidden border border-border">
         <div className="h-16 transition-colors duration-500" style={{ background: band.swatch }} />
         <div className="p-3.5">
-          <p className="font-bold">{band.label}</p>
+          <p className="font-semibold">{band.label}</p>
           <p className="mt-0.5 text-sm leading-snug text-muted-foreground">{band.detail}</p>
         </div>
       </div>

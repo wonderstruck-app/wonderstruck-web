@@ -19,14 +19,14 @@ export default async function ExplorePage() {
     <div className="flex w-full flex-col px-4 pt-4 pb-6 sm:px-6 lg:h-dvh lg:px-8 lg:pt-6">
       <header className="flex min-h-12 items-center gap-4">
         <div className="min-w-0 flex-1">
-          <h1 className="truncate text-[1.125rem] leading-snug font-bold sm:text-[1.3125rem]">
+          <h1 className="truncate text-[1.125rem] leading-snug font-semibold sm:text-[1.3125rem]">
             Ask Mira anything
           </h1>
           <p className="truncate text-sm text-muted-foreground">
             Talk out loud or type. Interrupt whenever you like.
           </p>
         </div>
-        <span className="hidden shrink-0 rounded-full border border-border px-2.5 py-1 text-xs font-semibold text-muted-foreground sm:inline">
+        <span className="hidden shrink-0 rounded-full border border-border px-2.5 py-1 text-xs font-medium text-muted-foreground sm:inline">
           Preview
         </span>
       </header>
@@ -67,7 +67,7 @@ export default async function ExplorePage() {
                   className="object-cover transition-transform duration-700 group-hover:scale-105 motion-reduce:transition-none"
                 />
                 <span className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/15 to-transparent" />
-                <span className="absolute inset-x-3 bottom-2.5 text-sm leading-snug font-semibold text-white">
+                <span className="absolute inset-x-3 bottom-2.5 text-sm leading-snug font-medium text-white">
                   {active.title}
                 </span>
               </Link>

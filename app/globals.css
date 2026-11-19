@@ -444,6 +444,8 @@
   html {
     @apply font-sans;
     font-feature-settings: "cv11";
+    /* Allo's roundness axis: 0 sharp, 50 default, 100 round. Kept low for a crisper, less bubbly read. */
+    font-variation-settings: "ROND" 20;
     -webkit-tap-highlight-color: transparent;
   }
   h1,

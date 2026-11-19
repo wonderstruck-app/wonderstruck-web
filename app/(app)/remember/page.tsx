@@ -83,7 +83,7 @@ export default async function RememberPage() {
           <RecallSession queue={queue} />
         </div>
         <section aria-labelledby="how-title" className="mt-10">
-          <h2 id="how-title" className="text-[1.1875rem] font-bold">
+          <h2 id="how-title" className="text-[1.1875rem] font-semibold">
             Why it works
           </h2>
           <div className="mt-3.5 grid gap-3 sm:grid-cols-3">
@@ -95,7 +95,7 @@ export default async function RememberPage() {
               <Tinted key={t.title} tone={t.tone} className="squircle-lg flex gap-3.5 p-4 sm:flex-col sm:gap-4 sm:p-5">
                 <IconKey tone={t.tone}>{t.icon}</IconKey>
                 <div>
-                  <p className="font-bold">{t.title}</p>
+                  <p className="font-semibold">{t.title}</p>
                   <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{t.text}</p>
                 </div>
               </Tinted>
@@ -114,7 +114,7 @@ function Stat({ tone, icon, value, label }: { tone: IconTone; icon: ReactNode; v
         {icon}
       </IconKey>
       <div className="min-w-0">
-        <p className="text-[1.375rem] leading-none font-bold tabular-nums" style={{ color: "var(--t)" }}>
+        <p className="text-[1.375rem] leading-none font-semibold tabular-nums" style={{ color: "var(--t)" }}>
           {value}
         </p>
         <p className="mt-1.5 text-xs leading-snug font-medium text-muted-foreground sm:text-sm">{label}</p>

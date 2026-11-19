@@ -35,7 +35,7 @@ export function RecentSessions({ sessions }: { sessions: SessionSummary[] }) {
             <div className="min-w-0 flex-1">
               <Link
                 href={`/sessions/${s.id}`}
-                className="block truncate text-[0.9375rem] font-semibold outline-none hover:underline focus-visible:underline"
+                className="block truncate text-[0.9375rem] font-medium outline-none hover:underline focus-visible:underline"
               >
                 {s.title}
               </Link>

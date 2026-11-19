@@ -52,7 +52,7 @@ export default async function Home() {
             <div className="text-center lg:py-16 lg:text-left">
               <h1
                 id="landing-title"
-                className="text-[2.5rem] leading-[1.02] font-bold text-balance sm:text-[3.375rem] xl:text-[4.25rem]"
+                className="text-[2.5rem] leading-[1.02] font-semibold text-balance sm:text-[3.375rem] xl:text-[4.25rem]"
               >
                 Less doomscrolling.
                 <br />
@@ -82,7 +82,7 @@ export default async function Home() {
         >
           <h2
             id="why-title"
-            className="text-[2rem] leading-[1.1] font-bold text-balance sm:text-[3rem]"
+            className="text-[2rem] leading-[1.1] font-semibold text-balance sm:text-[3rem]"
           >
             Not another feed.{" "}
             <span className="text-muted-foreground">Not another course.</span>
@@ -192,7 +192,7 @@ export default async function Home() {
         <section aria-labelledby="values-title" className="py-28 sm:py-36">
           <h2
             id="values-title"
-            className="text-center text-[1.75rem] leading-tight font-bold text-balance sm:text-[2.25rem]"
+            className="text-center text-[1.75rem] leading-tight font-semibold text-balance sm:text-[2.25rem]"
           >
             Built to leave you smarter, not hooked
           </h2>
@@ -218,7 +218,7 @@ export default async function Home() {
           <div aria-hidden className="hero-inset squircle-lg" />
           <h2
             id="cta-title"
-            className="text-[2rem] leading-[1.1] font-bold text-balance sm:text-[3rem]"
+            className="text-[2rem] leading-[1.1] font-semibold text-balance sm:text-[3rem]"
           >
             What are you wondering about today?
           </h2>

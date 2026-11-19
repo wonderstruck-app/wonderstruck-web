@@ -79,7 +79,7 @@ export function AppShell({
 
           <div className="mt-auto flex flex-col gap-4">
             <div className="squircle-md border border-ink/8 bg-ink/[0.04] p-4">
-              <p className="text-[0.9375rem] font-bold">Your week in wonder</p>
+              <p className="text-[0.9375rem] font-semibold">Your week in wonder</p>
               <p className="text-[0.8125rem] text-muted-foreground">
                 {weeklyRecap.sessions} sessions · {weeklyRecap.concepts}{" "}
                 concepts
@@ -91,12 +91,12 @@ export function AppShell({
 
             <div className="squircle-md flex items-center gap-2.5 border border-ink/8 bg-ink/[0.04] p-2 pl-2.5">
               <Avatar className="size-9">
-                <AvatarFallback className="bg-primary/15 text-xs font-bold text-primary-ink">
+                <AvatarFallback className="bg-primary/15 text-xs font-semibold text-primary-ink">
                   {learner.initials}
                 </AvatarFallback>
               </Avatar>
               <div className="min-w-0 flex-1">
-                <p className="truncate text-[0.9375rem] font-semibold">
+                <p className="truncate text-[0.9375rem] font-medium">
                   {learner.name}
                 </p>
                 <p className="truncate text-xs whitespace-nowrap text-muted-foreground">
@@ -133,7 +133,7 @@ export function AppShell({
                 aria-label="Account and more"
               >
                 <Avatar className="size-8">
-                  <AvatarFallback className="bg-primary/15 text-xs font-bold text-primary-ink">
+                  <AvatarFallback className="bg-primary/15 text-xs font-semibold text-primary-ink">
                     {learner.initials}
                   </AvatarFallback>
                 </Avatar>
@@ -146,12 +146,12 @@ export function AppShell({
             >
               <DropdownMenuLabel className="flex items-center gap-3 px-2.5 py-2.5">
                 <Avatar className="size-10">
-                  <AvatarFallback className="bg-primary/15 text-sm font-bold text-primary-ink">
+                  <AvatarFallback className="bg-primary/15 text-sm font-semibold text-primary-ink">
                     {learner.initials}
                   </AvatarFallback>
                 </Avatar>
                 <span className="min-w-0">
-                  <span className="block truncate text-[0.9375rem] font-semibold text-foreground">
+                  <span className="block truncate text-[0.9375rem] font-medium text-foreground">
                     {learner.name}
                   </span>
                   <span className="block truncate text-xs font-normal text-muted-foreground">

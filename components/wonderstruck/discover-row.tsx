@@ -33,10 +33,10 @@ export function DiscoverRow({ blocks }: { blocks: LearningBlock[] }) {
               />
               <span aria-hidden className="squircle-md pointer-events-none absolute inset-0 ring-1 ring-white/10 ring-inset" />
               <span className="flex flex-col p-4 text-white">
-                <span className="text-xs font-semibold text-white/65">
+                <span className="text-xs font-medium text-white/65">
                   {b.topic} · {b.minutes} min
                 </span>
-                <span className="mt-1 text-[0.9375rem] leading-snug font-bold text-balance">{b.question}</span>
+                <span className="mt-1 text-[0.9375rem] leading-snug font-semibold text-balance">{b.question}</span>
               </span>
             </Link>
           </li>

@@ -32,7 +32,7 @@ export function ConceptStateBadge({ state }: { state: ConceptState }) {
     <span
       title={m.hint}
       className={cn(
-        "inline-flex h-6 shrink-0 items-center rounded-full border px-2.5 text-xs font-semibold whitespace-nowrap",
+        "inline-flex h-6 shrink-0 items-center rounded-full border px-2.5 text-xs font-medium whitespace-nowrap",
         m.className,
       )}
     >

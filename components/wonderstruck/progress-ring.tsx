@@ -25,7 +25,7 @@ export function ProgressRing({
           className="stroke-tint-violet transition-[stroke-dashoffset] duration-700 ease-out motion-reduce:transition-none"
         />
       </svg>
-      <span className="text-sm font-bold tabular-nums">
+      <span className="text-sm font-semibold tabular-nums">
         {done}/{total}
       </span>
     </div>

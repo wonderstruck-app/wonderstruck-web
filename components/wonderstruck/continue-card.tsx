@@ -27,7 +27,7 @@ export function ContinueCard({ session: s }: { session: SessionSummary }) {
           />
         </div>
         <div className="min-w-0 flex-1">
-          <h3 className="text-[1.125rem] leading-snug font-bold">{s.title}</h3>
+          <h3 className="text-[1.125rem] leading-snug font-semibold">{s.title}</h3>
           <p className="mt-1 text-sm text-muted-foreground">
             {s.topics.join(" · ")} · {s.whenLabel.toLowerCase()}
           </p>
@@ -45,7 +45,7 @@ export function ContinueCard({ session: s }: { session: SessionSummary }) {
                 style={{ width: `${pct}%` }}
               />
             </div>
-            <span className="shrink-0 text-sm font-semibold tabular-nums">
+            <span className="shrink-0 text-sm font-medium tabular-nums">
               {covered} of {s.concepts.length} concepts
             </span>
           </div>

@@ -49,10 +49,10 @@ export default async function SessionsPage() {
                     key={k}
                     className="squircle-md border border-ink/6 bg-background/50 px-3 py-2.5"
                   >
-                    <dt className="text-[0.6875rem] font-semibold text-muted-foreground">
+                    <dt className="text-[0.6875rem] font-medium text-muted-foreground">
                       {k}
                     </dt>
-                    <dd className="mt-0.5 text-[1.375rem] font-bold tabular-nums">
+                    <dd className="mt-0.5 text-[1.375rem] font-semibold tabular-nums">
                       {v}
                     </dd>
                   </div>
@@ -118,7 +118,7 @@ function SessionGroup({
   const id = `group-${title.toLowerCase().replace(/\s+/g, "-")}`;
   return (
     <section aria-labelledby={id} className={first ? "mt-8" : "mt-10"}>
-      <h2 id={id} className="mb-3 text-sm font-semibold text-muted-foreground">
+      <h2 id={id} className="mb-3 text-sm font-medium text-muted-foreground">
         {title}
       </h2>
       <ul className="grid gap-3 2xl:grid-cols-2">
@@ -145,16 +145,16 @@ function SessionRow({ session: s }: { session: SessionSummary }) {
           className="object-cover transition-transform duration-700 group-hover:scale-105 motion-reduce:transition-none"
         />
         {s.status === "active" && (
-          <span className="absolute bottom-1.5 left-1.5 rounded-full bg-black/55 px-2 py-0.5 text-[0.6875rem] font-semibold text-white backdrop-blur-md">
+          <span className="absolute bottom-1.5 left-1.5 rounded-full bg-black/55 px-2 py-0.5 text-[0.6875rem] font-medium text-white backdrop-blur-md">
             Open
           </span>
         )}
       </div>
       <div className="flex min-w-0 flex-1 flex-col justify-center">
-        <p className="text-xs font-semibold text-muted-foreground">
+        <p className="text-xs font-medium text-muted-foreground">
           {s.topics.join(" · ")} · {s.whenLabel}
         </p>
-        <h3 className="mt-1 leading-snug font-bold">
+        <h3 className="mt-1 leading-snug font-semibold">
           <Link
             href={href}
             className="outline-none after:absolute after:inset-0 after:content-['']"

@@ -38,17 +38,17 @@ export function LearningCard({
       <div aria-hidden className="pointer-events-none absolute inset-0 squircle-lg ring-1 ring-white/10 ring-inset" />
 
       <div className="dark absolute top-4 right-4 left-4 flex items-start justify-between gap-3">
-        <span className="rounded-full bg-black/30 px-3 py-1 text-xs font-semibold text-white ring-1 ring-white/15 backdrop-blur-md">
+        <span className="rounded-full bg-black/30 px-3 py-1 text-xs font-medium text-white ring-1 ring-white/15 backdrop-blur-md">
           {b.topic}
         </span>
-        <span className="rounded-full bg-black/30 px-2.5 py-1 text-xs font-semibold text-white/90 tabular-nums ring-1 ring-white/15 backdrop-blur-md">
+        <span className="rounded-full bg-black/30 px-2.5 py-1 text-xs font-medium text-white/90 tabular-nums ring-1 ring-white/15 backdrop-blur-md">
           {b.minutes} min
         </span>
       </div>
 
       <div className="dark flex flex-col p-5 text-white sm:p-6">
-        {meta && <p className="mb-1.5 text-xs font-semibold text-white/65">{meta}</p>}
-        <h2 className="text-[1.375rem] leading-[1.2] font-bold text-balance sm:text-[1.5rem]">
+        {meta && <p className="mb-1.5 text-xs font-medium text-white/65">{meta}</p>}
+        <h2 className="text-[1.375rem] leading-[1.2] font-semibold text-balance sm:text-[1.5rem]">
           <span className="sr-only">{b.topic}, {b.minutes} minutes. </span>
           <Link
             href={`/learn/${b.id}`}

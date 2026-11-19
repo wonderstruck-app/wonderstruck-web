@@ -27,7 +27,7 @@ export function Hero({ learner }: { learner: Learner }) {
           />
           <h1
             id="hero-title"
-            className="text-[2.25rem] leading-[1.08] font-bold sm:text-[2.875rem]"
+            className="text-[2.25rem] leading-[1.08] font-semibold sm:text-[2.875rem]"
           >
             {greetings.map(([part, text]) => (
               <span key={part} className={`daypart daypart-${part}`}>

@@ -65,11 +65,11 @@ async function Session({ params }: Props) {
             {block.topic}
             {session && ` · ${session.minutes} min so far`}
           </p>
-          <h1 className="truncate text-[1.125rem] leading-snug font-bold sm:text-[1.3125rem]">
+          <h1 className="truncate text-[1.125rem] leading-snug font-semibold sm:text-[1.3125rem]">
             {block.question}
           </h1>
         </div>
-        <span className="hidden shrink-0 rounded-full border border-border px-2.5 py-1 text-xs font-semibold text-muted-foreground sm:inline">
+        <span className="hidden shrink-0 rounded-full border border-border px-2.5 py-1 text-xs font-medium text-muted-foreground sm:inline">
           Preview
         </span>
         {session && (
@@ -103,7 +103,7 @@ async function Session({ params }: Props) {
                     className="squircle-md group -mx-2 flex items-start gap-3 p-2 outline-none transition-colors hover:bg-ink/[0.04] focus-visible:ring-2 focus-visible:ring-ring"
                   >
                     <span className="min-w-0 flex-1">
-                      <span className="block text-sm leading-snug font-semibold">{s.title}</span>
+                      <span className="block text-sm leading-snug font-medium">{s.title}</span>
                       <span className="block text-xs text-muted-foreground">{s.publisher}</span>
                     </span>
                     <ExternalLink aria-hidden className="mt-0.5 size-3.5 shrink-0 text-muted-foreground group-hover:text-foreground" />

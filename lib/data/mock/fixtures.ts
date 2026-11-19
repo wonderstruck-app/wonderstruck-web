@@ -29,9 +29,11 @@ export const blocks: LearningBlock[] = [
     teaser:
       "Most of an octopus's neurons live in its arms, so each arm can taste, touch, and decide a little on its own.",
     body: [
-      "An octopus has roughly 500 million neurons, and about two-thirds of them sit in its eight arms rather than its central brain. Each arm carries its own chain of nerve clusters running past every sucker.",
-      "That arrangement lets an arm handle the fine detail of exploring a crevice, tasting with its suckers, and gripping prey, while the central brain sets broader goals. Researchers have watched arms keep reaching and grasping even when signals from the brain are cut.",
-      "It is not quite nine brains. It is closer to a manager who sets direction and eight capable teams that sort out the details themselves.",
+      "Imagine running a kitchen where every chef has a mind of their own. You call out “dinner for eight”, and each one goes off to chop, stir, and taste without you checking every move. That is roughly how an octopus runs its body.",
+      "An octopus has about 500 million neurons, close to a dog's count. But only around a third of them sit in its central brain. The other two-thirds are spread through its eight arms, in a chain of nerve clusters that runs past every single sucker.",
+      "So when an arm slips into a crack in the reef, it does not wait for instructions. Its suckers taste the rock, feel for texture, and decide whether something there is worth grabbing. The arm is part hand, part tongue, and part tiny brain.",
+      "Researchers have seen just how independent the arms are. When an arm's link to the central brain is cut, it can still reach toward food, grip it, and pass it along as if heading for a mouth that is no longer listening.",
+      "It is not quite nine brains. Think of it as a head chef who sets the menu and eight capable sous-chefs who handle the details. That split lets an octopus explore eight places at once without overloading the boss.",
     ],
     minutes: 6,
     sources: [
@@ -64,9 +66,11 @@ export const blocks: LearningBlock[] = [
     teaser:
       "Oxygen high in the atmosphere releases a very specific green light when solar particles excite it.",
     body: [
-      "Auroras begin with the solar wind, a stream of charged particles from the Sun. Earth's magnetic field funnels some of them toward the poles, where they collide with gas in the upper atmosphere.",
-      "Those collisions give atoms extra energy. When an oxygen atom at around 100 to 250 kilometres lets that energy go, it emits light at a wavelength of 557.7 nanometres: the familiar green.",
-      "Higher up, where the air is thinner, oxygen has time to release a slower red glow. Lower down, nitrogen adds blue and violet edges. The colour is a map of altitude and gas.",
+      "Imagine the Sun as a stove that never switches off, constantly spitting a hiss of charged particles into space. That stream, the solar wind, crosses about 150 million kilometres and arrives at Earth a few days later.",
+      "Most of it never reaches us. Earth's magnetic field acts like an invisible umbrella and deflects the wind around the planet. But near the poles, the field lines dip down into the atmosphere like funnels, and some particles slide in.",
+      "Up there, between about 100 and 250 kilometres high, they crash into oxygen atoms. Each collision is like a push on a swing: the atom gets a burst of extra energy, holds it for a moment, and then lets it go as a flash of light.",
+      "Oxygen at that height releases its energy at one very specific wavelength, 557.7 nanometres. Our eyes see that as a pale, glowing green, and because there is so much oxygen at that altitude, green dominates the show.",
+      "Higher up, where the air is thinner, oxygen has time to give off a slower red glow before bumping into anything. Lower down, nitrogen adds blue and violet fringes. So an aurora is really a painted map of altitude and gas.",
     ],
     minutes: 4,
     sources: [
@@ -113,9 +117,11 @@ export const blocks: LearningBlock[] = [
     teaser:
       "Fungal networks link roots underground, but how much trees “share” is more debated than the headlines say.",
     body: [
-      "Most plants partner with mycorrhizal fungi. The fungi wrap or enter roots, trading water and minerals for sugars the plant makes from sunlight.",
-      "Because one fungus can touch several trees, people describe a “wood wide web” where trees pass nutrients and warnings to one another. Some experiments did find carbon moving between connected seedlings.",
-      "Recent reviews urge caution. Field evidence that networks deliberately feed offspring or send alarms is thin, and much of the movement can be explained by fungi acting in their own interest.",
+      "Imagine walking through a forest and learning that the trees are holding hands underground. That is the picture behind the phrase “wood wide web”, and it is part true, part wishful thinking.",
+      "Most plants team up with mycorrhizal fungi. The fungi wrap around roots or grow into them, then send out threads far finer than a hair that reach much more soil than roots can. They trade water and minerals for sugar the plant makes from sunlight. It is a market, not a gift.",
+      "Because a single fungus can touch several trees at once, the network can link them. Some experiments found carbon moving from one seedling to another through those threads, and the idea of trees feeding their young and sending warnings took off.",
+      "Recent reviews urge caution. In real forests, evidence that trees deliberately share food or raise alarms through fungi is thin. Much of what moves can be explained by the fungi acting in their own interest, like a courier choosing its own routes.",
+      "So the connections are real, and the forest floor is busier than it looks. But it is less a friendly group chat and more a bustling economy where everyone, fungus included, is looking after itself.",
     ],
     minutes: 6,
     sources: [
@@ -147,9 +153,11 @@ export const blocks: LearningBlock[] = [
     teaser:
       "Its builders curved floors and swelled columns so the temple would look perfectly straight from below.",
     body: [
-      "The Parthenon's platform rises gently toward the middle of each side, by about 11 centimetres along the long edges. Its columns lean slightly inward and swell a little partway up, a feature called entasis.",
-      "One long-standing explanation is optical correction. A perfectly flat, long base can appear to sag in the middle, and perfectly straight columns can look pinched. The curves may cancel those illusions.",
-      "Other scholars add practical reasons, such as draining rainwater and giving the building a more lively, muscular look. The builders likely had several goals at once.",
+      "Imagine standing at the foot of the Acropolis in 432 BCE, looking up at a temple that seems perfectly straight. Every line looks ruled, every column looks true. Now imagine learning that almost none of it is.",
+      "The Parthenon's platform rises gently toward the middle of each side, by about 11 centimetres along the long edges. Lay a marble on it and it would roll toward the corners. The columns lean slightly inward, and each one swells a little partway up, a trick called entasis.",
+      "Why build it crooked? One long-standing explanation is that our eyes play tricks. A long, perfectly flat line seen from below can look like it sags in the middle, the way a long shelf seems to droop. Perfectly straight columns can look pinched at the waist.",
+      "So the builders may have bent the building to cancel the illusions, the way a tailor cuts a suit slightly off so it looks straight on a real body. The curves are small enough to go unnoticed and large enough to change what you see.",
+      "Other scholars add practical reasons, such as helping rainwater drain off the platform and giving the temple a lively, almost muscular stance. The builders likely had all of these goals at once.",
     ],
     minutes: 5,
     sources: [
@@ -181,9 +189,11 @@ export const blocks: LearningBlock[] = [
     teaser:
       "A massive young star pushes out a wind so fierce it inflates a shell in the surrounding gas.",
     body: [
-      "The Bubble Nebula sits about 7,000 light-years away in Cassiopeia. At its heart is a hot, massive star many times heavier than the Sun.",
-      "That star drives a stellar wind of particles moving at millions of kilometres per hour. Where the wind slams into the cooler gas around it, it sweeps material into a thin, expanding shell.",
-      "Ultraviolet light from the star makes the shell's gas glow, which is why we can see the bubble at all. It is the same physics as the solar wind, at a far more violent scale.",
+      "Imagine blowing into a soapy wand, but your breath is a wind moving millions of kilometres per hour and the bubble ends up seven light-years across. That is, roughly, what is happening in the Bubble Nebula.",
+      "It sits about 7,000 light-years away in the constellation Cassiopeia. At its heart is a young, hot star many times heavier than the Sun, the kind that burns fast and lives short.",
+      "Stars like that do not just shine; they blow. Their light is so intense that it pushes gas off their surface, creating a stellar wind far fiercer than anything the Sun produces.",
+      "Where that wind slams into the cooler gas floating around the star, it acts like a snowplough. Material piles up into a thin, expanding shell, and the bubble grows outward as the wind keeps pushing.",
+      "We can only see the bubble because the star's ultraviolet light makes that shell's gas glow. It is the same physics as the solar wind that paints our auroras, just turned up to a cosmic, far more violent scale.",
     ],
     minutes: 5,
     sources: [
@@ -215,9 +225,11 @@ export const blocks: LearningBlock[] = [
     teaser:
       "In some trials, people told they were taking sugar pills still reported feeling better.",
     body: [
-      "A placebo is a treatment with no active ingredient. For decades, researchers assumed it only worked if patients believed it was real.",
-      "Open-label placebo studies tested that idea by telling participants plainly that their pills were inert. In several small trials, people with conditions such as irritable bowel syndrome still reported improvement.",
-      "One explanation is expectation and ritual: taking a pill, being cared for, and anticipating relief can shape how we notice symptoms. The effects are mostly on self-reported experience rather than on the underlying disease.",
+      "Imagine your doctor handing you a bottle and saying, “These are sugar pills. There is nothing in them. Take two a day anyway.” It sounds like a joke. In some trials, it actually helped.",
+      "A placebo is a treatment with no active ingredient. For decades, researchers assumed it only worked through a kind of trick: you had to believe it was real medicine.",
+      "Open-label placebo studies tested that by being completely honest. Participants were told plainly that their pills were inert. In several small trials, people with conditions like irritable bowel syndrome still reported feeling better.",
+      "One explanation is ritual and expectation. Think of how a cup of tea can feel calming before the warmth has done anything. Taking a pill, being cared for, and expecting relief can change how closely we notice our symptoms.",
+      "The effects are mostly on how people feel rather than on the underlying disease, and the studies are still small. But they suggest that part of healing is the story our brain tells about what is happening.",
     ],
     minutes: 5,
     sources: [
@@ -235,9 +247,11 @@ export const blocks: LearningBlock[] = [
     teaser:
       "It curls into a lifeless-looking husk, swaps water for protective molecules, and waits.",
     body: [
-      "Tardigrades are animals under a millimetre long that live in moss, soil, and oceans. When their surroundings dry up, they pull in their legs and shrivel into a state called a tun.",
-      "In this state their metabolism almost stops. Special proteins help hold cell structures in place, a bit like a glassy scaffold, so membranes and DNA are not torn apart without water.",
-      "Add water again and many revive within hours. Dried tardigrades have survived extreme cold, radiation, and even exposure to space.",
+      "Imagine being able to pause your life. When things get bad, you curl up, switch everything off, and wait, for days, years, or longer, until the world is kind again. Tardigrades can do something very close to that.",
+      "These animals are under a millimetre long, with eight stubby legs and a slow, bumbling walk that earned them the nickname water bears. They live almost everywhere: in moss, soil, and the deep ocean.",
+      "When their home dries out, they pull in their legs and shrivel into a dry little barrel called a tun. Their metabolism drops to almost nothing. To a microscope, they look dead.",
+      "Inside, special proteins step in where water used to be. They form a kind of glassy scaffold, like packing foam around fragile glassware, so cell membranes and DNA are held in place instead of tearing apart.",
+      "Add water and many wake up within hours, unpack their legs, and wander off. Dried tardigrades have survived extreme cold, heavy radiation, and even a trip to open space.",
     ],
     minutes: 4,
     sources: [
@@ -256,9 +270,11 @@ export const blocks: LearningBlock[] = [
     teaser:
       "That eerie “I've been here before” feeling may be your memory system checking its own work.",
     body: [
-      "Most people report experiencing déjà vu at least once. It is a strong feeling of familiarity paired with the knowledge that the moment is actually new.",
-      "One idea is that a brief mismatch makes a new scene feel familiar, and then the brain's monitoring regions notice the error. In that view déjà vu is a sign of a healthy memory system catching a false alarm.",
-      "Researchers can trigger similar feelings in the lab with word lists and virtual scenes, but there is still no single agreed explanation.",
+      "Imagine walking into a café you have never visited, and a voice in your head insists, “I have been here before.” You know it is new. It feels familiar anyway. That strange tug is déjà vu, and most people feel it at least once.",
+      "Your memory has two quiet jobs. One recalls details: the name of the street, what you ordered last time. Another just whispers “this feels familiar” or “this is new”. Usually they agree.",
+      "One leading idea is that déjà vu happens when the familiarity signal fires by mistake. Maybe the layout of the room echoes somewhere you have been, or the signal simply misfires for a moment.",
+      "Then another part of your brain, the part that checks memory for errors, notices the mismatch. That is the eerie bit: you feel familiar and know you should not. Like a smoke alarm catching burnt toast, it may be a sign the system is working.",
+      "Researchers can trigger similar feelings in the lab with word lists and virtual rooms, but there is still no single agreed explanation for déjà vu.",
     ],
     minutes: 4,
     sources: [{ title: "Déjà vu", publisher: "Wikipedia", url: "https://en.wikipedia.org/wiki/D%C3%A9j%C3%A0_vu" }],

@@ -60,7 +60,7 @@ export function FeatureRow({
         </IconKey>
         <h3
           id={id}
-          className="mt-6 text-[1.875rem] leading-[1.1] font-bold sm:text-[2.5rem]"
+          className="mt-6 text-[1.875rem] leading-[1.1] font-semibold sm:text-[2.5rem]"
         >
           {title}
         </h3>
@@ -124,7 +124,7 @@ export function ActivityPreview({ block }: { block: LearningBlock }) {
   if (!block.activity) return null;
   return (
     <figure className="glass squircle-lg p-6 sm:p-9">
-      <figcaption className="mb-5 flex items-center gap-2.5 text-sm font-semibold">
+      <figcaption className="mb-5 flex items-center gap-2.5 text-sm font-medium">
         <IconKey tone="green" size="sm">
           <Check />
         </IconKey>
@@ -146,8 +146,8 @@ export function RememberPreview({ queue }: { queue: RecallItem[] }) {
     <div className="flex flex-col gap-5 sm:gap-6">
       <figure className="glass squircle-lg p-6 sm:w-[86%] sm:p-8">
         <figcaption>
-          <p className="text-sm font-semibold text-muted-foreground">Session recap</p>
-          <p className="mt-1 text-[1.25rem] leading-snug font-bold">{queue[0]?.sessionTitle}</p>
+          <p className="text-sm font-medium text-muted-foreground">Session recap</p>
+          <p className="mt-1 text-[1.25rem] leading-snug font-semibold">{queue[0]?.sessionTitle}</p>
         </figcaption>
         <ul className="mt-5 space-y-3">
           {ideas.map((t) => (
@@ -186,7 +186,7 @@ export function Principle({
     <Tinted as="li" tone={tone} className="squircle-lg flex flex-col gap-5 p-6 text-left sm:p-8">
       <IconKey tone={tone}>{icon}</IconKey>
       <div>
-        <p className="text-[1.25rem] font-bold">{title}</p>
+        <p className="text-[1.25rem] font-semibold">{title}</p>
         <p className="mt-2 leading-relaxed text-muted-foreground">{children}</p>
       </div>
     </Tinted>

@@ -70,7 +70,7 @@ export default async function DiscoverPage() {
               </ul>
               <Link
                 href="/saved"
-                className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-primary-ink hover:underline"
+                className="mt-3 inline-flex items-center gap-1 text-sm font-medium text-primary-ink hover:underline"
               >
                 See all {saved.length}
                 <ArrowRight aria-hidden className="size-4" />

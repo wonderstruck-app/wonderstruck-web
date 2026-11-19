@@ -104,7 +104,7 @@ export function SessionCanvas({
                     <Puzzle />
                   </IconKey>
                   <p className="min-w-0 text-sm">
-                    <span className="font-semibold">Mira set up an activity</span>
+                    <span className="font-medium">Mira set up an activity</span>
                     {activityTitle && <span className="text-foreground/60"> · {activityTitle}</span>}
                   </p>
                 </div>
@@ -270,7 +270,7 @@ function Line({ m, present, listening }: { m: Message; present: boolean; listeni
           </>
         )}
       </span>
-      <p className={cn("col-start-2 mb-1.5 text-xs font-semibold", mira ? "text-primary-ink/80" : "text-muted-foreground")}>
+      <p className={cn("col-start-2 mb-1.5 text-xs font-medium", mira ? "text-primary-ink/80" : "text-muted-foreground")}>
         {mira ? "Mira" : "You"}
         {m.via === "voice" && " · spoke"}
       </p>

@@ -20,7 +20,7 @@ export function RecallCard({ queue }: { queue: RecallItem[] }) {
       <div className="flex items-center gap-4">
         <ProgressRing done={done} total={queue.length} />
         <div className="min-w-0">
-          <h2 id="recall-title" className="text-[1.1875rem] font-bold">
+          <h2 id="recall-title" className="text-[1.1875rem] font-semibold">
             Ready to recall
           </h2>
           <p className="mt-0.5 text-sm text-muted-foreground">

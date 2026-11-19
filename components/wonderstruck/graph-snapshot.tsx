@@ -25,10 +25,10 @@ export function GraphSnapshot({ graph }: { graph: LearningGraph }) {
       />
       {newest && (
         <>
-          <p className="mt-3 text-xs font-semibold text-tint-teal">
+          <p className="mt-3 text-xs font-medium text-tint-teal">
             New connection
           </p>
-          <p className="mt-1 text-[1.0625rem] leading-snug font-bold">
+          <p className="mt-1 text-[1.0625rem] leading-snug font-semibold">
             {label(newest.from)} ↔ {label(newest.to)}
           </p>
           <p className="mt-1 text-sm leading-relaxed text-foreground/70">

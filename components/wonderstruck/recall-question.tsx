@@ -34,11 +34,11 @@ export function RecallQuestion({
       <fieldset disabled={checked}>
         <legend
           className={cn(
-            "leading-snug font-semibold text-balance",
-            size === "lg" ? "text-[1.25rem] font-bold sm:text-[1.5rem]" : "text-[0.9375rem]",
+            "leading-snug font-medium text-balance",
+            size === "lg" ? "text-[1.25rem] font-semibold sm:text-[1.5rem]" : "text-[0.9375rem]",
           )}
         >
-          <span className="mb-1.5 block text-xs font-semibold text-muted-foreground">
+          <span className="mb-1.5 block text-xs font-medium text-muted-foreground">
             From “{item.sessionTitle}”
           </span>
           {item.question}
@@ -76,7 +76,7 @@ export function RecallQuestion({
                   <span
                     aria-hidden
                     className={cn(
-                      "squircle-sm grid size-8 shrink-0 place-items-center bg-ink/[0.06] text-sm font-bold text-muted-foreground transition-colors",
+                      "squircle-sm grid size-8 shrink-0 place-items-center bg-ink/[0.06] text-sm font-semibold text-muted-foreground transition-colors",
                       isSel && !checked && "bg-primary text-primary-foreground",
                       checked && isAnswer && "bg-success text-background",
                       checked && isSel && !isAnswer && "bg-destructive text-background",
