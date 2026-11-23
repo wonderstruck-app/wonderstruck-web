@@ -18,7 +18,7 @@ export function HeroMira() {
       <MiraMascot
         width={480}
         loading="eager"
-        className="pointer-events-none w-48 translate-y-[3%] drop-shadow-[0_18px_30px_color-mix(in_oklch,var(--shadow-color)_calc(0.45*var(--shade)*100%),transparent)] sm:w-64 lg:w-full lg:max-w-[22rem]"
+        className="pointer-events-none w-48 translate-y-[3%] dark:drop-shadow-[0_18px_30px_color-mix(in_oklch,var(--shadow-color)_calc(0.45*var(--shade)*100%),transparent)] sm:w-64 lg:w-full lg:max-w-[22rem]"
       />
     </div>
   );

@@ -11,7 +11,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import type { Learner, WeeklyRecap } from "@/lib/data";
+import type { Learner } from "@/lib/data";
 import { BrandMark } from "./brand";
 import { ThemeToggle } from "./theme-toggle";
 import { primaryNav, secondaryNav } from "./nav-items";
@@ -49,13 +49,11 @@ function SidebarNav({ recallDue }: { recallDue: number }) {
 export type ShellData = {
   learner: Learner;
   recallDue: number;
-  conceptCount: number;
-  weeklyRecap: WeeklyRecap;
 };
 
 export function AppShell({
   children,
-  data: { learner, recallDue, conceptCount, weeklyRecap },
+  data: { learner, recallDue },
 }: {
   children: ReactNode;
   data: ShellData;
@@ -77,32 +75,16 @@ export function AppShell({
             </Suspense>
           </nav>
 
-          <div className="mt-auto flex flex-col gap-4">
-            <div className="squircle-md border border-ink/8 bg-ink/[0.04] p-4">
-              <p className="text-[0.9375rem] font-semibold">Your week in wonder</p>
-              <p className="text-[0.8125rem] text-muted-foreground">
-                {weeklyRecap.sessions} sessions · {weeklyRecap.concepts}{" "}
-                concepts
-              </p>
-              <Button asChild className="mt-4 w-full">
-                <Link href="/sessions#this-week">Read weekly recap</Link>
-              </Button>
-            </div>
-
-            <div className="squircle-md flex items-center gap-2.5 border border-ink/8 bg-ink/[0.04] p-2 pl-2.5">
+          <div className="mt-auto border-t border-ink/8 pt-4">
+            <div className="flex items-center gap-2.5 pl-2">
               <Avatar className="size-9">
                 <AvatarFallback className="bg-primary/15 text-xs font-semibold text-primary-ink">
                   {learner.initials}
                 </AvatarFallback>
               </Avatar>
-              <div className="min-w-0 flex-1">
-                <p className="truncate text-[0.9375rem] font-medium">
-                  {learner.name}
-                </p>
-                <p className="truncate text-xs whitespace-nowrap text-muted-foreground">
-                  {conceptCount} concepts learned
-                </p>
-              </div>
+              <p className="min-w-0 flex-1 truncate text-[0.9375rem] font-medium">
+                {learner.name}
+              </p>
               <ThemeToggle className="size-8 shrink-0" />
               <Button variant="ghost" size="icon" className="size-8 shrink-0" asChild>
                 <Link href="/settings" aria-label="Settings">
@@ -115,7 +97,7 @@ export function AppShell({
       </aside>
 
       <div className="flex min-w-0 flex-1 flex-col">
-        <header className="sticky top-0 z-20 flex h-16 items-center justify-between border-b border-border bg-white px-4 lg:hidden dark:border-white/8 dark:bg-[oklch(0.115_0.006_265/0.62)] dark:backdrop-blur-2xl dark:backdrop-saturate-150">
+        <header className="sticky top-0 z-20 flex h-16 items-center justify-between border-b border-border bg-white/85 px-4 backdrop-blur-sm lg:hidden dark:border-white/8 dark:bg-[oklch(0.115_0.006_265/0.62)] dark:backdrop-blur-2xl dark:backdrop-saturate-150">
           <Link
             href="/dashboard"
             className="squircle-sm flex items-center outline-none focus-visible:ring-2 focus-visible:ring-ring"
@@ -142,7 +124,7 @@ export function AppShell({
             <DropdownMenuContent
               align="end"
               sideOffset={10}
-              className="glass glass-panel squircle-md w-64 bg-popover/80 p-2 shadow-2xl ring-ink/10 backdrop-blur-2xl"
+              className="squircle-md w-64 border border-border bg-popover p-2 shadow-2xl ring-ink/10"
             >
               <DropdownMenuLabel className="flex items-center gap-3 px-2.5 py-2.5">
                 <Avatar className="size-10">
@@ -150,13 +132,8 @@ export function AppShell({
                     {learner.initials}
                   </AvatarFallback>
                 </Avatar>
-                <span className="min-w-0">
-                  <span className="block truncate text-[0.9375rem] font-medium text-foreground">
-                    {learner.name}
-                  </span>
-                  <span className="block truncate text-xs font-normal text-muted-foreground">
-                    {conceptCount} concepts learned
-                  </span>
+                <span className="min-w-0 truncate text-[0.9375rem] font-medium text-foreground">
+                  {learner.name}
                 </span>
               </DropdownMenuLabel>
               <DropdownMenuSeparator className="mx-1 my-2 bg-ink/8" />
@@ -186,7 +163,7 @@ export function AppShell({
 
         <nav
           aria-label="Primary"
-          className="fixed inset-x-0 bottom-0 z-20 border-t border-border bg-white px-2 pt-1 pb-[max(0.25rem,env(safe-area-inset-bottom))] lg:hidden dark:border-white/8 dark:bg-[oklch(0.115_0.006_265/0.62)] dark:backdrop-blur-2xl dark:backdrop-saturate-150"
+          className="fixed inset-x-0 bottom-0 z-20 border-t border-border bg-white/85 px-2 pt-1 pb-[max(0.25rem,env(safe-area-inset-bottom))] backdrop-blur-sm lg:hidden dark:border-white/8 dark:bg-[oklch(0.115_0.006_265/0.62)] dark:backdrop-blur-2xl dark:backdrop-saturate-150"
         >
           <Suspense>
             <ul className="flex">

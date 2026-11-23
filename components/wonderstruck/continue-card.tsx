@@ -16,7 +16,7 @@ export function ContinueCard({ session: s }: { session: SessionSummary }) {
         title="Continue exploring"
         href="/sessions"
       />
-      <div className="squircle-lg relative flex flex-col gap-5 glow-under border border-primary/70 bg-card bg-[radial-gradient(120%_140%_at_0%_0%,oklch(0.9_0.05_82/0.1),transparent_55%)] p-4 dark:border-primary/25 sm:flex-row sm:items-center sm:gap-6 sm:pr-6">
+      <div className="squircle-lg relative flex flex-col gap-5 glow-under [--search-glow:var(--primary)] border border-primary/70 bg-card bg-[radial-gradient(120%_140%_at_0%_0%,oklch(0.9_0.05_82/0.1),transparent_55%)] p-4 dark:border-primary/25 sm:flex-row sm:items-center sm:gap-6 sm:pr-6">
         <div className="squircle-md relative aspect-[2/1] w-full shrink-0 sm:aspect-[16/10] overflow-hidden sm:w-44">
           <Image
             src={s.image.src}
@@ -41,7 +41,7 @@ export function ContinueCard({ session: s }: { session: SessionSummary }) {
               className="h-2 flex-1 overflow-hidden rounded-full bg-secondary"
             >
               <div
-                className="h-full rounded-full bg-primary-ink"
+                className="h-full rounded-full bg-primary"
                 style={{ width: `${pct}%` }}
               />
             </div>

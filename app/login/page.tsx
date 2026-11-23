@@ -28,7 +28,7 @@ export default function LoginPage() {
           <MiraMascot
             width={112}
             loading="eager"
-            className="mx-auto mb-6 drop-shadow-[0_14px_24px_color-mix(in_oklch,var(--shadow-color)_calc(0.45*var(--shade)*100%),transparent)]"
+            className="mx-auto mb-6 dark:drop-shadow-[0_14px_24px_color-mix(in_oklch,var(--shadow-color)_calc(0.45*var(--shade)*100%),transparent)]"
           />
           <h1 className="text-[2rem] leading-tight font-semibold text-balance">
             Welcome to Wonderstruck

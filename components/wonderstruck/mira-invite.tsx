@@ -26,11 +26,11 @@ export function MiraInvite({
     >
       <span
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 -top-10 mx-auto size-64 rounded-full bg-[radial-gradient(closest-side,oklch(0.86_0.05_80/0.22),transparent)]"
+        className="pointer-events-none absolute inset-x-0 -top-10 mx-auto hidden size-64 rounded-full dark:block bg-[radial-gradient(closest-side,oklch(0.86_0.05_80/0.22),transparent)]"
       />
       <MiraMascot
         width={116}
-        className="relative mx-auto drop-shadow-[0_14px_22px_color-mix(in_oklch,var(--shadow-color)_calc(0.45*var(--shade)*100%),transparent)]"
+        className="relative mx-auto dark:drop-shadow-[0_14px_22px_color-mix(in_oklch,var(--shadow-color)_calc(0.45*var(--shade)*100%),transparent)]"
       />
       <h2 id="mira-invite" className="relative mt-4 text-[1.3125rem] font-semibold text-balance">
         {resuming ? "Pick up with Mira" : "Talk it through with Mira"}

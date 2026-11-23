@@ -23,7 +23,7 @@ export function Hero({ learner }: { learner: Learner }) {
           <MiraMascot
             width={124}
             loading="eager"
-            className="pointer-events-none mb-3 drop-shadow-[0_14px_24px_color-mix(in_oklch,var(--shadow-color)_calc(0.45*var(--shade)*100%),transparent)] @2xl:hidden"
+            className="pointer-events-none mb-3 dark:drop-shadow-[0_14px_24px_color-mix(in_oklch,var(--shadow-color)_calc(0.45*var(--shade)*100%),transparent)] @2xl:hidden"
           />
           <h1
             id="hero-title"
@@ -61,7 +61,7 @@ export function Hero({ learner }: { learner: Learner }) {
         <MiraMascot
           width={220}
           loading="eager"
-          className="pointer-events-none absolute right-[6%] bottom-0 hidden translate-y-[6%] drop-shadow-[0_18px_30px_color-mix(in_oklch,var(--shadow-color)_calc(0.45*var(--shade)*100%),transparent)] @2xl:block @4xl:right-[9%]"
+          className="pointer-events-none absolute right-[6%] bottom-0 hidden translate-y-[6%] dark:drop-shadow-[0_18px_30px_color-mix(in_oklch,var(--shadow-color)_calc(0.45*var(--shade)*100%),transparent)] @2xl:block @4xl:right-[9%]"
         />
       </div>
     </section>

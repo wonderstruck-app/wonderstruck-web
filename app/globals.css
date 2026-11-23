@@ -69,7 +69,7 @@
  */
 :root {
   color-scheme: light;
-  --background: oklch(0.975 0.006 85);
+  --background: oklch(1 0 0);
   --foreground: oklch(0.21 0.015 265);
   --card: oklch(0.995 0.002 85);
   --card-foreground: oklch(0.21 0.015 265);
@@ -91,7 +91,7 @@
   --secondary-key-hover: oklch(1 0 0);
   --key-hi: oklch(1 0 0 / 0.16);
   --key-ambient: 0 10px 18px -10px oklch(0.35 0.04 60 / 0.35);
-  --icon-edge-base: oklch(0.8 0.014 75);
+  --icon-edge-base: oklch(1 0 0);
   --key-disabled: oklch(0.78 0.016 75);
   --key-disabled-foreground: oklch(0.2 0.015 265);
   --key-disabled-edge: oklch(0.66 0.018 75);
@@ -535,6 +535,40 @@
       0 0 0 1px oklch(0.9 0.05 82 / 0.08),
       0 12px 48px -12px oklch(0.9 0.05 82 / 0.36),
       inset 0 1px 0 0 oklch(1 0 0 / 0.06);
+  }
+}
+
+/*
+ * Light mode sits on pure white, so the dark-tuned shadows above vanish. Give boxes a
+ * layered, clearly visible elevation instead: a tight contact shadow plus a soft drop.
+ */
+:root:not(.dark) {
+  --elev-1:
+    0 1px 2px oklch(0.3 0.03 60 / 0.08),
+    0 4px 10px -2px oklch(0.3 0.03 60 / 0.08),
+    0 16px 32px -14px oklch(0.3 0.03 60 / 0.2);
+  --elev-2:
+    0 2px 4px oklch(0.3 0.03 60 / 0.08),
+    0 10px 22px -6px oklch(0.3 0.03 60 / 0.12),
+    0 28px 52px -18px oklch(0.3 0.03 60 / 0.26);
+}
+:root:not(.dark) .surface,
+:root:not(.dark) .glass,
+:root:not(.dark) .glow-soft {
+  box-shadow: inset 0 1px 0 0 oklch(1 0 0 / 1), var(--elev-1);
+}
+:root:not(.dark) .glass-panel {
+  box-shadow: inset 0 1px 0 0 oklch(1 0 0 / 1), var(--elev-2);
+}
+:root:not(.dark) .glow-under {
+  box-shadow: 0 10px 12px -10px color-mix(in oklch, var(--search-glow) 45%, transparent), var(--elev-1);
+  &:focus-within {
+    box-shadow: 0 12px 14px -10px color-mix(in oklch, var(--search-glow) 65%, transparent), var(--elev-1);
+  }
+}
+@media (hover: hover) {
+  :root:not(.dark) .lift:hover {
+    box-shadow: inset 0 1px 0 0 oklch(1 0 0 / 1), var(--elev-2);
   }
 }
 

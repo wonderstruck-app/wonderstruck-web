@@ -97,9 +97,9 @@ export function SessionCanvas({
           ))}
 
           {activity && (
-            <li id="activity" className="scroll-mt-10 pl-12 sm:pl-[3.75rem]">
+            <li id="activity" className="scroll-mt-10 sm:pl-[3.75rem]">
               <div className="glass squircle-lg border-ink/10 bg-ink/[0.03]">
-                <div className="flex items-center gap-3 px-5 pt-4">
+                <div className="flex items-center gap-3 px-4 pt-4 sm:px-5">
                   <IconKey tone="green" size="sm">
                     <Puzzle />
                   </IconKey>
@@ -108,7 +108,7 @@ export function SessionCanvas({
                     {activityTitle && <span className="text-foreground/60"> · {activityTitle}</span>}
                   </p>
                 </div>
-                <div className="p-5 sm:p-6">{activity}</div>
+                <div className="p-4 sm:p-6">{activity}</div>
               </div>
             </li>
           )}
@@ -125,7 +125,7 @@ export function SessionCanvas({
           "flex shrink-0 flex-col items-center",
           embedded
             ? "gap-6 pt-9"
-            : "sticky bottom-[calc(3.75rem+env(safe-area-inset-bottom))] z-10 -mx-4 gap-4 border-t border-border bg-white px-4 py-4 sm:-mx-6 sm:px-6 dark:bg-[oklch(0.115_0.006_265)] lg:bottom-0 lg:mx-0 lg:gap-6 lg:border-t-0 lg:bg-transparent lg:px-0 lg:pt-12 lg:pb-2 lg:dark:bg-transparent",
+            : "sticky bottom-[calc(3.75rem+env(safe-area-inset-bottom))] z-10 -mx-4 gap-3 border-t border-border bg-white px-4 pt-3 pb-5 sm:-mx-6 sm:gap-4 sm:py-4 sm:px-6 dark:bg-[oklch(0.115_0.006_265)] lg:bottom-0 lg:mx-0 lg:gap-6 lg:border-t-0 lg:bg-transparent lg:px-0 lg:pt-12 lg:pb-2 lg:dark:bg-transparent",
         )}
       >
         {suggestions.length > 0 && !typing && (
@@ -190,8 +190,8 @@ export function SessionCanvas({
             </Button>
           </form>
         ) : (
-          <div className="flex w-full flex-col items-center gap-4 lg:gap-6">
-            <div className="grid w-full grid-cols-[1fr_auto_1fr] items-center gap-6">
+          <div className="flex w-full flex-col items-center gap-3 sm:gap-4 lg:gap-6">
+            <div className="grid w-full grid-cols-[1fr_auto_1fr] items-center gap-5 sm:gap-6">
               <div className="justify-self-end">
                 {voice === "idle" ? (
                   <p aria-live="polite" className="text-sm text-muted-foreground">
@@ -202,6 +202,7 @@ export function SessionCanvas({
                     type="button"
                     size="icon-lg"
                     variant="secondary"
+                    className="max-sm:size-10"
                     aria-pressed={voice === "muted"}
                     aria-label={voice === "muted" ? "Unmute microphone" : "Mute microphone"}
                     onClick={() => setVoice(voice === "muted" ? "listening" : "muted")}
@@ -216,7 +217,7 @@ export function SessionCanvas({
                 aria-label={listening ? "Stop talking" : "Talk with Mira"}
                 onClick={() => setVoice(listening ? "idle" : "listening")}
                 className={cn(
-                  "squircle-md size-16 shrink-0 p-0 [--key-depth:5px] [&_svg:not([class*='size-'])]:size-6",
+                  "squircle-md size-13 shrink-0 p-0 [--key-depth:4px] sm:size-16 sm:[--key-depth:5px] [&_svg:not([class*='size-'])]:size-5 sm:[&_svg:not([class*='size-'])]:size-6",
                   listening && "bg-primary text-primary-foreground [--key-edge:var(--primary-edge)] hover:bg-primary",
                 )}
               >
@@ -227,7 +228,7 @@ export function SessionCanvas({
                 size="icon-lg"
                 variant="secondary"
                 aria-label="Type instead"
-                className="justify-self-start"
+                className="justify-self-start max-sm:size-10"
                 onClick={() => {
                   setVoice("idle");
                   setTyping(true);
@@ -253,30 +254,39 @@ export function SessionCanvas({
 function Line({ m, present, listening }: { m: Message; present: boolean; listening: boolean }) {
   const mira = m.role === "mira";
   return (
-    <li className="rise-in grid grid-cols-[2.25rem_minmax(0,1fr)] items-start gap-x-3 sm:grid-cols-[2.75rem_minmax(0,1fr)] sm:gap-x-4">
-      <span aria-hidden className="relative row-span-2 grid place-items-center self-start">
+    <li className="rise-in grid grid-cols-[auto_minmax(0,1fr)] items-center gap-x-2.5 sm:grid-cols-[2.75rem_minmax(0,1fr)] sm:items-start sm:gap-x-4">
+      <span
+        aria-hidden
+        className={cn(
+          "relative mb-2 place-items-center sm:row-span-2 sm:mb-0 sm:grid sm:self-start",
+          present ? "grid" : "hidden",
+        )}
+      >
         {present && (
           <>
             <span
               className={cn(
-                "absolute size-16 rounded-full bg-[radial-gradient(closest-side,oklch(0.9_0.05_82/0.22),transparent)] transition-opacity duration-500 sm:size-20",
+                "absolute hidden size-12 rounded-full dark:block bg-[radial-gradient(closest-side,oklch(0.9_0.05_82/0.22),transparent)] transition-opacity duration-500 sm:size-20",
                 listening ? "breathe" : "opacity-60",
               )}
             />
             <MiraMascot
               width={44}
-              className="relative h-auto w-9 drop-shadow-[0_6px_12px_color-mix(in_oklch,var(--shadow-color)_calc(0.4*var(--shade)*100%),transparent)] sm:w-11"
+              className="relative h-auto w-7 dark:drop-shadow-[0_6px_12px_color-mix(in_oklch,var(--shadow-color)_calc(0.4*var(--shade)*100%),transparent)] sm:w-11"
             />
           </>
         )}
       </span>
-      <p className={cn("col-start-2 mb-1.5 text-xs font-medium", mira ? "text-primary-ink/80" : "text-muted-foreground")}>
+      <p
+        className={cn(
+          "mb-1.5 text-xs font-medium sm:col-span-1 sm:col-start-2",
+          present ? "col-start-2 max-sm:mb-2" : "col-span-2", mira ? "text-primary-ink/80" : "text-muted-foreground")}>
         {mira ? "Mira" : "You"}
         {m.via === "voice" && " · spoke"}
       </p>
       <p
         className={cn(
-          "col-start-2 text-pretty",
+          "col-span-2 text-pretty sm:col-span-1 sm:col-start-2",
           mira
             ? "text-[1.1875rem] leading-relaxed text-foreground sm:text-[1.3125rem]"
             : "text-[1rem] leading-relaxed text-foreground/60",

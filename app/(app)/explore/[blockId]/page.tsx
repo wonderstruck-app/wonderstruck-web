@@ -52,7 +52,7 @@ async function Session({ params }: Props) {
   return (
     <>
       <header className="flex items-center gap-3 sm:gap-4">
-        <Button asChild variant="secondary" size="icon-lg" className="shrink-0">
+        <Button asChild variant="secondary" size="icon-lg" className="shrink-0 -translate-y-0.5">
           <Link href={`/learn/${block.id}`} aria-label="Back to the block">
             <ArrowLeft />
           </Link>
@@ -73,7 +73,7 @@ async function Session({ params }: Props) {
           Preview
         </span>
         {session && (
-          <Button asChild variant="secondary" className="hidden shrink-0 sm:inline-flex">
+          <Button asChild variant="secondary" className="hidden shrink-0 -translate-y-0.5 sm:inline-flex">
             <Link href={`/sessions/${session.id}`}>End and recap</Link>
           </Button>
         )}
