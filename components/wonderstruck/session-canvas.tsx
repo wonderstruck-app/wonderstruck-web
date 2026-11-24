@@ -1,17 +1,28 @@
 "use client";
 
 import { useEffect, useRef, useState, type ReactNode } from "react";
-import { ArrowUp, Keyboard, Mic, MicOff, Puzzle, Square } from "lucide-react";
+import { ArrowUp, Keyboard, Mic, MicOff, Puzzle, Square, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import type { Message } from "@/lib/data";
+import { useMiraLive } from "@/lib/mira-live";
 import { cn } from "@/lib/utils";
 import { MiraMascot } from "./brand";
 import { IconKey } from "./icon-key";
 
 type VoiceState = "idle" | "listening" | "muted";
+type Turn = Message & { interrupted?: boolean };
 
 const NOT_CONNECTED =
   "I'm not connected in this preview, so I can't answer yet. Your message stays here so you can see how the session will look.";
+
+export type LiveTarget = {
+  /** Resolves the session to talk in, starting one if needed. */
+  getSessionId: () => Promise<string>;
+  /** After the call ends and its turns are saved. */
+  onClose?: (sessionId: string) => void;
+};
+
+const noSession = () => Promise.reject(new Error("No live session in a preview."));
 
 /**
  * Live session: no chat window. The conversation reads as open captions, with
@@ -25,6 +36,7 @@ export function SessionCanvas({
   activityTitle,
   suggestions = [],
   embedded = false,
+  live,
 }: {
   initialMessages: Message[];
   /** Shown as Mira's first turn when there is no conversation yet. */
@@ -35,6 +47,8 @@ export function SessionCanvas({
   suggestions?: string[];
   /** Inline preview (e.g. the landing page): no page-height layout, sticky dock or edge fade. */
   embedded?: boolean;
+  /** Talk to Mira for real (Gemini Live). Without it the canvas is a static preview. */
+  live?: LiveTarget;
 }) {
   const [messages] = useState<Message[]>(
     initialMessages.length
@@ -43,7 +57,10 @@ export function SessionCanvas({
   );
   const [extra, setExtra] = useState<Message[]>([]);
   const [draft, setDraft] = useState("");
-  const [voice, setVoice] = useState<VoiceState>("idle");
+  const [previewVoice, setPreviewVoice] = useState<VoiceState>("idle");
+  const mira = useMiraLive({ getSessionId: live?.getSessionId ?? noSession, onClose: live?.onClose });
+  const captions: Turn[] = mira.captions;
+  const voice: VoiceState = live ? (mira.mic === "off" ? "idle" : mira.mic === "on" ? "listening" : "muted") : previewVoice;
   const [typing, setTyping] = useState(false);
   const endRef = useRef<HTMLDivElement>(null);
 
@@ -60,12 +77,24 @@ export function SessionCanvas({
   }, []);
 
   useEffect(() => {
-    if (extra.length) endRef.current?.scrollIntoView({ block: embedded ? "nearest" : "end", behavior: "smooth" });
-  }, [extra, embedded]);
+    if (extra.length || captions.length) endRef.current?.scrollIntoView({ block: embedded ? "nearest" : "end", behavior: "smooth" });
+  }, [extra, captions.length, embedded]);
+
+  function setVoice(next: VoiceState) {
+    if (!live) return setPreviewVoice(next);
+    if (next === "listening") return voice === "muted" ? mira.setMuted(false) : void mira.startTalking();
+    if (next === "muted") return mira.setMuted(true);
+    mira.stop();
+  }
 
   function send(text: string) {
     const t = text.trim();
     if (!t) return;
+    if (live) {
+      void mira.sendText(t);
+      setDraft("");
+      return;
+    }
     const n = messages.length + extra.length;
     setExtra((m) => [
       ...m,
@@ -76,8 +105,24 @@ export function SessionCanvas({
   }
 
   const listening = voice === "listening";
-  const lastMira = [...messages, ...extra].findLast((m) => m.role === "mira")?.id;
-  const status = listening ? "Listening · preview" : voice === "muted" ? "Muted" : "Tap to talk";
+  const lastMira = [...messages, ...extra, ...captions].findLast((m) => m.role === "mira")?.id;
+  const status = !live
+    ? listening
+      ? "Listening · preview"
+      : voice === "muted"
+        ? "Muted"
+        : "Tap to talk"
+    : mira.status === "connecting"
+      ? "Connecting to Mira…"
+      : mira.speaking
+        ? "Mira is speaking"
+        : voice === "muted"
+          ? "Muted"
+          : listening
+            ? "Listening"
+            : "Tap to talk";
+  // Mira glows while the call is live, whether she or the learner is talking.
+  const active = listening || mira.speaking;
 
   return (
     <section
@@ -93,7 +138,7 @@ export function SessionCanvas({
       >
         <ol aria-label="Conversation" className={cn("mx-auto flex max-w-[44rem] flex-col gap-7 px-1", !embedded && "py-10")}>
           {messages.map((m) => (
-            <Line key={m.id} m={m} present={m.id === lastMira} listening={listening} />
+            <Line key={m.id} m={m} present={m.id === lastMira} listening={active} />
           ))}
 
           {activity && (
@@ -113,8 +158,8 @@ export function SessionCanvas({
             </li>
           )}
 
-          {extra.map((m) => (
-            <Line key={m.id} m={m} present={m.id === lastMira} listening={listening} />
+          {[...extra, ...captions].map((m) => (
+            <Line key={m.id} m={m} present={m.id === lastMira} listening={active} />
           ))}
         </ol>
         <div ref={endRef} />
@@ -128,6 +173,18 @@ export function SessionCanvas({
             : "sticky bottom-[calc(3.75rem+env(safe-area-inset-bottom))] z-10 -mx-4 gap-3 border-t border-border bg-white px-4 pt-3 pb-5 sm:-mx-6 sm:gap-4 sm:py-4 sm:px-6 dark:bg-[oklch(0.115_0.006_265)] lg:bottom-0 lg:mx-0 lg:gap-6 lg:border-t-0 lg:bg-transparent lg:px-0 lg:pt-12 lg:pb-2 lg:dark:bg-transparent",
         )}
       >
+        {mira.error && (
+          <p
+            role="alert"
+            className="squircle-md flex w-full max-w-[38rem] items-start gap-3 border border-destructive/25 bg-destructive/[0.06] py-2.5 pr-2 pl-4 text-sm leading-relaxed text-foreground/85"
+          >
+            <span className="min-w-0 flex-1 py-0.5">{mira.error}</span>
+            <Button type="button" size="icon-sm" variant="ghost" aria-label="Dismiss" onClick={mira.dismissError}>
+              <X />
+            </Button>
+          </p>
+        )}
+
         {suggestions.length > 0 && !typing && (
           <div className="flex w-full min-w-0 [justify-content:safe_center] gap-1 overflow-x-auto px-1 [scrollbar-width:none]">
             {suggestions.map((s) => (
@@ -160,7 +217,6 @@ export function SessionCanvas({
                 setTyping(false);
                 setVoice("listening");
               }}
-              
             >
               <Mic />
             </Button>
@@ -194,9 +250,7 @@ export function SessionCanvas({
             <div className="grid w-full grid-cols-[1fr_auto_1fr] items-center gap-5 sm:gap-6">
               <div className="justify-self-end">
                 {voice === "idle" ? (
-                  <p aria-live="polite" className="text-sm text-muted-foreground">
-                    {status}
-                  </p>
+                  <p className="text-sm text-muted-foreground">Tap to talk</p>
                 ) : (
                   <Button
                     type="button"
@@ -214,14 +268,15 @@ export function SessionCanvas({
               <Button
                 type="button"
                 aria-pressed={listening}
-                aria-label={listening ? "Stop talking" : "Talk with Mira"}
-                onClick={() => setVoice(listening ? "idle" : "listening")}
+                aria-label={voice !== "idle" ? "End the call" : "Talk with Mira"}
+                disabled={live && mira.status === "connecting" && voice === "idle"}
+                onClick={() => setVoice(voice !== "idle" ? "idle" : "listening")}
                 className={cn(
                   "squircle-md size-13 shrink-0 p-0 [--key-depth:4px] sm:size-16 sm:[--key-depth:5px] [&_svg:not([class*='size-'])]:size-5 sm:[&_svg:not([class*='size-'])]:size-6",
-                  listening && "bg-primary text-primary-foreground [--key-edge:var(--primary-edge)] hover:bg-primary",
+                  voice !== "idle" && "bg-primary text-primary-foreground [--key-edge:var(--primary-edge)] hover:bg-primary",
                 )}
               >
-                {listening ? <Square className="fill-current" /> : <Mic />}
+                {voice !== "idle" ? <Square className="fill-current" /> : <Mic />}
               </Button>
               <Button
                 type="button"
@@ -230,17 +285,19 @@ export function SessionCanvas({
                 aria-label="Type instead"
                 className="justify-self-start max-sm:size-10"
                 onClick={() => {
-                  setVoice("idle");
+                  // Typing keeps the call open (Mira still answers aloud) but frees the mic.
+                  if (live) mira.stopTalking();
+                  else setPreviewVoice("idle");
                   setTyping(true);
                 }}
               >
                 <Keyboard />
               </Button>
             </div>
-            {voice !== "idle" && (
+            {(voice !== "idle" || mira.status === "connecting" || mira.speaking) && (
               <p aria-live="polite" className="flex h-5 items-center gap-2.5 text-sm text-muted-foreground">
-                {listening && <Waveform />}
-                <span className={cn(listening && "text-foreground/85")}>{status}</span>
+                {active && <Waveform />}
+                <span className={cn(active && "text-foreground/85")}>{status}</span>
               </p>
             )}
           </div>
@@ -251,7 +308,7 @@ export function SessionCanvas({
 }
 
 /** Centred caption-style turn: Mira leads in full contrast, the learner is quieter. */
-function Line({ m, present, listening }: { m: Message; present: boolean; listening: boolean }) {
+function Line({ m, present, listening }: { m: Turn; present: boolean; listening: boolean }) {
   const mira = m.role === "mira";
   return (
     <li className="rise-in grid grid-cols-[auto_minmax(0,1fr)] items-center gap-x-2.5 sm:grid-cols-[2.75rem_minmax(0,1fr)] sm:items-start sm:gap-x-4">
@@ -283,6 +340,7 @@ function Line({ m, present, listening }: { m: Message; present: boolean; listeni
           present ? "col-start-2 max-sm:mb-2" : "col-span-2", mira ? "text-primary-ink/80" : "text-muted-foreground")}>
         {mira ? "Mira" : "You"}
         {m.via === "voice" && " · spoke"}
+        {m.interrupted && " · cut off"}
       </p>
       <p
         className={cn(

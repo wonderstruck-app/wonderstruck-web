@@ -6,7 +6,8 @@ import { Play, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { RailCard } from "@/components/wonderstruck/rail-card";
 import { SessionCanvas } from "@/components/wonderstruck/session-canvas";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { startLiveSession } from "@/lib/mira-live";
 import { Settled } from "@/components/wonderstruck/skeleton";
 import { ExploreSkeleton } from "@/components/wonderstruck/skeletons";
 import { useLoadedLate } from "@/lib/use-loaded-late";
@@ -15,6 +16,7 @@ import { q } from "@/lib/data/queries";
 export function ExploreView() {
   const { data: sessions } = useQuery(q.sessions());
   const { data: blocks } = useQuery(q.blocks());
+  const queryClient = useQueryClient();
   const late = useLoadedLate(!!(sessions && blocks));
   if (!sessions || !blocks) return <ExploreSkeleton />;
   const active = sessions.find((s) => s.status === "active");
@@ -33,9 +35,6 @@ export function ExploreView() {
               Talk out loud or type. Interrupt whenever you like.
             </p>
           </div>
-          <span className="hidden shrink-0 rounded-full border border-border px-2.5 py-1 text-xs font-medium text-muted-foreground sm:inline">
-            Preview
-          </span>
         </header>
 
         <div className="mt-5 grid grid-cols-[minmax(0,1fr)] gap-6 lg:min-h-0 lg:flex-1 lg:grid-cols-[minmax(0,1fr)_21rem] xl:gap-8 2xl:grid-cols-[minmax(0,1fr)_23rem]">
@@ -47,6 +46,10 @@ export function ExploreView() {
               "How do vaccines train the immune system?",
               "What actually is entropy?",
             ]}
+            live={{
+              getSessionId: () => startLiveSession(),
+              onClose: () => void queryClient.invalidateQueries({ queryKey: ["sessions"] }),
+            }}
           />
 
           <aside

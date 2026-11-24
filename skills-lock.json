@@ -51,6 +51,13 @@
       "skillPath": "skills/break-ui/SKILL.md",
       "computedHash": "f089f3663e197fb4e106249df70e815a96e3236520a2e1c0919d1694816baca8"
     },
+    "build-with-exa": {
+      "source": "exa-labs/agent-skills",
+      "commit": "53c2b03941c619606d9d4c2d619bce5c3d15a380",
+      "sourceType": "github",
+      "skillPath": "skills/build-with-exa/SKILL.md",
+      "computedHash": "54d77c703d8c3b0809a753658ac1c7236fa26a887e9eaf9ffabe661ccb7cf91a"
+    },
     "choreograph": {
       "source": "emilkowalski/skills",
       "sourceType": "github",

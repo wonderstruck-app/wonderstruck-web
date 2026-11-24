@@ -11,6 +11,7 @@ from app.core.errors import ErrorResponse, register_error_handlers
 from app.core.logging import configure_logging
 from app.core.middleware import REQUEST_ID_HEADER, RequestContextMiddleware
 from app.db.session import create_engine, create_sessionmaker
+from app.services import mira
 
 API_PREFIX = "/api/v1"
 VERSION = "0.1.0"
@@ -27,7 +28,15 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         engine = create_engine(settings)
         app.state.engine = engine
         app.state.sessionmaker = create_sessionmaker(engine) if engine else None
-        log.info("startup", environment=settings.environment, database=engine is not None)
+        if settings.mira_live_enabled:
+            mira.configure_vertex(settings)
+            app.state.mira_runner = mira.create_runner(settings)
+        log.info(
+            "startup",
+            environment=settings.environment,
+            database=engine is not None,
+            mira_live=settings.mira_live_enabled,
+        )
         try:
             yield
         finally:
@@ -48,6 +57,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     # Starts out empty so an unconfigured app fails closed rather than with AttributeError.
     app.state.engine = None
     app.state.sessionmaker = None
+    app.state.mira_runner = None
 
     app.add_middleware(
         CORSMiddleware,

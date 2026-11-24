@@ -16,7 +16,8 @@ import { ActivityView } from "@/components/wonderstruck/activity";
 import { ConceptStateBadge } from "@/components/wonderstruck/concept-state";
 import { RailCard } from "@/components/wonderstruck/rail-card";
 import { SessionCanvas } from "@/components/wonderstruck/session-canvas";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { startLiveSession } from "@/lib/mira-live";
 import { q } from "@/lib/data/queries";
 import { ExploreSessionSkeleton } from "@/components/wonderstruck/skeletons";
 
@@ -25,6 +26,7 @@ export function ExploreSessionView() {
   const { data: block } = useQuery(q.block(blockId));
   const { data: session, isPending: sessionPending } = useQuery(q.blockSession(blockId));
   const { data: blocks } = useQuery(q.blocks());
+  const queryClient = useQueryClient();
   if (block === null) notFound();
   if (!block || sessionPending || !blocks) return <ExploreSessionSkeleton />;
 
@@ -53,9 +55,6 @@ export function ExploreSessionView() {
             {block.question}
           </h1>
         </div>
-        <span className="hidden shrink-0 rounded-full border border-border px-2.5 py-1 text-xs font-medium text-muted-foreground sm:inline">
-          Preview
-        </span>
         {session && (
           <Button asChild variant="secondary" className="hidden shrink-0 -translate-y-0.5 sm:inline-flex">
             <Link href={`/sessions/${session.id}`}>End and recap</Link>
@@ -70,6 +69,14 @@ export function ExploreSessionView() {
           activity={block.activity ? <ActivityView activity={block.activity} /> : undefined}
           activityTitle={block.activity?.title}
           suggestions={["Explain it simply", "Give me an analogy", "Quiz me on this"]}
+          live={{
+            // Resumes the block's active session, or starts one.
+            getSessionId: () => startLiveSession(blockId),
+            onClose: (id) => {
+              for (const queryKey of [["block-session", blockId], ["session", id], ["sessions"]])
+                void queryClient.invalidateQueries({ queryKey });
+            },
+          }}
         />
 
         <aside

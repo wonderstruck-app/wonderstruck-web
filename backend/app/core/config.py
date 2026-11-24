@@ -43,6 +43,14 @@ class Settings(BaseSettings):
     # Shared with the Next.js app; without it every authenticated route answers 401.
     better_auth_secret: SecretStr | None = None
 
+    # Mira's live voice: Gemini Live through Google ADK on Vertex AI, authenticated with Application
+    # Default Credentials (the Cloud Run service account, or `gcloud auth application-default login`).
+    # Without a project, the live socket answers `voice_unavailable`.
+    google_cloud_project: str | None = None
+    # The Live API needs a regional endpoint, not `global`.
+    google_cloud_location: str = "us-central1"
+    mira_live_model: str = "gemini-3.8-live"
+
     @field_validator("cors_origins", mode="before")
     @classmethod
     def _split_origins(cls, v: object) -> object:
@@ -66,6 +74,10 @@ class Settings(BaseSettings):
     @property
     def is_production(self) -> bool:
         return self.environment == "production"
+
+    @property
+    def mira_live_enabled(self) -> bool:
+        return bool(self.google_cloud_project)
 
     @property
     def json_logs(self) -> bool:

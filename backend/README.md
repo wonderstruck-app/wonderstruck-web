@@ -66,11 +66,29 @@ All under `/api/v1`; the full contract is in `/api/v1/docs`.
 | Sessions | `GET`/`POST /sessions`, `GET`/`DELETE /sessions/{id}`, `POST /sessions/{id}/messages`, `/attempts`, `/heartbeat`, `/finish`, `/recap` |
 | Recall | `GET /recall/queue`, `GET /recall/history`, `POST /recall/{id}/reviews` |
 | Knowledge | `GET /graph`, `GET /memory`, `DELETE /memory/{id}`, `GET`/`PATCH /settings` |
+| Mira live | `POST /sessions/{id}/live-ticket`, `WS /sessions/{id}/live?ticket=` |
 
 Writes that a client may retry (messages, attempts, reviews) take a `clientId`: the first call returns
 `201`, a replay returns `200` with the original result. Recall answers are graded and scheduled (FSRS)
 on the server. Finishing a session queues a recap job; no worker consumes it yet, so recaps stay
 `generating`.
+
+## Mira live voice
+
+Mira talks through Gemini Live (`gemini-3.8-live`) on Vertex AI, driven by Google ADK, so usage bills
+to the GCP project (and its credits). The browser gets a one-minute ticket with its cookie, then
+opens the socket straight to the API: 16 kHz PCM up, Mira's 24 kHz PCM plus captions down. Her
+instructions come from the block (question, body, sources, concepts) and the recent transcript, and
+honour the learner's voice, pace, interruption and keep-transcripts settings. Raw audio is never
+stored; final captions are saved as session messages.
+
+Set `GOOGLE_CLOUD_PROJECT` to turn it on (without it the ticket route answers `503
+voice_unavailable`). Locally, sign in as an account with access to that project:
+
+```bash
+gcloud auth application-default login
+gcloud auth application-default set-quota-project <project>
+```
 
 ## Database
 
@@ -98,3 +116,5 @@ Runs as a non-root user with `ENVIRONMENT=production` (JSON logs, no docs) and l
 ### Cloud Run
 
 The GitHub trigger builds with `backend/` as the Docker context (`docker build backend -f backend/Dockerfile`). Set `ENVIRONMENT=production`, `DATABASE_URL`, `BETTER_AUTH_SECRET` and `CORS_ORIGINS` on the service, preferably from Secret Manager for the secrets.
+
+For Mira's voice also set `GOOGLE_CLOUD_PROJECT` (and `GOOGLE_CLOUD_LOCATION=us-central1`), grant the service's account `roles/aiplatform.user`, and raise the request timeout to 3600 s so calls aren't cut at 5 minutes. `CORS_ORIGINS` must include the web app's origin: the socket checks it.
