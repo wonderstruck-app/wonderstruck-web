@@ -10,7 +10,8 @@ FROM python:3.13-slim
 RUN useradd --create-home --uid 10001 api
 WORKDIR /app
 COPY --from=build --chown=api /app /app
-ENV PATH="/app/.venv/bin:$PATH" PYTHONUNBUFFERED=1 ENVIRONMENT=production
+ENV PATH="/app/.venv/bin:$PATH" PYTHONUNBUFFERED=1 ENVIRONMENT=production PORT=8000
 USER api
 EXPOSE 8000
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--proxy-headers", "--forwarded-allow-ips", "*"]
+# Cloud Run injects PORT (8080); exec keeps uvicorn as PID 1 so it receives SIGTERM.
+CMD ["sh", "-c", "exec uvicorn app.main:app --host 0.0.0.0 --port \"$PORT\" --proxy-headers --forwarded-allow-ips '*'"]

@@ -93,4 +93,8 @@ docker build -t wonderstruck-api backend
 docker run -p 8000:8000 --env-file backend/.env wonderstruck-api
 ```
 
-Runs as a non-root user with `ENVIRONMENT=production` (JSON logs, no docs).
+Runs as a non-root user with `ENVIRONMENT=production` (JSON logs, no docs) and listens on `$PORT` (default 8000; Cloud Run sets 8080).
+
+### Cloud Run
+
+The GitHub trigger builds with `backend/` as the Docker context (`docker build backend -f backend/Dockerfile`). Set `ENVIRONMENT=production`, `DATABASE_URL`, `BETTER_AUTH_SECRET` and `CORS_ORIGINS` on the service, preferably from Secret Manager for the secrets.
