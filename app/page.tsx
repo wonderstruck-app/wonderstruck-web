@@ -12,15 +12,15 @@ import {
   Principle,
   RememberPreview,
 } from "@/components/wonderstruck/landing";
+import { LegalFooter } from "@/components/wonderstruck/legal";
 import { ThemeToggle } from "@/components/wonderstruck/theme-toggle";
-import { getBlocks, getGraph, getRecallQueue } from "@/lib/data";
+import {
+  showcaseBlocks as blocks,
+  showcaseGraph as graph,
+  showcaseRecall as recall,
+} from "@/lib/data/showcase";
 
-export default async function Home() {
-  const [blocks, graph, recall] = await Promise.all([
-    getBlocks(),
-    getGraph(),
-    getRecallQueue(),
-  ]);
+export default function Home() {
   const byId = (id: string) => blocks.find((b) => b.id === id);
   const fan = ["octopus-arms", "aurora-green"]
     .map(byId)
@@ -231,10 +231,7 @@ export default async function Home() {
         </section>
       </main>
 
-      <footer className="flex flex-col items-center justify-between gap-3 border-t border-ink/10 py-8 text-sm text-muted-foreground sm:flex-row">
-        <BrandMark className="text-base lg:text-base" />
-        <p>Wonderstruck is in preview.</p>
-      </footer>
+      <LegalFooter />
     </div>
   );
 }

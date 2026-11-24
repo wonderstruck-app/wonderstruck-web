@@ -75,7 +75,7 @@ test commands without starting another server manually:
 
 ```bash filename="Terminal"
 EXPOSE_TESTING_API=1 pnpm build
-EXPOSE_TESTING_API=1 BASE_URL=http://localhost:3000 pnpm playwright test tests/prefetch-preservation.spec.ts
+EXPOSE_TESTING_API=1 BASE_URL=http://localhost:3001 pnpm playwright test tests/prefetch-preservation.spec.ts
 ```
 
 If the rig does not use `webServer`, start `EXPOSE_TESTING_API=1 pnpm start --port 3000` in a

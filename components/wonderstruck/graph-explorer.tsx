@@ -54,7 +54,7 @@ export function GraphExplorer({ graph }: { graph: LearningGraph }) {
   );
 }
 
-function Legend() {
+export function Legend() {
   return (
     <ul className="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-muted-foreground">
       <li className="flex items-center gap-2">

@@ -1,7 +1,10 @@
 "use client";
 
 import Link from "next/link";
+import { useQuery } from "@tanstack/react-query";
 import { usePathname } from "next/navigation";
+import type { ReactNode } from "react";
+import { q } from "@/lib/data/queries";
 import { cn } from "@/lib/utils";
 import { primaryNav, secondaryNav } from "./nav-items";
 
@@ -13,7 +16,7 @@ export function SidebarNavLink({
   badge,
 }: {
   href: string;
-  badge?: string;
+  badge?: ReactNode;
 }) {
   const item = findItem(href);
   const pathname = usePathname();
@@ -36,13 +39,25 @@ export function SidebarNavLink({
         className="size-5 stroke-[1.85]"
       />
       <span className="flex-1">{item.label}</span>
-      {badge && (
-        <span className="inline-grid h-6 min-w-6 place-items-center rounded-full bg-tint-violet/20 px-1.5 text-xs leading-none font-semibold text-tint-violet tabular-nums ring-1 ring-tint-violet/25">
-          {badge}
-        </span>
-      )}
+      {badge}
     </Link>
   );
+}
+
+/** Count pill for a sidebar item. Renders nothing at zero. */
+export function NavBadge({ count }: { count: number }) {
+  if (count <= 0) return null;
+  return (
+    <span className="inline-grid h-6 min-w-6 place-items-center rounded-full bg-tint-violet/20 px-1.5 text-xs leading-none font-semibold text-tint-violet tabular-nums ring-1 ring-tint-violet/25">
+      {count}
+    </span>
+  );
+}
+
+/** Concepts due for recall. Shares the queue query, so reviews update it everywhere. */
+export function RecallBadge() {
+  const { data } = useQuery(q.recallQueue());
+  return <NavBadge count={data?.length ?? 0} />;
 }
 
 export function BottomNavLink({ href }: { href: string }) {

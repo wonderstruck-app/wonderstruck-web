@@ -1,23 +1,18 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import Link from "next/link";
 import { ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { MiraMascot } from "@/components/wonderstruck/brand";
 import { PageFrame, PageHeader, WithRail } from "@/components/wonderstruck/page-header";
 import { RailCard } from "@/components/wonderstruck/rail-card";
-import { SettingsForm } from "@/components/wonderstruck/settings-form";
-import { getGraph, getLearner, getMemory, getSessions, getSettings } from "@/lib/data";
+import { LearnerProfile, ProfilePlaceholder } from "@/components/wonderstruck/learner";
+import { Section } from "@/components/wonderstruck/settings-form";
+import { SettingsData, YourDataStats } from "./settings-view";
 
 export const metadata: Metadata = { title: "Settings" };
 
-export default async function SettingsPage() {
-  const [learner, settings, sessions, graph, memory] = await Promise.all([
-    getLearner(),
-    getSettings(),
-    getSessions(),
-    getGraph(),
-    getMemory(),
-  ]);
+export default function SettingsPage() {
 
   return (
     <PageFrame>
@@ -40,18 +35,7 @@ export default async function SettingsPage() {
                 </p>
                 <MiraMascot width={60} className="-mb-1 shrink-0" />
               </div>
-              <dl className="mt-4 grid grid-cols-3 gap-2">
-                {[
-                  ["Sessions", sessions.length],
-                  ["Concepts", graph.concepts.length],
-                  ["Memories", memory.length],
-                ].map(([k, v]) => (
-                  <div key={k} className="squircle-md border border-ink/6 bg-background/50 px-3 py-2.5">
-                    <dt className="text-[0.6875rem] font-medium text-muted-foreground">{k}</dt>
-                    <dd className="mt-0.5 text-[1.375rem] font-semibold tabular-nums">{v}</dd>
-                  </div>
-                ))}
-              </dl>
+              <YourDataStats />
               <Button asChild variant="secondary" className="mt-4">
                 <Link href="/remember">Review what Mira remembers</Link>
               </Button>
@@ -63,8 +47,21 @@ export default async function SettingsPage() {
           title="Settings"
           description="Shape what Mira suggests, how it sounds, and what it keeps."
         />
-        <div className="mt-7">
-          <SettingsForm learner={learner} settings={settings} />
+        {/* The session read stays in this server tree: a Suspense passed through a client
+            component's props is invisible to instant validation. */}
+        <div className="mt-7 flex flex-col gap-6">
+          <Suspense
+            fallback={
+              <Section title="Profile">
+                <ProfilePlaceholder />
+              </Section>
+            }
+          >
+            <Section title="Profile">
+              <LearnerProfile />
+            </Section>
+          </Suspense>
+          <SettingsData />
         </div>
       </WithRail>
     </PageFrame>

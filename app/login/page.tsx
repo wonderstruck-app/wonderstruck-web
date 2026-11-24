@@ -7,10 +7,13 @@ import {
   GoogleSignIn,
 } from "@/components/wonderstruck/google-sign-in";
 import { ThemeToggle } from "@/components/wonderstruck/theme-toggle";
+import { safeNext } from "@/lib/auth-redirect";
+import { getSession } from "@/lib/session";
+import { redirect } from "next/navigation";
 
 export const metadata: Metadata = { title: "Sign in" };
 
-export default function LoginPage() {
+export default function LoginPage({ searchParams }: PageProps<"/login">) {
   return (
     <div className="mx-auto flex min-h-dvh w-full max-w-[96rem] flex-col px-5 sm:px-8 lg:px-12">
       <header className="flex h-20 items-center justify-between">
@@ -52,11 +55,29 @@ export default function LoginPage() {
           </div>
 
           <p className="mx-auto mt-4 max-w-[34ch] text-[0.8125rem] leading-relaxed text-muted-foreground">
-            We only use your Google name, email and photo to set up your
-            account.
+            By continuing, you agree to our{" "}
+            <Link href="/terms" className="underline underline-offset-4 hover:text-foreground">
+              Terms
+            </Link>{" "}
+            and{" "}
+            <Link href="/privacy" className="underline underline-offset-4 hover:text-foreground">
+              Privacy Policy
+            </Link>
+            .
           </p>
         </div>
       </main>
+
+      <Suspense>
+        <RedirectIfSignedIn searchParams={searchParams} />
+      </Suspense>
     </div>
   );
+}
+
+/** Uses the real session (not just the cookie), so a stale cookie can't cause a redirect loop. */
+async function RedirectIfSignedIn({ searchParams }: Pick<PageProps<"/login">, "searchParams">) {
+  if (!(await getSession())) return null;
+  const { next } = await searchParams;
+  redirect(safeNext(typeof next === "string" ? next : null));
 }

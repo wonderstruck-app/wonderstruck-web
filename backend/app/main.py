@@ -60,6 +60,8 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     # Added last, so outermost: request IDs also cover CORS preflights and error responses.
     app.add_middleware(RequestContextMiddleware)
 
+    # Dependencies must see the settings this app was built with, not a fresh read of the environment.
+    app.dependency_overrides[get_settings] = lambda: settings
     register_error_handlers(app)
     app.include_router(api_router, prefix=API_PREFIX)
     return app

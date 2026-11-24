@@ -3,7 +3,8 @@
 import { useState, type ReactNode } from "react";
 import { Check, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import type { RecallItem } from "@/lib/data";
+import type { RecallItem, RecallResult } from "@/lib/data";
+import { useReviewRecall } from "@/lib/data/queries";
 import { cn } from "@/lib/utils";
 
 /** One active-recall question with answer selection, checking, and explanation. Remount (key) per item. */
@@ -26,12 +27,29 @@ export function RecallQuestion({
   className?: string;
 }) {
   const [selected, setSelected] = useState<string | null>(null);
-  const [checked, setChecked] = useState(false);
-  const correct = selected === item.correctId;
+  const [result, setResult] = useState<RecallResult | null>(null);
+  const review = useReviewRecall();
+  const pending = review.isPending;
+  const error = review.isError;
+  const checked = result !== null;
+  const correct = result?.correct ?? false;
+
+  function check(optionId: string) {
+    const finish = (r: RecallResult) => {
+      setResult(r);
+      onChecked?.(r.correct);
+    };
+    // The landing showcase carries its answer; real cards are graded (and scheduled) server-side.
+    if (item.answer) return finish({ ...item.answer, correct: optionId === item.answer.correctId });
+    review.mutate(
+      { itemId: item.id, optionId, clientId: crypto.randomUUID() },
+      { onSuccess: finish },
+    );
+  }
 
   return (
     <div className={cn("flex flex-col", className)}>
-      <fieldset disabled={checked}>
+      <fieldset disabled={checked || pending}>
         <legend
           className={cn(
             "leading-snug font-medium text-balance",
@@ -46,7 +64,7 @@ export function RecallQuestion({
         <div className={cn("grid gap-2", size === "lg" ? "mt-6 gap-2.5" : "mt-3.5")}>
           {item.options.map((o, i) => {
             const isSel = selected === o.id;
-            const isAnswer = o.id === item.correctId;
+            const isAnswer = o.id === result?.correctId;
             return (
               <label
                 key={o.id}
@@ -111,7 +129,12 @@ export function RecallQuestion({
       </fieldset>
 
       <div aria-live="polite">
-        {checked && (
+        {error && (
+          <p className="rise-in mt-5 text-sm text-destructive">
+            Couldn’t check that just now. Try again in a moment.
+          </p>
+        )}
+        {result && (
           <div className="rise-in mt-5">
             <p
               className={cn(
@@ -122,7 +145,7 @@ export function RecallQuestion({
               {correct ? "That's it." : "Not quite."}
             </p>
             <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
-              {item.explanation}
+              {result.explanation}
             </p>
             <p className="mt-2 text-sm text-foreground/80">
               {correct
@@ -140,13 +163,11 @@ export function RecallQuestion({
           <Button
             size={size === "lg" ? "lg" : "default"}
             className="flex-1"
-            disabled={!selected}
-            onClick={() => {
-              setChecked(true);
-              onChecked?.(correct);
-            }}
+            disabled={!selected || pending}
+            aria-busy={pending}
+            onClick={() => selected && check(selected)}
           >
-            Check answer
+            {pending ? "Checking…" : "Check answer"}
           </Button>
         )}
         {secondary}

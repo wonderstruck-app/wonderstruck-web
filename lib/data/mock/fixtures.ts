@@ -2,10 +2,10 @@
 
 import type {
   ConceptLink,
+  RecallAnswer,
   Concept,
   LearningBlock,
   LearningSession,
-  Learner,
   MemoryItem,
   RecallItem,
   ReviewRecord,
@@ -14,12 +14,6 @@ import type {
 
 const img = (id: string, w = 1400) =>
   `https://images.unsplash.com/${id}?w=${w}&q=75&auto=format&fit=crop`;
-
-export const learner: Learner = {
-  name: "Aanya",
-  initials: "AR",
-  email: "aanya@example.com",
-};
 
 export const blocks: LearningBlock[] = [
   {
@@ -507,7 +501,8 @@ export const conceptLinks: ConceptLink[] = [
   { from: "optical-correction", to: "expectation", kind: "semantic", similarity: 0.74, rationale: "Both concern how the brain's assumptions shape what we perceive." },
 ];
 
-export const recallQueue: RecallItem[] = [
+/** Fixtures keep the answer inline; the mock source moves it under `answer`. */
+export const recallQueue: (Omit<RecallItem, "answer"> & RecallAnswer)[] = [
   {
     id: "r1",
     conceptId: "distributed",

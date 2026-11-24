@@ -15,6 +15,7 @@ export function Rise({
 }) {
   return (
     <Tag
+      data-rise
       className={cn("rise-in", className)}
       style={{ "--rise-order": order } as CSSProperties}
     >

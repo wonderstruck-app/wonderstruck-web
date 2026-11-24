@@ -5,37 +5,19 @@ import { useTheme } from "next-themes";
 import { Download, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
-import type { Learner, Settings } from "@/lib/data";
+import type { Settings } from "@/lib/data";
 import { cn } from "@/lib/utils";
 
 const paces: Settings["voice"]["pace"][] = ["relaxed", "natural", "brisk"];
 
 /** Settings form. Local state only in the preview; save handlers wire to the API later. */
-export function SettingsForm({
-  learner,
-  settings,
-}: {
-  learner: Learner;
-  settings: Settings;
-}) {
+export function SettingsForm({ settings }: { settings: Settings }) {
   const [interests, setInterests] = useState(settings.interests);
   const [voice, setVoice] = useState(settings.voice);
   const [privacy, setPrivacy] = useState(settings.privacy);
 
   return (
     <div className="flex flex-col gap-6">
-      <Section title="Profile">
-        <div className="flex items-center gap-4">
-          <span className="grid size-14 shrink-0 place-items-center rounded-full bg-primary/15 text-lg font-semibold text-primary-ink">
-            {learner.initials}
-          </span>
-          <div className="min-w-0">
-            <p className="font-semibold">{learner.name}</p>
-            <p className="truncate text-sm text-muted-foreground">{learner.email}</p>
-          </div>
-        </div>
-      </Section>
-
       <Appearance />
 
       <Section
@@ -172,7 +154,7 @@ export function SettingsForm({
 }
 
 const themes = [
-  ["system", "Match device"],
+  ["system", "System"],
   ["light", "Light"],
   ["dark", "Dark"],
 ] as const;
@@ -213,7 +195,7 @@ function Appearance() {
   );
 }
 
-function Section({
+export function Section({
   id,
   title,
   description,

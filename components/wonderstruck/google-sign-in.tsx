@@ -5,12 +5,15 @@ import { useSearchParams } from "next/navigation";
 import { LoaderCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { authClient } from "@/lib/auth-client";
+import { HOME_PATH, loginPath, safeNext } from "@/lib/auth-redirect";
 
 const unavailable =
   "Sign-in isn't available right now. Please try again in a moment.";
 
 export function GoogleSignIn() {
-  const returned = useSearchParams().get("error");
+  const params = useSearchParams();
+  const returned = params.get("error");
+  const next = safeNext(params.get("next"));
   const [pending, setPending] = useState(false);
   const [error, setError] = useState<string | null>(
     returned ? "Google sign-in didn't finish. Please try again." : null,
@@ -22,8 +25,8 @@ export function GoogleSignIn() {
     try {
       const { error } = await authClient.signIn.social({
         provider: "google",
-        callbackURL: "/dashboard",
-        errorCallbackURL: "/login?error=google",
+        callbackURL: next,
+        errorCallbackURL: `${loginPath(next)}${next === HOME_PATH ? "?" : "&"}error=google`,
       });
       if (error) throw error;
     } catch {

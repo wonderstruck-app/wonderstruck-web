@@ -14,6 +14,10 @@ const eslintConfig = defineConfig([
     "next-env.d.ts",
     // iCloud-excluded local folders (node_modules.nosync, .next.nosync).
     "*.nosync/**",
+    // Generated Prisma client.
+    "lib/generated/**",
+    // Python service.
+    "backend/**",
   ]),
 ]);
 

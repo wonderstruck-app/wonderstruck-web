@@ -8,7 +8,9 @@ import type { RecallItem } from "@/lib/data";
 import { ProgressRing } from "./progress-ring";
 import { RecallQuestion } from "./recall-question";
 
-export function RecallCard({ queue }: { queue: RecallItem[] }) {
+export function RecallCard({ queue: initial }: { queue: RecallItem[] }) {
+  // Keep the question being answered even after the review refetches the queue.
+  const [queue] = useState(initial);
   const [done, setDone] = useState(0);
   const item = queue[0];
 

@@ -1,8 +1,6 @@
 import type { LearningGraph } from "@/lib/data";
+import { LABEL_OFFSET, layoutGraph, NODE_RADIUS } from "@/lib/graph-layout";
 import { cn } from "@/lib/utils";
-
-export const GRAPH_WIDTH = 1000;
-export const GRAPH_HEIGHT = 620;
 
 /**
  * Presentational learning-graph SVG. Interactive when `onSelect` is passed
@@ -23,7 +21,7 @@ export function GraphCanvas({
   onSelect?: (id: string) => void;
   className?: string;
 }) {
-  const byId = new Map(graph.concepts.map((c) => [c.id, c]));
+  const layout = layoutGraph(graph, labels);
   const neighbours = new Set(
     selectedId
       ? graph.links.flatMap((l) =>
@@ -36,14 +34,14 @@ export function GraphCanvas({
 
   return (
     <svg
-      viewBox={`0 0 ${GRAPH_WIDTH} ${GRAPH_HEIGHT}`}
+      viewBox={layout.viewBox}
       role={onSelect ? "group" : "img"}
       aria-label={title}
       className={cn("h-auto w-full overflow-visible", className)}
     >
       {graph.links.map((l) => {
-        const a = byId.get(l.from);
-        const b = byId.get(l.to);
+        const a = layout.position(l.from);
+        const b = layout.position(l.to);
         if (!a || !b) return null;
         const semantic = l.kind === "semantic";
         const touches = selectedId === l.from || selectedId === l.to;
@@ -68,21 +66,22 @@ export function GraphCanvas({
       })}
 
       {graph.concepts.map((c) => {
+        const { x, y } = layout.position(c.id)!;
         const selected = c.id === selectedId;
-        const r = c.recent ? 15 : 12;
+        const r = c.recent ? NODE_RADIUS.recent : NODE_RADIUS.base;
         const node = (
           <>
             {(c.recent || selected) && (
               <circle
-                cx={c.x}
-                cy={c.y}
+                cx={x}
+                cy={y}
                 r={r + 14}
                 className={selected ? "fill-primary/25" : "fill-primary/15"}
               />
             )}
             <circle
-              cx={c.x}
-              cy={c.y}
+              cx={x}
+              cy={y}
               r={r}
               className={cn(
                 c.recent || selected ? "fill-primary" : "fill-tint-teal",
@@ -91,8 +90,8 @@ export function GraphCanvas({
             />
             {labels && (
               <text
-                x={c.x}
-                y={c.y + r + 30}
+                x={x}
+                y={y + r + LABEL_OFFSET}
                 textAnchor="middle"
                 className={cn(
                   "fill-foreground/85 stroke-[oklch(0.2_0.03_225)] text-[22px] font-medium [paint-order:stroke] [stroke-linejoin:round] [stroke-width:8px]",
@@ -131,7 +130,7 @@ export function GraphCanvas({
               dim(c.id) && "opacity-35",
             )}
           >
-            <circle cx={c.x} cy={c.y} r={36} className="fill-transparent" />
+            <circle cx={x} cy={y} r={36} className="fill-transparent" />
             {node}
           </g>
         );

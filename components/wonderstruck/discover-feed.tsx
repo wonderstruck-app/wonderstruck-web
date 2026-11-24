@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import type { LearningBlock, Topic } from "@/lib/data";
+import type { BlockCard, Topic } from "@/lib/data";
 import { Rise } from "./rise";
 import { LearningCard } from "./learning-card";
 import { TopicFilter } from "./topic-filter";
@@ -10,7 +10,7 @@ export function DiscoverFeed({
   blocks,
   savedIds,
 }: {
-  blocks: LearningBlock[];
+  blocks: BlockCard[];
   savedIds: string[];
 }) {
   const topics = [...new Set(blocks.map((b) => b.topic))].sort();

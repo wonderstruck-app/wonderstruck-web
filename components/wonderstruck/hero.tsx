@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Mic } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import type { Learner } from "@/lib/data";
+import type { ReactNode } from "react";
 import { MiraMascot } from "./brand";
 
 const greetings = [
@@ -11,7 +11,8 @@ const greetings = [
   ["night", "Still curious,"],
 ] as const;
 
-export function Hero({ learner }: { learner: Learner }) {
+/** `name` is a slot so the session-backed first name can stream in behind its own boundary. */
+export function Hero({ name }: { name: ReactNode }) {
   return (
     <section
       aria-labelledby="hero-title"
@@ -35,7 +36,7 @@ export function Hero({ learner }: { learner: Learner }) {
               </span>
             ))}
             <br />
-            <span className="text-primary-ink">{learner.name}.</span>
+            <span className="text-primary-ink">{name}.</span>
           </h1>
           <p className="mt-4 max-w-[30ch] text-[1.0625rem] leading-relaxed text-foreground/80">
             Something caught your eye today? Ask Mira and wander through it

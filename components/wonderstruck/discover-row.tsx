@@ -1,9 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
-import type { LearningBlock } from "@/lib/data";
+import type { BlockCard } from "@/lib/data";
 import { SectionHeading } from "./section-heading";
 
-export function DiscoverRow({ blocks }: { blocks: LearningBlock[] }) {
+export function DiscoverRow({ blocks }: { blocks: BlockCard[] }) {
   return (
     <section aria-labelledby="discover-title">
       <SectionHeading

@@ -14,7 +14,9 @@ const wash =
   "bg-[radial-gradient(120%_80%_at_100%_0%,color-mix(in_oklch,var(--tint-violet)_24%,transparent),transparent_62%),radial-gradient(90%_70%_at_0%_100%,color-mix(in_oklch,var(--tint-teal)_10%,transparent),transparent_60%)]";
 
 /** Focused recall run through the whole queue, then a calm finish. */
-export function RecallSession({ queue }: { queue: RecallItem[] }) {
+export function RecallSession({ queue: initial }: { queue: RecallItem[] }) {
+  // The run keeps the queue it started with; reviews refetch the live queue behind it.
+  const [queue] = useState(initial);
   const [index, setIndex] = useState(0);
   const [results, setResults] = useState<boolean[]>([]);
   const item = queue[index];

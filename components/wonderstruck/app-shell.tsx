@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { Suspense, type ReactNode } from "react";
-import { Settings } from "lucide-react";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { ChevronsUpDown, Settings } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -11,13 +10,17 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import type { Learner } from "@/lib/data";
 import { BrandMark } from "./brand";
-import { ThemeToggle } from "./theme-toggle";
+import { AvatarPlaceholder, LearnerAvatar, LearnerName } from "./learner";
+import { SignOutMenuItem } from "./sign-out";
+import { ThemeMenuItem, ThemeToggle } from "./theme-toggle";
 import { primaryNav, secondaryNav } from "./nav-items";
 import { BottomNavLink, SidebarNavLink } from "./nav-link";
 
-function SidebarNav({ recallDue }: { recallDue: number }) {
+const menuItem =
+  "gap-3 rounded-xl px-2.5 py-2 text-[0.9375rem] font-medium focus:bg-ink/[0.07]";
+
+function SidebarNav({ recallBadge }: { recallBadge: ReactNode }) {
   return (
     <>
       <ul className="flex flex-col gap-1">
@@ -26,9 +29,7 @@ function SidebarNav({ recallDue }: { recallDue: number }) {
             <SidebarNavLink
               href={item.href}
               badge={
-                item.href === "/remember" && recallDue > 0
-                  ? String(recallDue)
-                  : undefined
+                item.href === "/remember" ? <Suspense>{recallBadge}</Suspense> : undefined
               }
             />
           </li>
@@ -46,17 +47,13 @@ function SidebarNav({ recallDue }: { recallDue: number }) {
   );
 }
 
-export type ShellData = {
-  learner: Learner;
-  recallDue: number;
-};
-
 export function AppShell({
   children,
-  data: { learner, recallDue },
+  recallBadge,
 }: {
   children: ReactNode;
-  data: ShellData;
+  /** Streams in on its own so per-learner data never blocks the shell. */
+  recallBadge: ReactNode;
 }) {
   return (
     <div className="relative isolate mx-auto flex min-h-dvh w-full max-w-[96rem]">
@@ -71,27 +68,48 @@ export function AppShell({
 
           <nav aria-label="Primary">
             <Suspense>
-              <SidebarNav recallDue={recallDue} />
+              <SidebarNav recallBadge={recallBadge} />
             </Suspense>
           </nav>
 
           <div className="mt-auto border-t border-ink/8 pt-4">
-            <div className="flex items-center gap-2.5 pl-2">
-              <Avatar className="size-9">
-                <AvatarFallback className="bg-primary/15 text-xs font-semibold text-primary-ink">
-                  {learner.initials}
-                </AvatarFallback>
-              </Avatar>
-              <p className="min-w-0 flex-1 truncate text-[0.9375rem] font-medium">
-                {learner.name}
-              </p>
-              <ThemeToggle className="size-8 shrink-0" />
-              <Button variant="ghost" size="icon" className="size-8 shrink-0" asChild>
-                <Link href="/settings" aria-label="Settings">
-                  <Settings aria-hidden className="size-5" />
-                </Link>
-              </Button>
-            </div>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <button
+                  type="button"
+                  aria-label="Account menu"
+                  className="squircle-md flex w-full items-center gap-3 px-2 py-2 text-left transition-colors outline-none hover:bg-ink/[0.05] focus-visible:ring-2 focus-visible:ring-ring data-[state=open]:bg-ink/[0.06]"
+                >
+                  <Suspense fallback={<AvatarPlaceholder className="size-9" />}>
+                    <LearnerAvatar className="size-9 shrink-0" fallbackClassName="text-xs" />
+                  </Suspense>
+                  <span className="min-w-0 flex-1 truncate text-[0.9375rem] font-medium">
+                    <Suspense>
+                      <LearnerName />
+                    </Suspense>
+                  </span>
+                  <ChevronsUpDown aria-hidden className="size-4 shrink-0 text-muted-foreground" />
+                </button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent
+                side="top"
+                align="start"
+                sideOffset={8}
+                className="squircle-md w-(--radix-dropdown-menu-trigger-width) border border-border bg-popover p-2 shadow-2xl ring-ink/10"
+              >
+                <DropdownMenuItem asChild className={menuItem}>
+                  <Link href="/settings">
+                    <span className="squircle-sm grid size-8 place-items-center border border-ink/8 bg-ink/[0.05]">
+                      <Settings aria-hidden className="size-4" />
+                    </span>
+                    Settings
+                  </Link>
+                </DropdownMenuItem>
+                <ThemeMenuItem className={menuItem} />
+                <DropdownMenuSeparator className="mx-1 my-2 bg-ink/8" />
+                <SignOutMenuItem className={menuItem} />
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
         </div>
       </aside>
@@ -114,11 +132,9 @@ export function AppShell({
                 className="size-11 p-0"
                 aria-label="Account and more"
               >
-                <Avatar className="size-8">
-                  <AvatarFallback className="bg-primary/15 text-xs font-semibold text-primary-ink">
-                    {learner.initials}
-                  </AvatarFallback>
-                </Avatar>
+                <Suspense fallback={<AvatarPlaceholder className="size-8" />}>
+                  <LearnerAvatar className="size-8" fallbackClassName="text-xs" />
+                </Suspense>
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent
@@ -127,13 +143,13 @@ export function AppShell({
               className="squircle-md w-64 border border-border bg-popover p-2 shadow-2xl ring-ink/10"
             >
               <DropdownMenuLabel className="flex items-center gap-3 px-2.5 py-2.5">
-                <Avatar className="size-10">
-                  <AvatarFallback className="bg-primary/15 text-sm font-semibold text-primary-ink">
-                    {learner.initials}
-                  </AvatarFallback>
-                </Avatar>
+                <Suspense fallback={<AvatarPlaceholder className="size-10" />}>
+                  <LearnerAvatar className="size-10" fallbackClassName="text-sm" />
+                </Suspense>
                 <span className="min-w-0 truncate text-[0.9375rem] font-medium text-foreground">
-                  {learner.name}
+                  <Suspense>
+                    <LearnerName />
+                  </Suspense>
                 </span>
               </DropdownMenuLabel>
               <DropdownMenuSeparator className="mx-1 my-2 bg-ink/8" />
@@ -154,6 +170,8 @@ export function AppShell({
                   </Link>
                 </DropdownMenuItem>
               ))}
+              <DropdownMenuSeparator className="mx-1 my-2 bg-ink/8" />
+              <SignOutMenuItem className={menuItem} />
             </DropdownMenuContent>
           </DropdownMenu>
           </div>

@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import type { LearningBlock } from "@/lib/data";
+import type { BlockCard } from "@/lib/data";
 import { SaveButton } from "./save-button";
 
 /**
@@ -16,7 +16,7 @@ export function LearningCard({
   meta,
   priority = false,
 }: {
-  block: LearningBlock;
+  block: BlockCard;
   saved?: boolean;
   meta?: string;
   priority?: boolean;
@@ -65,7 +65,7 @@ export function LearningCard({
               <ArrowRight aria-hidden className="transition-transform group-hover:translate-x-0.5" />
             </Link>
           </Button>
-          <SaveButton initial={saved} label={b.question} />
+          <SaveButton blockId={b.id} initial={saved} label={b.question} />
         </div>
       </div>
     </article>

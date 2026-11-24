@@ -1,4 +1,4 @@
-// Domain types shared by every data source (mock today, the FastAPI client later).
+// Domain types shared by every data source (the FastAPI client, or the in-memory mock).
 // UI components depend on these types only, never on a concrete source.
 
 export type Topic =
@@ -59,7 +59,18 @@ export type LearningBlock = {
   activity?: Activity;
 };
 
-export type Learner = { name: string; initials: string; email: string };
+/** What feeds and lists carry. The full block (body, sources, activity) comes from `getBlock`. */
+export type BlockCard = Pick<LearningBlock, "id" | "topic" | "question" | "teaser" | "minutes" | "image">;
+
+/** The signed-in learner, from the Better Auth session (see lib/session.ts). */
+export type Learner = {
+  id: string;
+  name: string;
+  firstName: string;
+  initials: string;
+  email: string;
+  image: string | null;
+};
 
 /** Evidence ladder. Exposure alone never becomes "demonstrated". */
 export type ConceptState = "discussed" | "practiced" | "demonstrated" | "next";
@@ -123,9 +134,16 @@ export type RecallItem = {
   sessionTitle: string;
   question: string;
   options: Choice[];
-  correctId: string;
-  explanation: string;
+  /**
+   * Only the public landing showcase ships the answer. Real cards are graded on the server
+   * (`reviewRecall`) so the answer never reaches the browser before the learner commits.
+   */
+  answer?: RecallAnswer;
 };
+
+export type RecallAnswer = { correctId: string; explanation: string };
+
+export type RecallResult = RecallAnswer & { correct: boolean };
 
 export type ReviewRecord = {
   id: string;
@@ -170,7 +188,7 @@ export type LearningGraph = {
   sessions: { id: string; title: string }[];
 };
 
-export type SavedBlock = { block: LearningBlock; savedLabel: string };
+export type SavedBlock = { block: BlockCard; savedLabel: string };
 
 export type WeeklyRecap = { sessions: number; concepts: number };
 
@@ -198,10 +216,9 @@ export type LearningMode = {
   href: string;
 };
 
-/** Everything the UI reads. Implement this once against the real API to swap out the mock. */
+/** Everything the UI reads and writes. `lib/data/index.ts` picks the implementation. */
 export interface DataSource {
-  getLearner(): Promise<Learner>;
-  getBlocks(): Promise<LearningBlock[]>;
+  getBlocks(): Promise<BlockCard[]>;
   getBlock(id: string): Promise<LearningBlock | null>;
   getSavedBlocks(): Promise<SavedBlock[]>;
   getSessions(): Promise<SessionSummary[]>;
@@ -212,4 +229,6 @@ export interface DataSource {
   getMemory(): Promise<MemoryItem[]>;
   getGraph(): Promise<LearningGraph>;
   getSettings(): Promise<Settings>;
+  reviewRecall(itemId: string, optionId: string, clientId: string): Promise<RecallResult>;
+  setBlockSaved(blockId: string, saved: boolean): Promise<void>;
 }

@@ -1,37 +1,42 @@
 "use client";
 
-import { useState } from "react";
 import { Bookmark } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useSetBlockSaved } from "@/lib/data/queries";
 import { cn } from "@/lib/utils";
 
-/** Local-only save toggle for the preview. Wire `onToggle` to the API later. */
+/** Save toggle for a block. Flips immediately and reverts if the server refuses. */
 export function SaveButton({
+  blockId,
   initial = false,
   label,
   compact = false,
-  onToggle,
 }: {
+  blockId: string;
   initial?: boolean;
   label: string;
   compact?: boolean;
-  onToggle?: (saved: boolean) => void;
 }) {
-  const [saved, setSaved] = useState(initial);
+  const save = useSetBlockSaved();
+  // Shows the requested state while saving; once the saved list refetches, `initial` reflects
+  // the server (and a refused save falls back to it).
+  const optimistic = save.isPending ? save.variables.saved : initial;
+
+  function toggle() {
+    save.mutate({ blockId, saved: !optimistic });
+  }
+
   return (
     <Button
       variant="secondary"
       size={compact ? "icon" : "default"}
-      aria-pressed={saved}
-      aria-label={compact ? `${saved ? "Unsave" : "Save"} ${label}` : undefined}
-      onClick={() => {
-        setSaved(!saved);
-        onToggle?.(!saved);
-      }}
-      className={cn(saved && "text-tint-rose")}
+      aria-pressed={optimistic}
+      aria-label={compact ? `${optimistic ? "Unsave" : "Save"} ${label}` : undefined}
+      onClick={toggle}
+      className={cn(optimistic && "text-tint-rose")}
     >
-      <Bookmark aria-hidden className={cn(saved && "fill-current")} />
-      {!compact && (saved ? "Saved" : "Save")}
+      <Bookmark aria-hidden className={cn(optimistic && "fill-current")} />
+      {!compact && (optimistic ? "Saved" : "Save")}
     </Button>
   );
 }
